@@ -3,7 +3,6 @@
     <img src="./assets/indexbg.jpg">
 
     <Button id="loginButton"
-            type="info"
             :size="buttonSize"
             @click="userLogin"  
     >登录</Button>
@@ -82,6 +81,7 @@ button{
 }
 #loginButton{
   margin-top: 600px;
+  background-color:bisque;
 }
 #registerButton{
   margin-top: 680px; 
