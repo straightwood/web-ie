@@ -13,26 +13,30 @@
     >注册</Button>
     
     <Card id="card" v-if="showCard">
-        <div id="inputBox">
-            <Input class="Input" 
-              size="large"
-              v-model="username" 
-              maxlength="10" 
-              show-word-limit 
-              placeholder="Account..." 
-        />
-        <br><br>
-        <Input class="Input"
-              size="large"
-              v-model="password" 
-              type="password" 
-              password 
-              placeholder="Password..." 
-        />
-        <Button @click="userLogin">登录</Button>
+        <Form ref="formInline" :model="formInline" :rules="ruleInline">
+            <FormItem prop="username">
+                <Input type="text"
+                      size="large" 
+                      v-model="formInline.username" 
+                      maxlength="10" 
+                      show-word-limit 
+                      placeholder="Username..." 
+                />
+            </FormItem>
+            <FormItem prop="password">
+                <Input type="password" 
+                      size="large"
+                      v-model="formInline.password"
+                      password 
+                      placeholder="Password..."
+                />
+            </FormItem>
+            <FormItem>
+                <Button type="primary" @click="handleLogin('formInline');userLogin()">登录</Button>
+            </FormItem>
+        </Form>
 
-        </div>
-      
+
     </Card>
   </div>
 </template>
@@ -48,12 +52,36 @@ export default {
             username: '',
             password: '',
             showCard: false,
+
+            //表单
+            formInline: {
+                username: '',
+                password: ''
+            },
+            ruleInline: {
+                username: [
+                    { required: true, message: '请填写账号！', trigger: 'blur' }
+                ],
+                password: [
+                    { required: true, message: '请输入密码！', trigger: 'blur' },
+                    { type: 'string', min: 6, message: '密码至少6位！', trigger: 'blur' }
+                ]
+            }
         }
     },
     methods:{
       userLogin(){
         this.showCard = !this.showCard;
-      }
+      },
+      handleLogin(name) {//########################################注意
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.$Message.success('Success!');
+                    } else {
+                        this.$Message.error('Fail!');
+                    }
+                })
+            }
     }
 }
 </script>
@@ -94,10 +122,5 @@ button{
   margin: -1000px 680px;
   width: 400px;
   height: 600px;
-}
-#inputBox{
-  width:250px;
-  margin: 0 auto;
-  padding-top: 300px;
 }
 </style>
