@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="./assets/indexbg.jpg">
     <router-view/>
     <!-- 进度条 -->
     <Steps :current="1">
