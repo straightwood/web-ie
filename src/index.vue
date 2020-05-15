@@ -8,15 +8,17 @@
     >登录</Button>
 
     <Button id="registerButton" 
-            :size="buttonSize" 
+            :size="buttonSize"
+            @click="userRegister" 
     >注册</Button>
     
-    <Card id="card" v-if="showCard">
-        <Form ref="formInline" :model="formInline" :rules="ruleInline">
+    <!-- 登录卡片 -->
+    <Card id="card" v-if="showLoginCard ">
+        <Form ref="formInline1" :model="formInline1" :rules="ruleInline">
             <FormItem prop="username">
                 <Input type="text"
                       size="large" 
-                      v-model="formInline.username" 
+                      v-model="formInline1.username" 
                       maxlength="10" 
                       show-word-limit 
                       placeholder="Username..." 
@@ -25,18 +27,52 @@
             <FormItem prop="password">
                 <Input type="password" 
                       size="large"
-                      v-model="formInline.password"
+                      v-model="formInline1.password"
                       password 
                       placeholder="Password..."
                 />
             </FormItem>
             <FormItem>
-                <Button type="primary" @click="handleLogin('formInline');userLogin()">登录</Button>
+                <Button type="primary" @click="handleLogin('formInline1');userLogin()">登录</Button>
             </FormItem>
         </Form>
-
-
     </Card>
+
+    <!-- 注册卡片 --><!-- 验证规则没独立 -->
+    <Card id="card" v-if="showRegisterCard">
+        <Form ref="formInline2" :model="formInline2" :rules="ruleInline">
+            <FormItem prop="username">
+                <Input type="text"
+                      size="large" 
+                      v-model="formInline2.username" 
+                      maxlength="10" 
+                      show-word-limit 
+                      placeholder="Username..." 
+                />
+            </FormItem>
+            <FormItem prop="nickname">
+                <Input type="text"
+                      size="large" 
+                      v-model="formInline2.nickname" 
+                      maxlength="10" 
+                      show-word-limit 
+                      placeholder="Nickname..." 
+                />
+            </FormItem>
+            <FormItem prop="password">
+                <Input type="password" 
+                      size="large"
+                      v-model="formInline2.password"
+                      password 
+                      placeholder="Password..."
+                />
+            </FormItem>
+            <FormItem>
+                <Button type="primary" @click="handleRegister('formInline2');userRegister()">注册</Button>
+            </FormItem>
+        </Form>
+    </Card>
+
   </div>
 </template>
 
@@ -50,12 +86,18 @@ export default {
             buttonSize: 'large',//button大小
             username: '',
             password: '',
-            showCard: false,
+            showLoginCard: false,//登录卡片
+            showRegisterCard:false,//注册卡片
 
             //表单
-            formInline: {
+            formInline1: {
                 username: '',
                 password: ''
+            },
+            formInline2: {
+                username: '',
+                password: '',
+                nickname: ''
             },
             ruleInline: {
                 username: [
@@ -70,7 +112,7 @@ export default {
     },
     methods:{
         userLogin(){
-          this.showCard = !this.showCard;
+          this.showLoginCard = !this.showLoginCard;
         },
         handleLogin(name) {
             this.$refs[name].validate((valid) => {
@@ -84,12 +126,47 @@ export default {
                     },
                     //body:JSON.stringify(this.formInline),
                     body:JSON.stringify({
-                      username:this.formInline.username,
-                      password:this.formInline.password
+                      username:this.formInline1.username,
+                      password:this.formInline1.password
                     }),
                   }).then(res=> { return res.json()
                     }).then(res=>{
                       console.log(res[0].code);
+                      if(res[0].code == 1){
+                        // alert
+                        this.$Message.success(res[0].message);
+                      }else{
+                        this.$Message.error(res[0].message);
+                      }
+                    });
+                } else {
+                    this.$Message.error();
+                }
+            })
+        },
+        //注册
+        userRegister(){
+          this.showRegisterCard = !this.showRegisterCard;
+        },
+        handleRegister(name) {
+            this.$refs[name].validate((valid) => {
+                if (valid) {
+                  fetch("api/web-ie/server/register.php",{
+                    method:"POST",
+                    headers:{
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json',
+                      // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    //body:JSON.stringify(this.formInline),
+                    body:JSON.stringify({
+                      username:this.formInline2.username,
+                      password:this.formInline2.password,
+                      nickname:this.formInline2.nickname
+                    }),
+                  }).then(res=> { return res.json()
+                    }).then(res=>{
+                      // console.log(res[0].code);
                       if(res[0].code == 1){
                         // alert
                         this.$Message.success(res[0].message);
