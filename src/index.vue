@@ -1,77 +1,93 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/indexbg.jpg"> -->
+    <img src="./assets/indexBG.jpg">
+    <div id="btnBox">
+      <Button type="text"
+              id="loginButton"
+              class="btnClass"
+              @click="userLogin"  
+      ></Button>
+      <Button type="text"
+              id="registerButton" 
+              class="btnClass"
+              @click="userRegister" 
+      ></Button>
+      <Button type="text"
+              id="instrucButton" 
+              class="btnClass"
+              @click="userInstruc" 
+      ></Button>
 
-    <Button id="loginButton"
-            :size="buttonSize"
-            @click="userLogin"  
-    >登录</Button>
-
-    <Button id="registerButton" 
-            :size="buttonSize"
-            @click="userRegister" 
-    >注册</Button>
+    </div>
     
-    <!-- 登录卡片 -->
-    <Card id="card" v-if="showLoginCard ">
-        <Form ref="formInline1" :model="formInline1" :rules="ruleInline">
-            <FormItem prop="username">
-                <Input type="text"
-                      size="large" 
-                      v-model="formInline1.username" 
-                      maxlength="10" 
-                      show-word-limit 
-                      placeholder="Username..." 
-                />
-            </FormItem>
-            <FormItem prop="password">
-                <Input type="password" 
-                      size="large"
-                      v-model="formInline1.password"
-                      password 
-                      placeholder="Password..."
-                />
-            </FormItem>
-            <FormItem>
-                <Button type="primary" @click="handleLogin('formInline1');userLogin()">登录</Button>
-            </FormItem>
-        </Form>
-    </Card>
+    <div id="cardBox">
+      <!-- 登录卡片 -->
+      <Card id="loginCard" class="cardClass" v-if="showLoginCard ">
+        <Icon type="ios-close" @click="userLogin"/>
+          <Form ref="formInline1" :model="formInline1" :rules="ruleInline">
+              <FormItem prop="username">
+                  <Input type="text"
+                        size="large" 
+                        v-model="formInline1.username" 
+                        maxlength="10" 
+                        show-word-limit 
+                        placeholder="Username..." 
+                  />
+              </FormItem>
+              <FormItem prop="password">
+                  <Input type="password" 
+                        size="large"
+                        v-model="formInline1.password"
+                        password 
+                        placeholder="Password..."
+                  />
+              </FormItem>
+              <FormItem>
+                  <Button type="primary" @click="handleLogin('formInline1');userLogin()">登录</Button>
+              </FormItem>
+          </Form>
+      </Card>
 
-    <!-- 注册卡片 --><!-- 验证规则没独立 -->
-    <Card id="card" v-if="showRegisterCard">
-        <Form ref="formInline2" :model="formInline2" :rules="ruleInline">
-            <FormItem prop="username">
-                <Input type="text"
-                      size="large" 
-                      v-model="formInline2.username" 
-                      maxlength="10" 
-                      show-word-limit 
-                      placeholder="Username..." 
-                />
-            </FormItem>
-            <FormItem prop="nickname">
-                <Input type="text"
-                      size="large" 
-                      v-model="formInline2.nickname" 
-                      maxlength="10" 
-                      show-word-limit 
-                      placeholder="Nickname..." 
-                />
-            </FormItem>
-            <FormItem prop="password">
-                <Input type="password" 
-                      size="large"
-                      v-model="formInline2.password"
-                      password 
-                      placeholder="Password..."
-                />
-            </FormItem>
-            <FormItem>
-                <Button type="primary" @click="handleRegister('formInline2');userRegister()">注册</Button>
-            </FormItem>
-        </Form>
-    </Card>
+      <!-- 注册卡片 --><!-- 验证规则没独立 -->
+      <Card id="registerCard" class="cardClass" v-if="showRegisterCard">
+          <Icon type="ios-close" @click="userRegister"/>
+          <Form ref="formInline2" :model="formInline2" :rules="ruleInline">
+              <FormItem prop="username">
+                  <Input type="text"
+                        size="large" 
+                        v-model="formInline2.username" 
+                        maxlength="10" 
+                        show-word-limit 
+                        placeholder="Username..." 
+                  />
+              </FormItem>
+              <FormItem prop="nickname">
+                  <Input type="text"
+                        size="large" 
+                        v-model="formInline2.nickname" 
+                        maxlength="10" 
+                        show-word-limit 
+                        placeholder="Nickname..." 
+                  />
+              </FormItem>
+              <FormItem prop="password">
+                  <Input type="password" 
+                        size="large"
+                        v-model="formInline2.password"
+                        password 
+                        placeholder="Password..."
+                  />
+              </FormItem>
+              <FormItem>
+                  <Button type="primary" @click="handleRegister('formInline2');userRegister()">注册</Button>
+              </FormItem>
+          </Form>
+      </Card>
+      <Card id="instrucCard" class="cardClass" v-if="showInstrucCard">
+        <!-- <img src = "./assets/gameImg.jpg"/> -->
+      </Card>
+    </div>
+    
 
   </div>
 </template>
@@ -88,6 +104,7 @@ export default {
             password: '',
             showLoginCard: false,//登录卡片
             showRegisterCard:false,//注册卡片
+            showInstrucCard:false,
 
             //表单
             formInline1: {
@@ -111,8 +128,26 @@ export default {
         }
     },
     methods:{
+        judgeCard(){
+          if(this.showLoginCard==true){
+            this.showRegisterCard==false; this.$options.methods.userRegister();
+            this.showInstrucCard==false;
+          }else if(this.showRegisterCard==true){
+            this.showLoginCard==false; this.$options.methods.userLogin();
+            this.showInstrucCard==false;
+          }else if(this.showInstrucCard==true){
+            this.showLoginCard==false; this.$options.methods.userLogin();
+            this.showRegisterCard==false; this.$options.methods.userRegister();
+          }
+        },
         userLogin(){
           this.showLoginCard = !this.showLoginCard;
+          // this.$options.methods.judgeCard();
+          if(this.showLoginCard==true){
+            this.showRegisterCard==false; 
+            // this.$options.methods.userRegister();
+            this.showInstrucCard==false;
+          }
         },
         handleLogin(name) {
             this.$refs[name].validate((valid) => {
@@ -133,7 +168,6 @@ export default {
                     }).then(res=>{
                       console.log(res[0].code);
                       if(res[0].code == 1){
-                        // alert
                         this.$Message.success(res[0].message);
                       }else{
                         this.$Message.error(res[0].message);
@@ -147,6 +181,7 @@ export default {
         //注册
         userRegister(){
           this.showRegisterCard = !this.showRegisterCard;
+          this.$options.methods.judgeCard();
         },
         handleRegister(name) {
             this.$refs[name].validate((valid) => {
@@ -178,7 +213,12 @@ export default {
                     this.$Message.error();
                 }
             })
-        }
+        },
+        //游戏说明
+        userInstruc(){
+          this.showInstrucCard = !this.showInstrucCard;
+          this.$options.methods.judgeCard();
+        },
     }
 
 }
@@ -188,9 +228,9 @@ export default {
 
 
 <style scoped>
-/* #app{
+#app{
   position: relative;
-  width:1920px;
+  width: 1920px;
   height: 1080px;
 }
 img{ 
@@ -198,24 +238,41 @@ img{
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-button{
+#btnBox{
   position: absolute;
-  margin-left: -60%;
-  width: 300px;
-  height: 50px;
+  margin: -570px 800px;
+}
+.btnClass{
+  background-color:rgba(255, 255, 255, 0);
+  width: 280px;
+  height:90px;
+  margin-top: 40px;
 }
 #loginButton{
-  margin-top: 600px;
-  background-color:bisque;
+  background: url("./assets/loginBtn.png") -30px -10px no-repeat;
 }
 #registerButton{
-  margin-top: 680px; 
-} */
-/* #card{
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.719);;
-  text-align: center;
-  margin: -1000px 680px;
-  width: 400px;
-  height: 600px;
-} */
+  background: url("./assets/registerBtn.png") center center no-repeat;
+}
+#instrucButton{
+  background: url("./assets/instrucBtn.png") center center no-repeat;
+}
+
+#cardBox{
+  position: relative;
+  margin: 0;
+}
+.cardClass{
+  /* 覆盖组件 */
+  border:0;
+  border-radius: 0px;
+  width: 1920px;
+  height: 1080px;
+}
+#instrucCard{
+  background: url("./assets/gameImg.jpg");
+  position: absolute;
+  padding: 0;
+  margin:-1080px 0px ;
+}
 </style>
