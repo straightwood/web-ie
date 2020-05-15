@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/indexbg.jpg">
+    <!-- <img src="./assets/indexbg.jpg"> -->
 
     <Button id="loginButton"
             :size="buttonSize"
@@ -9,7 +9,6 @@
 
     <Button id="registerButton" 
             :size="buttonSize" 
-            ghost
     >注册</Button>
     
     <Card id="card" v-if="showCard">
@@ -70,19 +69,41 @@ export default {
         }
     },
     methods:{
-      userLogin(){
-        this.showCard = !this.showCard;
-      },
-      handleLogin(name) {//########################################注意
-                this.$refs[name].validate((valid) => {
-                    if (valid) {
-                        this.$Message.success('Success!');
-                    } else {
-                        this.$Message.error('Fail!');
-                    }
-                })
-            }
+        userLogin(){
+          this.showCard = !this.showCard;
+        },
+        handleLogin(name) {
+            this.$refs[name].validate((valid) => {
+                if (valid) {
+                  fetch("api/web-ie/server/login.php",{
+                    method:"POST",
+                    headers:{
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json',
+                      // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    //body:JSON.stringify(this.formInline),
+                    body:JSON.stringify({
+                      username:this.formInline.username,
+                      password:this.formInline.password
+                    }),
+                  }).then(res=> { return res.json()
+                    }).then(res=>{
+                      console.log(res[0].code);
+                      if(res[0].code == 1){
+                        // alert
+                        this.$Message.success(res[0].message);
+                      }else{
+                        this.$Message.error(res[0].message);
+                      }
+                    });
+                } else {
+                    this.$Message.error();
+                }
+            })
+        }
     }
+
 }
 </script>
 
@@ -90,14 +111,13 @@ export default {
 
 
 <style scoped>
-#app{
+/* #app{
   position: relative;
   width:1920px;
   height: 1080px;
 }
 img{ 
   width:100%;
-  /* height:100%; */
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
@@ -113,14 +133,12 @@ button{
 }
 #registerButton{
   margin-top: 680px; 
-}
-#card{
-  /* position: absolute; */
-  
+} */
+/* #card{
   box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.719);;
   text-align: center;
   margin: -1000px 680px;
   width: 400px;
   height: 600px;
-}
+} */
 </style>
