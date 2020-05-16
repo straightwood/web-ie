@@ -22,19 +22,17 @@
     
     <div id="cardBox">
       <!-- 登录卡片 -->
-      <Card id="loginCard" class="cardClass" v-if="showLoginCard ">
-        <Icon type="ios-close" @click="userLogin"/>
-          <Form ref="formInline1" :model="formInline1" :rules="ruleInline">
-              <FormItem prop="username">
+      <Card id="loginCard" class="cardClass" :bordered="false" v-if="showLoginCard " dis-hover>
+        <button class ="cancelBtn" @click="backIndex('login')"></button>
+          <Form ref="formInline1" :model="formInline1" :rules="ruleInline" :label-width="120">
+              <FormItem label="用户名" prop="username">
                   <Input type="text"
                         size="large" 
                         v-model="formInline1.username" 
-                        maxlength="10" 
-                        show-word-limit 
                         placeholder="Username..." 
                   />
               </FormItem>
-              <FormItem prop="password">
+              <FormItem label="密码" prop="password">
                   <Input type="password" 
                         size="large"
                         v-model="formInline1.password"
@@ -43,34 +41,32 @@
                   />
               </FormItem>
               <FormItem>
-                  <Button type="primary" @click="handleLogin('formInline1');userLogin()">登录</Button>
+                  <Button id="card_login" type="primary" @click="handleLogin('formInline1')"></Button>
               </FormItem>
           </Form>
       </Card>
 
       <!-- 注册卡片 --><!-- 验证规则没独立 -->
-      <Card id="registerCard" class="cardClass" v-if="showRegisterCard">
-          <Icon type="ios-close" @click="userRegister"/>
-          <Form ref="formInline2" :model="formInline2" :rules="ruleInline">
-              <FormItem prop="username">
+      <Card  class="cardClass" :bordered="false" v-if="showRegisterCard" dis-hover>
+          <button class ="cancelBtn" @click="backIndex('regist')"></button>
+          <Form ref="formInline2" :model="formInline2" :rules="ruleInline" :label-width="120">
+              <FormItem label="用户名" prop="username">
                   <Input type="text"
                         size="large" 
-                        v-model="formInline2.username" 
-                        maxlength="10" 
-                        show-word-limit 
+                        v-model="formInline2.username"  
                         placeholder="Username..." 
                   />
               </FormItem>
-              <FormItem prop="nickname">
+              <FormItem label="昵称" prop="nickname">
                   <Input type="text"
                         size="large" 
                         v-model="formInline2.nickname" 
-                        maxlength="10" 
+                        maxlength="5" 
                         show-word-limit 
                         placeholder="Nickname..." 
                   />
               </FormItem>
-              <FormItem prop="password">
+              <FormItem label="设置密码" prop="password">
                   <Input type="password" 
                         size="large"
                         v-model="formInline2.password"
@@ -79,12 +75,13 @@
                   />
               </FormItem>
               <FormItem>
-                  <Button type="primary" @click="handleRegister('formInline2');userRegister()">注册</Button>
+                  <Button id="card_regist" type="primary" @click="handleRegister('formInline2')"></Button>
               </FormItem>
           </Form>
       </Card>
-      <Card id="instrucCard" class="cardClass" v-if="showInstrucCard">
-        <!-- <img src = "./assets/gameImg.jpg"/> -->
+      <Card id="instrucCard" :bordered="false" v-if="showInstrucCard" dis-hover>
+        <!-- <Button id ="backBtn" :size="buttonSize" type="text" @click="backIndex"></Button> -->
+        <button id ="backBtn" @click="backIndex('ins')"></button>
       </Card>
     </div>
     
@@ -123,31 +120,22 @@ export default {
                 password: [
                     { required: true, message: '请输入密码！', trigger: 'blur' },
                     { type: 'string', min: 6, message: '密码至少6位！', trigger: 'blur' }
+                ],
+                nickname: [
+                    { required: true, message: '请输入昵称！', trigger: 'blur' },
                 ]
             }
         }
     },
     methods:{
-        judgeCard(){
-          if(this.showLoginCard==true){
-            this.showRegisterCard==false; this.$options.methods.userRegister();
-            this.showInstrucCard==false;
-          }else if(this.showRegisterCard==true){
-            this.showLoginCard==false; this.$options.methods.userLogin();
-            this.showInstrucCard==false;
-          }else if(this.showInstrucCard==true){
-            this.showLoginCard==false; this.$options.methods.userLogin();
-            this.showRegisterCard==false; this.$options.methods.userRegister();
-          }
+        backIndex(name){
+          if(name=="login") this.showLoginCard = false;//this.$option.methods.userLogin()调用后 值改变 div状态不刷新
+          if(name=="regist") this.showRegisterCard = false;
+          if(name=="ins") this.showInstrucCard = false;
         },
         userLogin(){
           this.showLoginCard = !this.showLoginCard;
-          // this.$options.methods.judgeCard();
-          if(this.showLoginCard==true){
-            this.showRegisterCard==false; 
-            // this.$options.methods.userRegister();
-            this.showInstrucCard==false;
-          }
+          console.log(this.showLoginCard)
         },
         handleLogin(name) {
             this.$refs[name].validate((valid) => {
@@ -166,8 +154,9 @@ export default {
                     }),
                   }).then(res=> { return res.json()
                     }).then(res=>{
-                      console.log(res[0].code);
                       if(res[0].code == 1){
+                        // this.$options.methods.userLogin();
+                        this.showLoginCard = false;
                         this.$Message.success(res[0].message);
                       }else{
                         this.$Message.error(res[0].message);
@@ -181,7 +170,7 @@ export default {
         //注册
         userRegister(){
           this.showRegisterCard = !this.showRegisterCard;
-          this.$options.methods.judgeCard();
+          console.log(this.showRegisterCard);
         },
         handleRegister(name) {
             this.$refs[name].validate((valid) => {
@@ -203,7 +192,9 @@ export default {
                     }).then(res=>{
                       // console.log(res[0].code);
                       if(res[0].code == 1){
-                        // alert
+                        // this.$options.methods.backIndex("login");
+                        this.showRegisterCard = false;
+                        //this.$options.methods.userRegister();                       
                         this.$Message.success(res[0].message);
                       }else{
                         this.$Message.error(res[0].message);
@@ -217,8 +208,8 @@ export default {
         //游戏说明
         userInstruc(){
           this.showInstrucCard = !this.showInstrucCard;
-          this.$options.methods.judgeCard();
         },
+        
     }
 
 }
@@ -252,10 +243,10 @@ img{
   background: url("./assets/loginBtn.png") -30px -10px no-repeat;
 }
 #registerButton{
-  background: url("./assets/registerBtn.png") center center no-repeat;
+  background: url("./assets/registerBtn.png") -30px -10px no-repeat;
 }
 #instrucButton{
-  background: url("./assets/instrucBtn.png") center center no-repeat;
+  background: url("./assets/instrucBtn.png") -30px -10px no-repeat;
 }
 
 #cardBox{
@@ -263,16 +254,58 @@ img{
   margin: 0;
 }
 .cardClass{
-  /* 覆盖组件 */
+  background: url("./assets/cardBG.png");
+  background-size: 100% 100%;
+  position: absolute;
   border:0;
   border-radius: 0px;
-  width: 1920px;
-  height: 1080px;
+  margin: -545px 620px;
+  width: 650px;
+  height: 375px;
+}
+form{
+  width: 450px;
+  position: absolute;
+  margin:75px 60px;
+}
+#card_login {
+  background: url("./assets/loginButton.png") -25px -5px no-repeat;
+  border: 0;
+  width: 210px;
+  height:40px;
+  margin: 20px 20px;
+}
+#card_regist{
+  background: url("./assets/registerButton.png") -25px -5px no-repeat;
+  border: 0;
+  width: 210px;
+  height:40px;
+  margin: 0 20px;
 }
 #instrucCard{
   background: url("./assets/gameImg.jpg");
   position: absolute;
   padding: 0;
-  margin:-1080px 0px ;
+  width: 1920px;
+  height: 1080px;
+  margin:-1085px 0px ;/* ############## why1085?? */
+}
+.cancelBtn{
+  background: url('./assets/cancelButton.png') center center no-repeat;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  margin: 5% 82%;
+  border: 0px;
+  outline: none;
+}
+#backBtn{
+  background: url('./assets/backBtn.png') center center no-repeat;
+  width: 120px;
+  height: 85px;
+  margin-top:3%;
+  margin-left: 90%;
+  border: 0px;
+  outline: none;
 }
 </style>
