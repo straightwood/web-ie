@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <img src="./assets/indexBG.jpg">
+  <div id="main">
+    <img src="../assets/indexBG.jpg">
     <div id="btnBox">
       <Button type="text"
               id="loginButton"
@@ -135,7 +135,6 @@ export default {
         },
         userLogin(){
           this.showLoginCard = !this.showLoginCard;
-          console.log(this.showLoginCard)
         },
         handleLogin(name) {
             this.$refs[name].validate((valid) => {
@@ -156,8 +155,10 @@ export default {
                     }).then(res=>{
                       if(res[0].code == 1){
                         // this.$options.methods.userLogin();
+                        // this.$refs[name].resetFields();
                         this.showLoginCard = false;
                         this.$Message.success(res[0].message);
+                        this.$router.push('/main')
                       }else{
                         this.$Message.error(res[0].message);
                       }
@@ -194,8 +195,8 @@ export default {
                       if(res[0].code == 1){
                         // this.$options.methods.backIndex("login");
                         this.showRegisterCard = false;
-                        //this.$options.methods.userRegister();                       
                         this.$Message.success(res[0].message);
+                        this.$router.push('/main')  
                       }else{
                         this.$Message.error(res[0].message);
                       }
@@ -219,7 +220,7 @@ export default {
 
 
 <style scoped>
-#app{
+#main{
   position: relative;
   width: 1920px;
   height: 1080px;
@@ -240,13 +241,13 @@ img{
   margin-top: 40px;
 }
 #loginButton{
-  background: url("./assets/loginBtn.png") -30px -10px no-repeat;
+  background: url("../assets/loginBtn.png") -30px -10px no-repeat;
 }
 #registerButton{
-  background: url("./assets/registerBtn.png") -30px -10px no-repeat;
+  background: url("../assets/registerBtn.png") -30px -10px no-repeat;
 }
 #instrucButton{
-  background: url("./assets/instrucBtn.png") -30px -10px no-repeat;
+  background: url("../assets/instrucBtn.png") -30px -10px no-repeat;
 }
 
 #cardBox{
@@ -254,7 +255,7 @@ img{
   margin: 0;
 }
 .cardClass{
-  background: url("./assets/cardBG.png");
+  background: url("../assets/cardBG.png");
   background-size: 100% 100%;
   position: absolute;
   border:0;
@@ -269,21 +270,21 @@ form{
   margin:75px 60px;
 }
 #card_login {
-  background: url("./assets/loginButton.png") -25px -5px no-repeat;
+  background: url("../assets/loginButton.png") -25px -5px no-repeat;
   border: 0;
   width: 210px;
   height:40px;
   margin: 20px 20px;
 }
 #card_regist{
-  background: url("./assets/registerButton.png") -25px -5px no-repeat;
+  background: url("../assets/registerButton.png") -25px -5px no-repeat;
   border: 0;
   width: 210px;
   height:40px;
   margin: 0 20px;
 }
 #instrucCard{
-  background: url("./assets/gameImg.jpg");
+  background: url("../assets/gameImg.jpg");
   position: absolute;
   padding: 0;
   width: 1920px;
@@ -291,16 +292,16 @@ form{
   margin:-1085px 0px ;/* ############## why1085?? */
 }
 .cancelBtn{
-  background: url('./assets/cancelButton.png') center center no-repeat;
+  background: url('../assets/cancelButton.png') center center no-repeat;
   width: 22px;
   height: 22px;
   position: absolute;
-  margin: 5% 82%;
+  margin: 5% 80%;
   border: 0px;
   outline: none;
 }
 #backBtn{
-  background: url('./assets/backBtn.png') center center no-repeat;
+  background: url('../assets/backBtn.png') center center no-repeat;
   width: 120px;
   height: 85px;
   margin-top:3%;

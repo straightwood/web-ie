@@ -22,7 +22,7 @@
             if(mysqli_num_rows($test)==0){
                 $sql_insert = "INSERT INTO user VALUES ('$username', '$password', '$nickname', 0)";
                 $result = mysqli_query($conn, $sql_insert);
-                $result_array[0] = ['code'=>'1','message'=>'注册成功！'];
+                $result_array[0] = ['code'=>'1','message'=>'注册成功！已自动跳转...'];
                 //################自动登录？操作？超级变量？
             }else{
                 $result_array[0] = ['code'=>'0','message'=>'此账号已存在！'];
