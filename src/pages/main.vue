@@ -1,6 +1,6 @@
 <template>
     <div>
-        main主页面
+        main主页面路由转跳提示
     </div>
 </template>
 
