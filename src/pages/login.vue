@@ -33,11 +33,12 @@
 
 
 <script>
+import { mapMutations } from 'vuex';//########0525标记
 export default {
     name:'App',
     data(){
         return {
-
+            userToken:'',
             //表单
             formInline: {
                 username: '',
@@ -58,6 +59,7 @@ export default {
         }
     },
     methods:{
+        ...mapMutations(['changeLogin']),
         backIndex(name){
           if(name=="login") this.showLoginCard = false;//this.$option.methods.userLogin()调用后 值改变 div状态不刷新
           if(name=="regist") this.showRegisterCard = false;
@@ -79,15 +81,18 @@ export default {
                     },
                     //body:JSON.stringify(this.formInline),
                     body:JSON.stringify({
+                      Authorization:'',
                       username:this.formInline.username,
                       password:this.formInline.password
                     }),
                   }).then(res=> { return res.json()
                     }).then(res=>{
                       if(res[0].code == 1){
-                        // this.$options.methods.userLogin();
+                        this.userToken = res[0].token;
+                        this.changeLogin({ Authorization: this.userToken });
                         this.showLoginCard = false;
                         this.$Message.success(res[0].message);
+                        this.$router.push('/main');
                       }else{
                         this.$Message.error(res[0].message);
                       }
