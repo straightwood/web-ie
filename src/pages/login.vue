@@ -1,4 +1,5 @@
 <template>
+<!-- 这是一个无用页面 -->
   <div id="main">
     <img src="../assets/indexBG.jpg">
     <div id="cardBox">
