@@ -77,7 +77,6 @@ export default {
                     headers:{
                       'Accept': 'application/json',
                       'Content-Type': 'application/json',
-                      // 'Content-Type': 'application/x-www-form-urlencoded',
                     },
                     //body:JSON.stringify(this.formInline),
                     body:JSON.stringify({

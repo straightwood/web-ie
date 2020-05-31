@@ -11,7 +11,6 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      //跨域设置
       "/api": {
         // target: "http://localhost/",
         target: "http://127.0.0.1:80",

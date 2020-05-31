@@ -7,7 +7,7 @@
     $username = $data['username'];
     $password = $data["password"];
 
-    require_once('encodeToken.php');
+    require_once('encodeToken.php');//生成自定义token
 
     if($username != '' && $password != ''){
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

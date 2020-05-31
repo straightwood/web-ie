@@ -92,6 +92,7 @@
 
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
     name:'App',
     data(){
@@ -128,6 +129,7 @@ export default {
         }
     },
     methods:{
+        ...mapMutations(['changeLogin']),
         backIndex(name){
           if(name=="login") this.showLoginCard = false;//this.$option.methods.userLogin()调用后 值改变 div状态不刷新
           if(name=="regist") this.showRegisterCard = false;
@@ -144,18 +146,18 @@ export default {
                     headers:{
                       'Accept': 'application/json',
                       'Content-Type': 'application/json',
-                      // 'Content-Type': 'application/x-www-form-urlencoded',
                     },
                     //body:JSON.stringify(this.formInline),
                     body:JSON.stringify({
+                      Authorization:'',
                       username:this.formInline1.username,
                       password:this.formInline1.password
                     }),
                   }).then(res=> { return res.json()
                     }).then(res=>{
                       if(res[0].code == 1){
-                        // this.$options.methods.userLogin();
-                        // this.$refs[name].resetFields();
+                        this.userToken = res[0].token;
+                        this.changeLogin({ Authorization: this.userToken });
                         this.showLoginCard = false;
                         this.$Message.success(res[0].message);
                         this.$router.push('/main')
@@ -171,7 +173,7 @@ export default {
         //注册
         userRegister(){
           this.showRegisterCard = !this.showRegisterCard;
-          console.log(this.showRegisterCard);
+          //console.log(this.showRegisterCard);
         },
         handleRegister(name) {
             this.$refs[name].validate((valid) => {
@@ -181,19 +183,19 @@ export default {
                     headers:{
                       'Accept': 'application/json',
                       'Content-Type': 'application/json',
-                      // 'Content-Type': 'application/x-www-form-urlencoded',
                     },
                     //body:JSON.stringify(this.formInline),
                     body:JSON.stringify({
+                      Authorization:'',
                       username:this.formInline2.username,
                       password:this.formInline2.password,
                       nickname:this.formInline2.nickname
                     }),
                   }).then(res=> { return res.json()
                     }).then(res=>{
-                      // console.log(res[0].code);
                       if(res[0].code == 1){
-                        // this.$options.methods.backIndex("login");
+                        this.userToken = res[0].token;
+                        this.changeLogin({ Authorization: this.userToken });
                         this.showRegisterCard = false;
                         this.$Message.success(res[0].message);
                         this.$router.push('/main')  
