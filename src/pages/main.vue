@@ -1,13 +1,153 @@
 <template>
-    <div>
-        main主页面路由转跳提示
+    <div id="main">
+        <!-- <img src="../assets/paperBG.png"> -->
+        <div class="aside">
+            <div :class="{bgColors:1==current}" class="aside_text">
+                <div class="chinese" @click="changeColor(1);handleStudy()">学习—</div>
+                <div class="english">STUDY</div>
+            </div>
+            <div :class="{bgColors:2==current}" class="aside_text">
+                <div class="chinese" @click="changeColor(2);handleBoard()">金榜—</div>
+                <div class="english">LEADERBOARD</div>
+            </div>
+            <div :class="{bgColors:3==current}" class="aside_text">
+                <div class="chinese" @click="changeColor(3);handleLogout()">登出—</div>
+                <div class="english">LOGOUT</div>
+            </div>
+        </div>
+        <div class="title"></div>
+        <div class="selection">
+            <button class="select_button" id="examBtn" @click="handleExam"></button>
+            <button class="select_button" id="studyBtn" @click="handleStudy"></button>
+            <button class="select_button" id="readBtn" @click="handleRead"></button>
+            <button class="select_button" id="thinkBtn" @click="handleThink"></button>
+        </div>
     </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+export default{
+    data(){
+        return{
+            color:false,
+            current:1,
 
+        };
+    },
+    methods:{
+        ...mapMutations(['changeLogin']),
+        changeColor(num){
+            this.current=num;
+        },
+        handleStudy(){
+            this.$router.push('./main');
+        },
+        handleBoard(){
+            this.$router.push('./board');
+            
+        },
+        handleLogout(){
+            this.$Modal.confirm({
+                title: '确认要退出登录吗？',
+                // content: '<p>Content of dialog</p><p>Content of dialog</p>',
+                onOk: () => {
+                    this.$Message.info('已退出登录！');
+                    this.changeLogin({ Authorization: '' });
+                    this.$router.push('./index');
+                },
+                onCancel: () => {
+                    // this.$Message.info('Clicked cancel');
+                }
+            });
+            
+        },
+        handleExam(){
+            this.$router.push('/main/exam');
+        },
+        handleStudy(){
+            this.$router.push('./main/study');
+        },
+        handleRead(){
+            this.$router.push('./main/read');
+        },
+        handleThink(){
+            this.$router.push('./main/think');
+        },
+    },
+}
 </script>
 
 <style scoped>
+#main{
+  position: relative;
+  background: url('../assets/paperBG.png');
+  width: 1920px;
+  height: 1080px;
+}
+img{ 
+  width:100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.aside{
+    position: absolute;
+    background-color:#F0EFEB;
+    width:100px;
+    height: 1080px;
+    padding: 25px;
+}
+.aside_text{
+    margin-bottom: 60px;
+}
+.aside_text .chinese{
+    font-family: Arial,STKaiti,"楷体";
+    line-height: 1;
+    width: 15px;
+    font-size: 30px;
+}
+.aside_text .english{
+    padding-left: 7px;
+    font-family: Arial,STKaiti,"楷体";
+    word-wrap: break-word;
+    line-height: 1;
+    width: 15px;
+    /* rotate: 90deg; */
+}
+.title{
+    position: absolute;
+    background: url('../assets/kkTitle.png') no-repeat;
+    width: 300px;
+    height: 80px;
+    left: 200px;
+    top:150px;
+}
+.selection{
+    position: absolute;
+    width:1500px;
+    left: 200px;
+    top:300px;
+}
+.selection .select_button{
+    /* position: absolute; */
+    width:241px;
+    height: 360px;
+    margin: 60px;
+}
+#examBtn{
+    background: url('../assets/examBtn.png') no-repeat;
+}
+#studyBtn{
+    background: url('../assets/studyBtn.png') no-repeat;
+}
+#readBtn{
+    background: url('../assets/readBtn.png') no-repeat;
+}
+#thinkBtn{
+    background: url('../assets/thinkBtn.png') no-repeat;
+}
+.bgColors{
+    color:rgb(195, 1, 1);
+}
 
 </style>

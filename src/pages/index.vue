@@ -94,7 +94,6 @@
 <script>
 import { mapMutations } from 'vuex';
 export default {
-    name:'App',
     data(){
         return {
             buttonSize: 'large',//button大小

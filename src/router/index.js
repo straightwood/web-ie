@@ -4,6 +4,12 @@ import Router from 'vue-router'
 import Index from '../pages/index'
 // import Login from '../pages/login'
 import Main from '../pages/main'
+import Board from '../pages/board'
+
+import Exam from '../pages/main/exam'
+import Study from '../pages/main/study'
+import Read from '../pages/main/read'
+import Think from '../pages/main/think'
 
 Vue.use(Router)//vue全局使用Router
 
@@ -21,7 +27,30 @@ export default new Router({
       path: '/main',          //链接路径
       name: 'main-page',
       component: Main,
-    }
+    },{
+      path: '/board',         //排行榜     
+      name: 'board-page',     
+      component: Board,       
+    },{                   
+      path: '/main/exam',           //科考
+      name: 'exam',
+      component: Exam
+    },
+    {
+      path: '/main/study',          //勤学
+      name: 'study',
+      component: Study
+    },
+    {
+      path: '/main/read',           //苦读
+      name: 'read',
+      component: Read
+    },
+    {
+      path: '/main/think',          //自省
+      name: 'think',
+      component: Think
+    },
   ]
 });
 
