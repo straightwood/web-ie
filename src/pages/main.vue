@@ -3,7 +3,7 @@
         <!-- <img src="../assets/paperBG.png"> -->
         <div class="aside">
             <div :class="{bgColors:1==current}" class="aside_text">
-                <div class="chinese" @click="changeColor(1);handleStudy()">学习—</div>
+                <div class="chinese" @click="changeColor(1);handleMain()">学习—</div>
                 <div class="english">STUDY</div>
             </div>
             <div :class="{bgColors:2==current}" class="aside_text">
@@ -40,7 +40,7 @@ export default{
         changeColor(num){
             this.current=num;
         },
-        handleStudy(){
+        handleMain(){
             this.$router.push('./main');
         },
         handleBoard(){
@@ -50,14 +50,12 @@ export default{
         handleLogout(){
             this.$Modal.confirm({
                 title: '确认要退出登录吗？',
-                // content: '<p>Content of dialog</p><p>Content of dialog</p>',
                 onOk: () => {
                     this.$Message.info('已退出登录！');
                     this.changeLogin({ Authorization: '' });
                     this.$router.push('./index');
                 },
                 onCancel: () => {
-                    // this.$Message.info('Clicked cancel');
                 }
             });
             
@@ -85,15 +83,10 @@ export default{
   width: 1920px;
   height: 1080px;
 }
-img{ 
-  width:100%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
 .aside{
     position: absolute;
     background-color:#F0EFEB;
-    width:100px;
+    width:70px;
     height: 1080px;
     padding: 25px;
 }
