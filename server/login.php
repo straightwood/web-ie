@@ -1,5 +1,5 @@
 <?php
-    //登录，目前只把插入到user表
+    //登录
     // header('Content-Type:application/json; charset=utf-8');
     require_once('connectvars.php');
 
