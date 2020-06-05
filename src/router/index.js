@@ -10,6 +10,7 @@ import Exam from '../pages/main/exam'
 import Study from '../pages/main/study'
 import Read from '../pages/main/read'
 import Think from '../pages/main/think'
+import xsTest from '../pages/main/exam/xxTest'
 
 Vue.use(Router)//vue全局使用Router
 
@@ -32,24 +33,25 @@ export default new Router({
       name: 'board-page',     
       component: Board,       
     },{                   
-      path: '/main/exam',           //科考
+      path: '/main/exam',      //科考
       name: 'exam',
       component: Exam
-    },
-    {
-      path: '/main/study',          //勤学
+    },{
+      path: '/main/study',     //勤学
       name: 'study',
       component: Study
-    },
-    {
-      path: '/main/read',           //苦读
+    },{
+      path: '/main/read',      //苦读
       name: 'read',
       component: Read
-    },
-    {
-      path: '/main/think',          //自省
+    },{
+      path: '/main/think',     //自省
       name: 'think',
       component: Think
+    },{
+      path: '/main/exam/xsTest',     //自省
+      name: 'xsTest',
+      component: xsTest
     },
   ]
 });
