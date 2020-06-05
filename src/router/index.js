@@ -10,7 +10,7 @@ import Exam from '../pages/main/exam'
 import Study from '../pages/main/study'
 import Read from '../pages/main/read'
 import Think from '../pages/main/think'
-import xsTest from '../pages/main/exam/xxTest'
+import xsTest from '../pages/main/exam/xsTest'
 
 Vue.use(Router)//vue全局使用Router
 
