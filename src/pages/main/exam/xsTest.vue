@@ -6,7 +6,9 @@
                 :key="index"
                 v-text="puzzle"
                 @click="moveFn(index)"
-            ></li>
+            >
+            <img :src="puzzle.image">
+            </li>
         </ul>
         <button class="btn btn-warning btn-block btn-reset" @click="renders">重置游戏</button>
     </div>
@@ -29,7 +31,7 @@ export default {
                 i = 1
             // 生成包含1 ~ 15数字的数组
             for (i; i < 9; i++) {
-                puzzleArr.push(i)
+                puzzleArr.push({name:i,image:require('../../../assets/pintu/'+(i)+'.png')})
             }
             // 随机打乱数组
             puzzleArr = puzzleArr.sort(() => {
@@ -82,7 +84,6 @@ export default {
 </script>
 
 <style>
-/* @import url('../../../assets/css/bootstrap.min.css'); */
 body {
     font-family: Arial, "Microsoft YaHei"; 
 }

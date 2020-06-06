@@ -61,7 +61,7 @@ export default{
             
         },
         handleExam(){
-            this.$router.push('/main/exam/xsTest');
+            this.$router.push('./main/exam/xsTest1');
         },
         handleStudy(){
             this.$router.push('./main/study');

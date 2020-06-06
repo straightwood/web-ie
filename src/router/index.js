@@ -10,7 +10,9 @@ import Exam from '../pages/main/exam'
 import Study from '../pages/main/study'
 import Read from '../pages/main/read'
 import Think from '../pages/main/think'
-import xsTest from '../pages/main/exam/xsTest'
+import xsTest1 from '../pages/main/exam/xsTest1'
+import xsTest2 from '../pages/main/exam/xsTest2'
+import hsTest from '../pages/main/exam/hsTest'
 
 Vue.use(Router)//vue全局使用Router
 
@@ -49,9 +51,17 @@ export default new Router({
       name: 'think',
       component: Think
     },{
-      path: '/main/exam/xsTest',     //自省
-      name: 'xsTest',
-      component: xsTest
+      path: '/main/exam/xsTest1',     //拼图1
+      name: 'xsTest1',
+      component: xsTest1
+    },{
+      path: '/main/exam/xsTest2/:correct/:time',     //拼图2
+      name: 'xsTest2',
+      component: xsTest2
+    },{
+      path: '/main/exam/hsTest',     //会试
+      name: 'hsTest',
+      component: hsTest
     },
   ]
 });
