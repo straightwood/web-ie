@@ -198,6 +198,7 @@ export default {
                         this.userToken = res[0].token;
                         this.changeLogin({ Authorization: this.userToken });
                         localStorage.setItem('username', JSON.stringify(this.formInline1.username));
+                        
                         this.showRegisterCard = false;
                         this.$Message.success(res[0].message);
                         this.$router.push('/main')  

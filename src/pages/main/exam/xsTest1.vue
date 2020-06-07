@@ -15,7 +15,7 @@
             </div>
             <div class="cer">
                 <div class="box r_box">
-                    <draggable element="span" v-model="list_result" v-bind="dragOptions" :move="onMove">
+                    <draggable tag="span" v-model="list_result" v-bind="dragOptions" :move="onMove">
                         <transition-group name="no" class="list-group" tag="ul">
                         <li class="list-group-item" v-for="element in list_result" :key="element.order">
                             <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
@@ -60,20 +60,19 @@
 <script>
 import draggable from "vuedraggable";
 const message_left = [
-    // require('../../../assets/backBtn.png'),
-  "vue.draggable",
-  "draggable",
-  "component",
+  "1",
+  "2",
+  "3",
 ];
 const message_right = [
-  "for",
-  "vue.js",
-  "based",
+  "4",
+  "5",
+  "6",
 ];
 const message_bottom = [
-  "export",
-  "return",
-  "editable",
+  "7",
+  "8",
+  "9",
 ];
 export default {
   components: {

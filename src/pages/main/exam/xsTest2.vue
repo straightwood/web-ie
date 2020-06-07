@@ -15,7 +15,7 @@
             </div>
             <div class="cer">
                 <div class="box r_box">
-                    <draggable element="span" v-model="list_result" v-bind="dragOptions" :move="onMove">
+                    <draggable tag="span" v-model="list_result" v-bind="dragOptions" :move="onMove">
                         <transition-group name="no" class="list-group" tag="ul">
                         <li class="list-group-item" v-for="element in list_result" :key="element.order">
                             <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
@@ -60,20 +60,19 @@
 <script>
 import draggable from "vuedraggable";
 const message_left = [
-    // require('../../../assets/backBtn.png'),
-  "vue.draggable",
-  "draggable",
-  "component",
+  "1",
+  "2",
+  "3",
 ];
 const message_right = [
-  "for",
-  "vue.js",
-  "based",
+  "4",
+  "5",
+  "6",
 ];
 const message_bottom = [
-  "export",
-  "return",
-  "editable",
+  "7",
+  "8",
+  "9",
 ];
 export default {
   components: {
@@ -125,8 +124,9 @@ export default {
   mounted(res){
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
-    this.correct_res = this.$route.params.correct;//处理传参
-    this.time_res = this.$route.params.time;
+    this.correct_res = parseInt(this.$route.params.correct);//处理传参
+    this.time_res = parseInt(this.$route.params.time);
+    console.log(this.correct_res,this.time_res)
     
   },
   beforeDestroy(){
@@ -168,7 +168,6 @@ export default {
         this.$router.push('/main/exam/hsTest');
     },
     passFn () {
-        console.log(1111)
         if(this.list_result.length==9){
             const newPuzzles = this.list_result.slice(0, 9)
             const isPass = newPuzzles.every((e, i) => e.order === i + 1)
@@ -184,8 +183,10 @@ export default {
         this.compute();
     },
     compute(){
-        this.time_res+=this.time;
+        this.time_res+=this.current;
         this.correct_res+=this.correct;
+        // console.log( this.correct_res,this.time_res,)
+        console.log(JSON.parse(localStorage.getItem("username")))
         fetch('api/web-ie/server/xsTest.php',{
             method:"POST",
             headers:{
@@ -194,7 +195,7 @@ export default {
             },
             body:JSON.stringify({
                 Authorization:localStorage.getItem('Authorization'),//token
-                username:localStorage.getItem('zheng'),
+                username:JSON.parse(localStorage.getItem("username")),
                 correct:this.correct_res,
                 time:this.time_res,
             }),
