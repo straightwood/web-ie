@@ -12,7 +12,9 @@ import Read from '../pages/main/read'
 import Think from '../pages/main/think'
 import xsTest1 from '../pages/main/exam/xsTest1'
 import xsTest2 from '../pages/main/exam/xsTest2'
-import hsTest from '../pages/main/exam/hsTest'
+import hsTest1 from '../pages/main/exam/hsTest1'
+import hsTest2 from '../pages/main/exam/hsTest2'
+import dsTest from '../pages/main/exam/dsTest'
 
 Vue.use(Router)//vue全局使用Router
 
@@ -59,9 +61,17 @@ export default new Router({
       name: 'xsTest2',
       component: xsTest2
     },{
-      path: '/main/exam/hsTest',     //会试
-      name: 'hsTest',
-      component: hsTest
+      path: '/main/exam/hsTest1',     //填空1
+      name: 'hsTest1',
+      component: hsTest1
+    },{
+      path: '/main/exam/hsTest2/:correct/:time',     //填空2
+      name: 'hsTest2',
+      component: hsTest2
+    },{
+      path: '/main/exam/dsTest',     //填空2
+      name: 'dsTest',
+      component: dsTest
     },
   ]
 });

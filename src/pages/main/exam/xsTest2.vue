@@ -126,7 +126,7 @@ export default {
     this.timer=setInterval(this.setTime,1000);
     this.correct_res = parseInt(this.$route.params.correct);//处理传参
     this.time_res = parseInt(this.$route.params.time);
-    console.log(this.correct_res,this.time_res)
+    // console.log(this.correct_res,this.time_res)
     
   },
   beforeDestroy(){
@@ -186,9 +186,9 @@ export default {
     compute(){
         this.time_res+=this.current;
         this.correct_res+=this.correct;
-        console.log( this.correct_res,this.time_res,)
+        console.log(111,this.correct_res,this.time_res,)
         console.log(JSON.parse(localStorage.getItem("username")))
-        fetch('api/web-ie/server/xsTest.php',{
+        fetch('api/web-ie/server/hsTest.php',{
             method:"POST",
             headers:{
                 'Accept': 'application/json',
@@ -216,7 +216,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #main{
     background: url('../../../assets/pintu/BG.png');
     position: relative;

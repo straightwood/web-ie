@@ -180,7 +180,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #main{
     background: url('../../../assets/pintu/BG.png');
     position: relative;
