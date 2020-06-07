@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="timer">计时器：{{current}}</div>
-    <button class="nextBtn" @click="nextBtn();passFn();"></button>
+    <button class="nextBtn" @click="passFn"></button>
 </div>
 </template>
 
@@ -153,7 +153,7 @@ export default {
         }else{
             alert ('答案不正确！')
         }
-        
+        this.nextBtn();        
     }
   },
   computed: {

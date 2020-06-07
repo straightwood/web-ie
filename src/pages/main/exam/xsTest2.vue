@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="timer">计时器：{{current}}</div>
-    <button class="nextBtn" @click="nextBtn();passFn()"></button>
+    <button class="nextBtn" @click="passFn"></button>
 </div>
 </template>
 
@@ -181,11 +181,12 @@ export default {
             alert ('答案不正确！')
         }
         this.compute();
+        this.nextBtn();
     },
     compute(){
         this.time_res+=this.current;
         this.correct_res+=this.correct;
-        // console.log( this.correct_res,this.time_res,)
+        console.log( this.correct_res,this.time_res,)
         console.log(JSON.parse(localStorage.getItem("username")))
         fetch('api/web-ie/server/xsTest.php',{
             method:"POST",
@@ -202,7 +203,7 @@ export default {
         }).then((res)=>{
             return res.json();
         }).then((res)=>{
-            console.log(res);
+            // console.log(res);
             // if(res[2].code==1){     
                 
             // }else{

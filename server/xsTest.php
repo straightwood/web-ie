@@ -9,7 +9,7 @@
     $time = intval($data['time']);
     require_once('decodeToken.php');
 
-    $score=0;//#################################公式定义
+    $score=$correct*500/$time;//#################################公式定义
 
     if($tokenNum=='200'){
         $result_array[2] = ['code'=>'1','message'=>'登录成功！'];
