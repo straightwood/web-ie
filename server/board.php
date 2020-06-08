@@ -9,7 +9,7 @@
         $result_array[2] = ['code'=>'1','message'=>'登录成功！'];
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         if($conn != null){
-            $sql = "SELECT nickname,score FROM user ORDER BY score desc limit 0,8";
+            $sql = "SELECT nickname,score FROM user ORDER BY score DESC LIMIT 0,8";
             $result = mysqli_query($conn, $sql);//$conn->query($sql);//执行$sql 
             $resArray = mysqli_fetch_all($result,MYSQL_ASSOC);
             $resNum = mysqli_num_rows($result);

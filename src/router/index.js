@@ -14,6 +14,8 @@ import xsTest1 from '../pages/main/exam/xsTest1'
 import xsTest2 from '../pages/main/exam/xsTest2'
 import hsTest1 from '../pages/main/exam/hsTest1'
 import hsTest2 from '../pages/main/exam/hsTest2'
+
+import hsTest from '../pages/main/exam/hsTest'
 import dsTest from '../pages/main/exam/dsTest'
 
 Vue.use(Router)//vue全局使用Router
@@ -72,6 +74,10 @@ export default new Router({
       path: '/main/exam/dsTest',     //填空2
       name: 'dsTest',
       component: dsTest
+    },{
+      path: '/main/exam/hsTest',     //填空2
+      name: 'hsTest',
+      component: hsTest
     },
   ]
 });

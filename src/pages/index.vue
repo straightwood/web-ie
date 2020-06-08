@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <img src="../assets/indexBG.jpg">
+    <img src="../assets/index/indexBG.jpg">
     <div id="btnBox">
       <Button type="text"
               id="loginButton"
@@ -246,13 +246,13 @@ img{
   margin-top: 40px;
 }
 #loginButton{
-  background: url("../assets/loginBtn.png") -30px -10px no-repeat;
+  background: url("../assets/index/loginBtn.png") -30px -10px no-repeat;
 }
 #registerButton{
-  background: url("../assets/registerBtn.png") -30px -10px no-repeat;
+  background: url("../assets/index/registerBtn.png") -30px -10px no-repeat;
 }
 #instrucButton{
-  background: url("../assets/instrucBtn.png") -30px -10px no-repeat;
+  background: url("../assets/index/instrucBtn.png") -30px -10px no-repeat;
 }
 
 #cardBox{
@@ -260,7 +260,7 @@ img{
   margin: 0;
 }
 .cardClass{
-  background: url("../assets/cardBG.png");
+  background: url("../assets/index/cardBG.png");
   background-size: 100% 100%;
   position: absolute;
   border:0;
@@ -275,21 +275,21 @@ form{
   margin:75px 60px;
 }
 #card_login {
-  background: url("../assets/loginButton.png") -25px -5px no-repeat;
+  background: url("../assets/index/loginButton.png") -25px -5px no-repeat;
   border: 0;
   width: 210px;
   height:40px;
   margin: 20px 20px;
 }
 #card_regist{
-  background: url("../assets/registerButton.png") -25px -5px no-repeat;
+  background: url("../assets/index/registerButton.png") -25px -5px no-repeat;
   border: 0;
   width: 210px;
   height:40px;
   margin: 0 20px;
 }
 #instrucCard{
-  background: url("../assets/gameImg.jpg");
+  background: url("../assets/index/gameImg.jpg");
   position: absolute;
   padding: 0;
   width: 1920px;
@@ -297,7 +297,7 @@ form{
   margin:-1085px 0px ;/* ############## why1085?? */
 }
 .cancelBtn{
-  background: url('../assets/cancelButton.png') center center no-repeat;
+  background: url('../assets/index/cancelButton.png') center center no-repeat;
   width: 22px;
   height: 22px;
   position: absolute;
@@ -306,7 +306,7 @@ form{
   outline: none;
 }
 #backBtn{
-  background: url('../assets/backBtn.png') center center no-repeat;
+  background: url('../assets/index/backBtn.png') center center no-repeat;
   width: 120px;
   height: 85px;
   margin-top:3%;

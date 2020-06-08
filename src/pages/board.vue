@@ -23,14 +23,13 @@
         <p class="item_achieve">{{item.achieve}}</p>
       </div>
       <div class="achieve_box">
-        <img src="../assets/zhuangyuan.png">
-        <img src="../assets/bangyan.png">
-        <img src="../assets/tanhua.png">
-        <!-- <p class="item_achieve">{{item.achieve}}</p> -->
+        <img src="../assets/board/zhuangyuan.png">
+        <img src="../assets/board/bangyan.png">
+        <img src="../assets/board/tanhua.png">
       </div>
     </div>
     <div id="title">
-      <img src="../assets/boardtitle.png">
+      <img src="../assets/board/boardtitle.png">
     </div>
   </div>
 </template>
@@ -166,7 +165,7 @@ export default {
 <style scope>
 #main{
   position: relative;
-  background: url('../assets/boardBG.png');
+  background: url('../assets/board/boardBG.png');
   width: 1920px;
   height: 1080px;
 }
@@ -199,7 +198,7 @@ export default {
 }
 .content{
     position: absolute;
-    background: url('../assets/linetable.png') no-repeat;
+    background: url('../assets/board/linetable.png') no-repeat;
     width:1200px;
     height: 850px;
     left:250px;

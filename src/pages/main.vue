@@ -1,6 +1,6 @@
 <template>
     <div id="main">
-        <!-- <img src="../assets/paperBG.png"> -->
+        <!-- <img src="../assets/main/paperBG.png"> -->
         <div class="aside">
             <div :class="{bgColors:1==current}" class="aside_text">
                 <div class="chinese" @click="changeColor(1);handleMain()">学习—</div>
@@ -79,7 +79,7 @@ export default{
 <style scoped>
 #main{
   position: relative;
-  background: url('../assets/paperBG.png');
+  background: url('../assets/main/paperBG.png');
   width: 1920px;
   height: 1080px;
 }
@@ -109,7 +109,7 @@ export default{
 }
 .title{
     position: absolute;
-    background: url('../assets/kkTitle.png') no-repeat;
+    background: url('../assets/main/kkTitle.png') no-repeat;
     width: 300px;
     height: 80px;
     left: 200px;
@@ -128,16 +128,16 @@ export default{
     margin: 60px;
 }
 #examBtn{
-    background: url('../assets/examBtn.png') no-repeat;
+    background: url('../assets/main/examBtn.png') no-repeat;
 }
 #studyBtn{
-    background: url('../assets/studyBtn.png') no-repeat;
+    background: url('../assets/main/studyBtn.png') no-repeat;
 }
 #readBtn{
-    background: url('../assets/readBtn.png') no-repeat;
+    background: url('../assets/main/readBtn.png') no-repeat;
 }
 #thinkBtn{
-    background: url('../assets/thinkBtn.png') no-repeat;
+    background: url('../assets/main/thinkBtn.png') no-repeat;
 }
 .bgColors{
     color:rgb(195, 1, 1);
