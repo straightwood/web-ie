@@ -127,7 +127,6 @@ export default {
     this.correct_res = parseInt(this.$route.params.correct);//处理传参
     this.time_res = parseInt(this.$route.params.time);
     // console.log(this.correct_res,this.time_res)
-    
   },
   beforeDestroy(){
     clearInterval(this.timer);
@@ -188,7 +187,7 @@ export default {
         this.correct_res+=this.correct;
         console.log(111,this.correct_res,this.time_res,)
         console.log(JSON.parse(localStorage.getItem("username")))
-        fetch('api/web-ie/server/hsTest.php',{
+        fetch('api/web-ie/server/xsTest.php',{
             method:"POST",
             headers:{
                 'Accept': 'application/json',

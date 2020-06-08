@@ -5,9 +5,6 @@
       <div class="content_box">
         {{text1}}
       </div>
-      <!-- <div class="content_box">
-        {{text2}}
-      </div> -->
     </div>
     <div class="answer">
       <div class="answer_box">
@@ -15,20 +12,11 @@
               @mousedown="move1" 
               v-for="(element,index) in answer1" 
               :key="index" 
-              :id="index"
+              :id="element.id"
               :style="answer1_position[index]">
           {{element.text}}
         </div>
       </div>
-      <!-- <div class="answer_li" 
-            @mousedown="move2" 
-            v-for="(element,index) in answer2" 
-            :key="index" 
-            :id="index"
-            :style="answer2_position[index]">
-          {{element.text}}
-      </div> -->
-      <!-- <div class="answer_single"> </div> -->
     </div>
     <div class="timer">计时器：{{current}}</div>
     <button class="nextBtn" @click="passFn"></button>
@@ -45,48 +33,56 @@ export default {
       positionX:0,
       positionY:0,
       title1:"登幽州台歌",
-      text1:"凤凰台上凤凰游 凤去台空江自流 吴宫花草埋幽径 晋代衣冠成古丘 三山半落青天外 二水中分白鹭洲 总为浮云能蔽日 长安不见使人愁",
-      answer1:[
+      text1:"凤凰台上| |凰游 凤去| |空江自流 吴宫花草埋| |径 晋代衣冠成| |丘 三山半落| |天外 二水中分白鹭| | 总为浮| |能蔽日 | |安不见使人愁",
+       answer1:[
         {
           order:5,
+          id:1,
           text:"青",
-          positionX:-230,
+          positionX:-242,
           positionY:389,
         },{
           order:1,
-          text:"台",
-          positionX:-408,
-          positionY:389,
+          id:2,
+          text:"凤",
+          positionX:-425,
+          positionY:392,
         },{
           order:8,
+          id:3,
           text:"长",
-          positionX:-141,
-          positionY:628,
+          positionX:-152,
+          positionY:658,
         },{
           order:6,
+          id:4,
           text:"洲",
-          positionX:-228,
-          positionY:1031,
+          positionX:-242,
+          positionY:1064,
         },
         {
           order:7,
+          id:5,
           text:"云",
-          positionX:-139,
-          positionY:321,
+          positionX:-152,
+          positionY:324,
         },{
           order:2,
-          text:"凤",
-          positionX:-411,
-          positionY:761,
+          id:6,
+          text:"台",
+          positionX:-425,
+          positionY:795,
         },{
           order:4,
+          id:7,
           text:"古",
-          positionX:-319,
-          positionY:965,
+          positionX:-333,
+          positionY:997,
         },{
           order:3,
+          id:8,
           text:"幽",
-          positionX:-318,
+          positionX:-333,
           positionY:457,
         },
       ],
@@ -120,36 +116,36 @@ export default {
       empty_position:[
         {
           order:1,
-          positionX:-408,
-          positionY:389,
+          positionX:-425,
+          positionY:392,
         },{
           order:2,
-          positionX:-411,
-          positionY:761,
+          positionX:-425,
+          positionY:795,
         },{
           order:3,
-          positionX:-318,
+          positionX:-333,
           positionY:457,
         },{
           order:4,
-          positionX:-319,
-          positionY:965,
+          positionX:-333,
+          positionY:997,
         },{
           order:5,
-          positionX:-230,
+          positionX:-242,
           positionY:389,
         },{
           order:6,
-          positionX:-228,
-          positionY:1031,
+          positionX:-242,
+          positionY:1064,
         },{
           order:7,
-          positionX:-139,
-          positionY:321,
+          positionX:-152,
+          positionY:324,
         },{
           order:8,
-          positionX:-141,
-          positionY:628,
+          positionX:-152,
+          positionY:658,
         },
       ],
       answer1_user:[],
@@ -208,12 +204,9 @@ export default {
                 odiv.style.top = top + 'px';
             };
             document.onmouseup = (e) => {
-              // console.log(odiv.style.top,odiv.style.left)
                 document.onmousemove = null;
                 document.onmouseup = null;
                 for(i in this.empty_position){
-                  // console.log('this',this.positionX,this.positionY)
-                  // console.log('empty',this.empty_position[i].positionX,this.empty_position[i].positionY)
                   if((this.positionX>=this.empty_position[i].positionX-60&&this.positionX<=this.empty_position[i].positionX+40)
                   && (this.positionY>=this.empty_position[i].positionY-60&&this.positionY<=this.empty_position[i].positionY+40)){
                     odiv.style.top = this.empty_position[i].positionX+'px';
@@ -231,7 +224,6 @@ export default {
                 if(flag==0){
                   this.answer1_user.push({order:0,id:parseInt(e.target.id),positionX:odiv.style.top,positionY:odiv.style.left});
                 }
-                // console.log(this.answer1_user);
             };
         },  
         nextBtn(){
@@ -243,9 +235,7 @@ export default {
           if(this.answer1_user.length==8){
 
             for(i in this.empty_position){
-              // console.log('empty_position[i]',this.empty_position[i])
               for(j in this.answer1_user){
-                // console.log('answer1_user[j]',this.answer1_user[j])
                 if((this.empty_position[i].positionX+'px')==this.answer1_user[j].positionX
                 &&(this.empty_position[i].positionY+'px')==this.answer1_user[j].positionY){
                     this.answer1_user[j].order=this.empty_position[i].order;
@@ -257,21 +247,14 @@ export default {
             newPuzzles.sort(this.creatCompare('order'));
             this.answer1.sort(this.creatCompare('order'));
 
-            console.log("newPuzzles",newPuzzles);
-            console.log("answer1",this.answer1);
-
             for(k=0; k <8 ;k++){
-              // console.log(k)
-              console.log(newPuzzles[k].positionX,this.answer1[k].positionX+'px')
-              if((newPuzzles[k].positionX==this.answer1[k].positionX+'px')
-                &&(newPuzzles[k].positionY==this.answer1[k].positionY+'px')){
+               if(newPuzzles[k].id==this.answer1[k].id){
                 order++;
-                console.log(order)
               }
             }
-            console.log(111,order)
             if(order==8){
               alert ('恭喜，闯关成功！')
+              this.correct=1;
             }else{
               alert ('答案不正确！')
             }
@@ -307,19 +290,17 @@ export default {
   position: absolute;
   display: flex;
   justify-content: space-between;
-  left:150px;
+  left:180px;
   top:350px;
   width:1100px;
   height: 500px;
-  padding:15px 30px;
   font-size: 45px;
   line-height: 2;
 }
 .content_box{
-  /* position: absolute; */
   width:1200px;
   height: 460px;
-  padding-left:20px;
+  /* padding-left:20px; */
   letter-spacing:0.5em;
   color:lightslategray;
 }
@@ -347,7 +328,6 @@ export default {
   height: 40px;
   line-height: 40px;
   z-index: 99;
-  /* border: 1px solid black; */
 }
 .answer_single{
   z-index: -5;
