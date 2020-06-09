@@ -158,7 +158,8 @@ export default {
                         this.userToken = res[0].token;
                         this.changeLogin({ Authorization: this.userToken });
                         localStorage.setItem('username', JSON.stringify(this.formInline1.username));
-                        
+                        localStorage.setItem('nickname', res[1][0].nickname);
+
                         this.showLoginCard = false;
                         this.$Message.success(res[0].message);
                         this.$router.push('/main')
@@ -197,8 +198,11 @@ export default {
                       if(res[0].code == 1){
                         this.userToken = res[0].token;
                         this.changeLogin({ Authorization: this.userToken });
-                        localStorage.setItem('username', JSON.stringify(this.formInline1.username));
-                        
+                        localStorage.setItem('username', JSON.stringify(this.formInline2.username));
+                        localStorage.setItem('nickname', this.formInline2.nickname);
+                        // console.log(localStorage.getItem('nickname'));
+                        // console.log(localStorage.getItem('username'));
+
                         this.showRegisterCard = false;
                         this.$Message.success(res[0].message);
                         this.$router.push('/main')  

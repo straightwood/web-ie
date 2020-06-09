@@ -108,6 +108,7 @@ export default {
     this.getData();
   },
   methods:{
+
     ...mapMutations(['changeLogin']),
     getData(){
       fetch('api/web-ie/server/board.php',{
@@ -162,7 +163,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 #main{
   position: relative;
   background: url('../assets/board/boardBG.png');

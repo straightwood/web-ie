@@ -18,10 +18,12 @@
             $sql = "SELECT * FROM user 
                     where account = '$username' 
                     AND password = password($password)";
-            $result = mysqli_query($conn, $sql);//$conn->query($sql);//执行$sql   
+            $result = mysqli_query($conn, $sql);
+            $resArray = mysqli_fetch_all($result,MYSQL_ASSOC);//数组 
+
             if (mysqli_num_rows($result) == 1) {
                 $result_array[0] = ['token'=>$token,'code'=>'1','message'=>'登陆成功!'];
-			 	
+                $result_array[1] = $resArray;
             }else{
 				$result_array[0] = ['code'=>'0','message'=>'用户名或密码输入错误'];               
             }
