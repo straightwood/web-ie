@@ -32,7 +32,6 @@ export default{
         return{
             color:false,
             current:1,
-
         };
     },
     methods:{
@@ -61,7 +60,7 @@ export default{
             
         },
         handleExam(){
-            // this.$router.push('./exam/xsTest1');
+            this.judge();
             this.$router.push('/main/exam/xsExam');
         },
         handleStudy(){

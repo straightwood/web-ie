@@ -33,6 +33,7 @@
       <Button type="text"
               id="SaveExitBtn" 
               class="btnClass"
+              @click="save"
       ></Button>
     </div>
     <div id="btnBox2">
@@ -54,7 +55,13 @@
 let count=0;
 export default {
   el:"#eunuch",
+  mounted(){
+    this.judge();
+  },
   methods:{
+    save(){
+      this.$router.push('/main');
+    },
     ExamRule(){
       eunuch.style.width="700px"
       eunuch.style.top="250px"

@@ -82,9 +82,8 @@ export default {
     return {
       timer:'',
       correct:0,
-      current:0,
+      current:60,
       correct_res:0,
-      time_res:0,
         // numList:[1,2,3,4,5,6,7,8,9],
         // numRes:[''],
         
@@ -122,11 +121,10 @@ export default {
     };
   },
   mounted(res){
+    this.judge();
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
     this.correct_res = parseInt(this.$route.params.correct);//处理传参
-    this.time_res = parseInt(this.$route.params.time);
-    // console.log(this.correct_res,this.time_res)
   },
   beforeDestroy(){
     clearInterval(this.timer);
@@ -154,7 +152,11 @@ export default {
   },
   methods: {
     setTime(){
-      this.current+=1;
+      this.current-=1;
+      if(this.current==0){
+        this.correct=0;
+        this.$router.push('/main/exam/hsExam');
+      }    
     },
     onMove({ relatedContext, draggedContext }) {
       const relatedElement = relatedContext.element;
@@ -183,10 +185,9 @@ export default {
         this.nextBtn();
     },
     compute(){
-        this.time_res+=this.current;
         this.correct_res+=this.correct;
-        console.log(111,this.correct_res,this.time_res,)
-        console.log(JSON.parse(localStorage.getItem("username")))
+        // console.log(111,this.correct_res,this.time_res,)
+        // console.log(JSON.parse(localStorage.getItem("username")))
         fetch('api/web-ie/server/xsTest.php',{
             method:"POST",
             headers:{
@@ -197,18 +198,10 @@ export default {
                 Authorization:localStorage.getItem('Authorization'),//token
                 username:JSON.parse(localStorage.getItem("username")),
                 correct:this.correct_res,
-                time:this.time_res,
             }),
         }).then((res)=>{
             return res.json();
         }).then((res)=>{
-            // console.log(res);
-            // if(res[2].code==1){     
-                
-            // }else{
-            //     this.$Message.error(res[2].message);
-            //     this.$router.push('./index');
-            // }
         }); 
     }
   },

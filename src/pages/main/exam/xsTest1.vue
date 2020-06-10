@@ -82,7 +82,7 @@ export default {
     return {
       timer:'',
       correct:0,
-      current:0,
+      current:60,
         // numList:[1,2,3,4,5,6,7,8,9],
         // numRes:[''],
         
@@ -120,6 +120,7 @@ export default {
     };
   },
   mounted(){
+    this.judge();
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
   },
@@ -128,7 +129,11 @@ export default {
   },
   methods: {
     setTime(){
-      this.current+=1;
+      this.current-=1;
+      if(this.current==0){
+        this.correct=0;
+        this.$router.push({name:'xsTest2',params:{correct:this.correct}});
+      }   
     },
     onMove({ relatedContext, draggedContext }) {
       const relatedElement = relatedContext.element;
@@ -210,7 +215,7 @@ export default {
    width: 108px;
     height: 324px;
     padding: 0;
-    background: rgba(204, 204, 204, 0.787);
+    /* background: rgba(204, 204, 204, 0.787); */
     list-style: none;
 }
 .b2_list-group {
@@ -218,7 +223,7 @@ export default {
     height: 108px;
     margin-bottom: 20px;
     padding: 0;
-    background: rgba(204, 204, 204, 0.787);
+    /* background: rgba(204, 204, 204, 0.787); */
     list-style: none;
 }
 .list-group {

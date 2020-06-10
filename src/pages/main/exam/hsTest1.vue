@@ -29,7 +29,7 @@ export default {
     return{
       timer:'',
       correct:0,
-      current:0,
+      current:20,
       positionX:0,
       positionY:0,
       title1:"登幽州台歌",
@@ -152,6 +152,7 @@ export default {
     }
   },
   mounted(){
+    this.judge();
     this.random();
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
@@ -161,7 +162,11 @@ export default {
   },
   methods:{
         setTime(){
-          this.current+=1;
+          this.current-=1;
+          if(this.current==0){
+            this.correct=0;
+            this.$router.push({name:'hsTest2',params:{correct:this.correct}});
+          }
         },
         random(){
           this.answer1.sort(function() {

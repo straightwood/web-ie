@@ -30,6 +30,7 @@
       <Button type="text"
               id="SaveExitBtn" 
               class="btnClass"
+              @click="save"
       ></Button>
     </div>
     <div id="btnBox2">
@@ -51,9 +52,15 @@
 let count=0;
 export default {
   el:"#fanjin",
+  mounted(){
+    this.judge();
+  },
   methods:{
     start(){
       this.$router.push('./xsTest1');
+    },
+    save(){
+      this.$router.push('/main');
     },
     ExamRule(){
       fanjin.style.width="700px"

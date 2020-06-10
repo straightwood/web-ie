@@ -51,6 +51,7 @@ export default {
     }
   },
   mounted:function(){
+      this.judge();
       this.timejian();
       this.timer=setInterval(this.timejian, 1000);
       this.handleInputOne(this.$refs.inputOne);
