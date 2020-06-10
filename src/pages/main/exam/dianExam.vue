@@ -1,23 +1,23 @@
 <template>
   <div id="main">
-    <img src="../../../assets/dsbg.png">
+    <img src="../../../assets/dianexam/dsbg.png">
     <div id="title">
-       <img src="../../../assets/dianexamtitle.png">
+       <img src="../../../assets/dianexam/dianexamtitle.png">
     </div>
     <div id="eunuch">
-       <img src="../../../assets/Eunuch1.png">
+       <img src="../../../assets/dianexam/Eunuch1.png">
     </div>
     <div id="chatbox">
-       <img src="../../../assets/dsexam1.png">
+       <img src="../../../assets/dianexam/dsexam1.png">
     </div>
     <div id="chatbox2">
-       <img src="../../../assets/dsexam2.png">
+       <img src="../../../assets/dianexam/dsexam2.png">
     </div>
     <div id="chatbox3">
-       <img src="../../../assets/dsexam3.png">
+       <img src="../../../assets/dianexam/dsexam3.png">
     </div>
     <div id="chatbox4">
-       <img src="../../../assets/dsexam4.png">
+       <img src="../../../assets/dianexam/dsexam4.png">
     </div>
     <div id="btnBox">
       <Button type="text"
@@ -54,7 +54,6 @@
 <script>
 let count=0;
 export default {
-  el:"#eunuch",
   mounted(){
     this.judge();
   },
@@ -177,15 +176,15 @@ img{
   height:150px;
 }
 #EntertheroomBtn{
-  background: url("../../../assets/EntertheroomBtn.png")  no-repeat;
+  background: url("../../../assets/exam/EntertheroomBtn.png")  no-repeat;
   margin-right:30px;
 }
 #ExamRuleBtn{
-  background: url("../../../assets/ExamRuleBtn.png")  no-repeat;
+  background: url("../../../assets/exam/ExamRuleBtn.png")  no-repeat;
   margin-right:30px;
 }
 #SaveExitBtn{
-  background: url("../../../assets/SaveExitBtn.png")  no-repeat;
+  background: url("../../../assets/exam/SaveExitBtn.png")  no-repeat;
 }
 #btnBox2{
   position: absolute;
@@ -201,9 +200,9 @@ img{
   visibility:hidden;
 }
 #byeButton{
-  background: url("../../../assets/byeButton.png")  no-repeat;
+  background: url("../../../assets/exam/byeButton.png")  no-repeat;
 }
 #continueButton{
-  background: url("../../../assets/continueButton.png")  no-repeat;
+  background: url("../../../assets/exam/continueButton.png")  no-repeat;
 }
 </style>

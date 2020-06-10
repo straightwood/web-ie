@@ -1,20 +1,20 @@
 <template>
   <div id="main">
-    <img src="../../../assets/hsbg.png">
+    <img src="../../../assets/huiexam/hsbg.png">
     <div id="title">
-       <img src="../../../assets/huiexamtitle.png">
+       <img src="../../../assets/huiexam/huiexamtitle.png">
     </div>
     <div id="poet">
-       <img src="../../../assets/poet.png">
+       <img src="../../../assets/huiexam/poet.png">
     </div>
     <div id="chatbox">
-       <img src="../../../assets/hsexam1.png">
+       <img src="../../../assets/huiexam/hsexam1.png">
     </div>
     <div id="chatbox2">
-       <img src="../../../assets/hsexam2.png">
+       <img src="../../../assets/huiexam/hsexam2.png">
     </div>
     <div id="chatbox3">
-       <img src="../../../assets/hsexam3.png">
+       <img src="../../../assets/huiexam/hsexam3.png">
     </div>
     <div id="btnBox">
       <Button type="text"
@@ -51,7 +51,6 @@
 <script>
 let count=0;
 export default {
-  el:"#poet",
   mounted(){
     this.judge();
   },
@@ -169,15 +168,15 @@ img{
   height:150px;
 }
 #EntertheroomBtn{
-  background: url("../../../assets/EntertheroomBtn.png")  no-repeat;
+  background: url("../../../assets/exam/EntertheroomBtn.png")  no-repeat;
   margin-right:30px;
 }
 #ExamRuleBtn{
-  background: url("../../../assets/ExamRuleBtn.png")  no-repeat;
+  background: url("../../../assets/exam/ExamRuleBtn.png")  no-repeat;
   margin-right:30px;
 }
 #SaveExitBtn{
-  background: url("../../../assets/SaveExitBtn.png")  no-repeat;
+  background: url("../../../assets/exam/SaveExitBtn.png")  no-repeat;
 }
 #btnBox2{
   position: absolute;
@@ -193,9 +192,9 @@ img{
   visibility:hidden;
 }
 #byeButton{
-  background: url("../../../assets/byeButton.png")  no-repeat;
+  background: url("../../../assets/exam/byeButton.png")  no-repeat;
 }
 #continueButton{
-  background: url("../../../assets/continueButton.png")  no-repeat;
+  background: url("../../../assets/exam/continueButton.png")  no-repeat;
 }
 </style>

@@ -1,20 +1,20 @@
 <template>
   <div id="main">
-    <img src="../../../assets/xsbg.png">
+    <img src="../../../assets/xiangexam/xsbg.png">
     <div id="title">
-       <img src="../../../assets/xiangexamtitle.png">
+       <img src="../../../assets/xiangexam/xiangexamtitle.png">
     </div>
     <div id="fanjin">
-       <img src="../../../assets/fanjin.png">
+       <img src="../../../assets/xiangexam/fanjin.png">
     </div>
     <div id="chatbox">
-       <img src="../../../assets/xsexam1.png">
+       <img src="../../../assets/xiangexam/xsexam1.png">
     </div>
     <div id="chatbox2">
-       <img src="../../../assets/xsexam2.png">
+       <img src="../../../assets/xiangexam/xsexam2.png">
     </div>
     <div id="chatbox3">
-       <img src="../../../assets/xsexam3.png">
+       <img src="../../../assets/xiangexam/xsexam3.png">
     </div>
     <div id="btnBox">
       <Button type="text"
@@ -51,7 +51,6 @@
 <script>
 let count=0;
 export default {
-  el:"#fanjin",
   mounted(){
     this.judge();
   },
@@ -162,15 +161,15 @@ img{
   height:150px;
 }
 #EntertheroomBtn{
-  background: url("../../../assets/EntertheroomBtn.png")  no-repeat;
+  background: url("../../../assets/exam/EntertheroomBtn.png")  no-repeat;
   margin-right:30px;
 }
 #ExamRuleBtn{
-  background: url("../../../assets/ExamRuleBtn.png")  no-repeat;
+  background: url("../../../assets/exam/ExamRuleBtn.png")  no-repeat;
   margin-right:30px;
 }
 #SaveExitBtn{
-  background: url("../../../assets/SaveExitBtn.png")  no-repeat;
+  background: url("../../../assets/exam/SaveExitBtn.png")  no-repeat;
 }
 #btnBox2{
   position: absolute;
@@ -186,9 +185,9 @@ img{
   visibility:hidden;
 }
 #byeButton{
-  background: url("../../../assets/byeButton.png")  no-repeat;
+  background: url("../../../assets/exam/byeButton.png")  no-repeat;
 }
 #continueButton{
-  background: url("../../../assets/continueButton.png")  no-repeat;
+  background: url("../../../assets/exam/continueButton.png")  no-repeat;
 }
 </style>

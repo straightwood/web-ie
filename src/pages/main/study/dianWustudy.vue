@@ -3,7 +3,6 @@
     <img src="../../../assets/dianexam/dsWubg.png">
     <input type="button" id="button1" @click.stop="handleInputOne" ref="inputOne"/>
     <div class="myDiv"  :class="{active1:isActive1}" ref="myDiv"></div>
-    <div id="endtime">{{val1}}</div>
     <div id="bird">
     <img src="../../../assets/dianexam/仙鹤飞翔A.gif" style="width:280px" id="birdA" @click='aclick'>
     <img src="../../../assets/dianexam/仙鹤飞翔B.gif" style="width:290px" id="birdB" @click='bclick'>
@@ -14,11 +13,11 @@
     <p id=q1content>A：人不犯我，我不犯人。<br> 
        B：以德报德，以直抱怨。<br> 
        C：先祖之仇，九世可报。<br> 
-       D: 以德报怨，善待仇人。</p>
+       D: 以德报怨，善待仇人。</p> 
     <p id=q2title>问题(2/3)：在古代，关于“大学”错误的是：</p>
     <p id=q2content>A：古人8岁小学，15岁时大学<br> 
-       B：高等院校<br> 
-       C：博学<br> 
+       B：博学<br> 
+       C：高等院校<br> 
        D: 大人之学</p>
     <p id=q3title>问题(3/3)：四书不包括以下哪本书：</p>
     <p id=q3content>A：《春秋》<br> 
@@ -27,7 +26,42 @@
        D: 《论语》</p>
     <img src="../../../assets/dianexam/correct.png" id="gou">
     <img src="../../../assets/dianexam/wrong.png" id="cha">
-    <Button type="text" id="nextqusBtn" @click="nextqus"></Button>
+    <Button type="text" id="nextqusBtn"  @click="nextqus"></Button>
+    <Button type="text" id="qusjiexiBtn"  @click="qusjiexi"></Button>
+    <Button type="text" id="finishqusbutton"  @click="gotowens"></Button>
+    <img id="jiexibg" src="../../../assets/dianstudy/jiexiBg.png">
+    <Button type="text" id="jiexiclosebtn" @click="closejiexi"></Button>
+    <p id=q1jiexi class=jiexi>九世犹可以复仇乎?虽百世可也。<br>
+                  &emsp;&emsp;——《公羊传·庄公四年》<br>  
+                  &emsp;正确答案为C。<br>
+                  &emsp;儒家公羊派的大复仇思想，主<br>
+                  张有仇必报。<br>
+                  &emsp;具体一点来说，大复仇理论所<br>
+                  展现的伦理观念至少包括两点：<br>
+                  &emsp;一是国君复国君杀祖杀父之仇。<br>
+                  &emsp;二是臣子复乱贼弑君之仇。<br>
+                  &emsp;因此，先祖之仇，九世可报。<br>
+    </p>
+    <p id=q2jiexi class=jiexi>大学之道，在明明德。<br>&nbsp;&nbsp;&nbsp;&nbsp;
+                  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;——《大学》<br>  
+                  &emsp;正确答案为C。<br>
+                  &emsp;尽管在现代，大学的普遍意义<br>
+                  代表高等院校。<br>
+                  &emsp;但在古代，大学明显是有不同<br>
+                  的意思<br>
+                  &emsp;一是指博学。<br>
+                  &emsp;二是相对小孩之学的大人之学。<br>
+                  指的是更高深的知识<br>
+                  &emsp;很明显，高等院校的意思是错<br>
+                  误的。
+    </p>
+    <p id=q3jiexi class=jiexi>
+                  &emsp;四书五经往往并列，大家很容<br>
+                  易搞混。<br>
+                  &emsp;春秋属于五经，但是不属于四<br>
+                  书。<br>
+                  &emsp;因此，答案是A。<br>
+    </p>    
     <img id="wskaichang" src="../../../assets/dianexam/wskaichang.png">
   </div>
 </template>
@@ -38,11 +72,10 @@ export default {
     return{
       pos:[],
       isActive1:false,
-      val1:'倒计时:',
-      t:11,
+      t:12,
       ans:[],
       ansnum:0,
-      correctans:['c','b','a'],
+      correctans:['c','c','a'],
       score:0,
       kcflag:0,
       choseflag:[0,0,0],
@@ -50,7 +83,6 @@ export default {
     }
   },
   mounted:function(){
-      this.judge();
       this.timejian();
       this.timer=setInterval(this.timejian, 1000);
       this.handleInputOne(this.$refs.inputOne);
@@ -107,30 +139,26 @@ export default {
       }
     },
     timejian(){
-        this.val1 ="倒计时:"+(this.t).toString();
         if(this.t>0 ){
           this.t=this.t-1;
         }
         if(this.t==9 && this.kcflag==0){
           this.kcflag=1;
-          wskaichang.style.visibility='hidden';
+          wskaichang.style.display='none';
         } 
-        if(this.val1=="倒计时:0" && this.choseflag[this.ansnum]==0){
+        if(this.t==0 && this.choseflag[this.ansnum]==0){
           cha.style.visibility='visible';
-          if(this.ansnum<3){
-          nextqusBtn.style.visibility='visible';
-          }
           bird.style.display='none';
-          endtime.style.display='none';
         }
-        if(this.choseflag[this.ansnum]==1){
-          endtime.style.display='none';
+        if(this.t==0){
+          qusjiexiBtn.style.display='block';
+          if(this.ansnum==2){
+            finishqusbutton.style.display='block';
+          }
+          else{
+            nextqusBtn.style.display='block';
+          }
         }
-        if(this.ansnum==2 && (this.choseflag[2]==1 || this.val1=="倒计时:0") ){
-          this.gotowens();
-        }
-        console.log("选择标记："+this.choseflag);
-        console.log("题号："+this.ansnum);
     },
     
     aclick(){
@@ -154,47 +182,79 @@ export default {
         this.jiaodui(this.ans);
     },
     jiaodui(ans){
-      if(2>this.ansnum>0){
-        nextqusBtn.style.visibility='visible';
-      }
+        if(this.ansnum==2){
+          finishqusbutton.style.display='block';
+        }else{
+          nextqusBtn.style.display='block';
+        }
+        qusjiexiBtn.style.display='block';
       if(this.correctans[this.ansnum]==ans){
-        this.score +=10;
-        gou.style.visibility='visible';
+        gou.style.display='block';
       }
       else{
-        cha.style.visibility='visible';
+        cha.style.display='block';
       } 
-      console.log("选中："+ans);
-      console.log("正确答案："+this.correctans[this.ansnum]);
-      console.log("成绩："+this.score);
       bird.style.display='none';
     },
     nextqus(){
       this.ansnum++;
-      endtime.style.display='block';
       gou.style.visibility='hidden';
       cha.style.visibility='hidden';
+      jiexibg.style.display='none';
+      jiexiclosebtn.style.display='none';
       if(this.ansnum==1 ){
+        q1jiexi.style.display='none';
         this.t=10;
-        q1title.style.visibility='hidden';
-        q1content.style.visibility='hidden';
-        q2title.style.visibility='visible';
-        q2content.style.visibility='visible';
-        nextqusBtn.style.visibility='hidden';
+        q1title.style.display='none';
+        q1content.style.display='none';
+        q2title.style.display='block';
+        q2content.style.display='block';
+        nextqusBtn.style.display='none';
+        qusjiexiBtn.style.display='none';
         bird.style.display='block';
       }
         else if(this.ansnum==2 ){
+        q2jiexi.style.display='none';
         this.t=10;
-        q2title.style.visibility='hidden';
-        q2content.style.visibility='hidden';
-        q3title.style.visibility='visible';
-        q3content.style.visibility='visible';
-        nextqusBtn.style.visibility='hidden';
+        q2title.style.display='none';
+        q2content.style.display='none';
+        q3title.style.display='block';
+        q3content.style.display='block';
+        nextqusBtn.style.display='none';
+        qusjiexiBtn.style.display='none';
         bird.style.display='block';
       }
     },
+    qusjiexi(){
+      jiexibg.style.display='block';
+      jiexiclosebtn.style.display='block';
+      console.log("题目数："+this.ansnum);
+      if(this.ansnum==0){
+        q1jiexi.style.display='block';
+      }
+      else if(this.ansnum==1){
+        q2jiexi.style.display='block';
+      }
+      else{
+        q3jiexi.style.display='block';
+      }
+    },
+    closejiexi(){
+       console.log("题目数："+this.ansnum);
+       jiexibg.style.display='none';
+       jiexiclosebtn.style.display='none';
+       if(this.ansnum==0){
+        q1jiexi.style.display='none';
+       }
+       else if(this.ansnum==1){
+        q2jiexi.style.display='none';
+       }
+       else{
+        q3jiexi.style.display='none'; 
+       }
+    },
     gotowens(){
-       this.$router.push('./DsExamWen');
+       this.$router.push('./dianWenstudy');
     }
   }
 }
@@ -219,7 +279,6 @@ body,div{
   position: absolute;
   width:200px;
   height:200px;
-  
   top:0px;
   left:0px;
 }
@@ -288,13 +347,6 @@ p,input{
 65% { transform: translate(-900px, 0px); }
 100% { transform: translate(-1950px, 0px); }
 }
-#endtime{
-  position: absolute;
-  bottom:50px;
-  right:100px;
-  font-size:35px;
-  color:white;
-}
 #q1title,#q2title,#q3title{
   position: absolute;
   bottom:250px;
@@ -312,7 +364,7 @@ p,input{
   font-family:KaiTi;
 }
 #q2title,#q3title,#q2content,#q3content{
-  visibility: hidden;
+  display:none;
 }
 #gou,#cha{
   position: absolute;
@@ -322,18 +374,59 @@ p,input{
   visibility:hidden;
 }
 #nextqusBtn{
-  background: url("../../../assets/dianexam/nextqusbutton.png")  no-repeat;
+  background: url("../../../assets/dianstudy/nextqusbutton.png")  no-repeat;
   position: absolute;
   right:80px;
-  bottom:20px;
-  width:250px;
+  bottom:50px;
+  width:300px;
   height:100px;
-  visibility:hidden;
+  display:none;
+}
+#finishqusbutton{
+  background: url("../../../assets/dianstudy/finishqusbutton.png")  no-repeat;
+  position: absolute;
+  right:80px;
+  bottom:50px;
+  width:300px;
+  height:100px;
+  display:none;
+}
+#qusjiexiBtn{
+  background: url("../../../assets/dianstudy/qusjiexibtn.png")  no-repeat;
+  position: absolute;
+  right:80px;
+  bottom:150px;
+  width:300px;
+  height:100px;
+  display:none;
 }
 #wskaichang{
   position:absolute;
   left:0px;
   top:0px;
   visibility:visible;
+}
+#jiexibg{
+  width:500px;
+  position: absolute;
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;
+  display:none;
+}
+#jiexiclosebtn{
+  width:30px;
+  position: absolute;
+  margin: auto;
+  top: 0; left:420px; bottom:670px; right: 0;
+  background: url("../../../assets/dianstudy/jiexiclosebtn.png") no-repeat;
+  display:none;
+}
+#q1jiexi,#q2jiexi,#q3jiexi{
+  position: absolute;
+  top:320px; left: 750px;
+  font-size:28px;
+  color:#000000;
+  font-family:SimHei;
+  display:none;
 }
 </style>

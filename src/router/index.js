@@ -25,6 +25,14 @@ import DsWen from '../pages/main/exam/dianExamWen'
 import failed from '../pages/main/exam/failed'
 import success from '../pages/main/exam/success'
 
+import dianWustudy from  '../pages/main/study/dianWustudy'
+import dianWenstudy from  '../pages/main/study/dianWenstudy'
+import xiangstudy1 from  '../pages/main/study/xiangshistudy1'
+import xiangstudy2 from  '../pages/main/study/xiangshistudy2'
+import xiangstudy3 from  '../pages/main/study/xiangshistudy3'
+import huistudy1 from  '../pages/main/study/huishistudy1'
+import huistudy2 from  '../pages/main/study/huishistudy2'
+
 Vue.use(Router)//vue全局使用Router
 
 export default new Router({
@@ -109,12 +117,41 @@ export default new Router({
       path: '/main/exam/success',
       name: 'success-page',
       component: success,
+    },{
+      path: '/main/study/dianWustudy',
+      name: 'dianWustudy-page',
+      component: dianWustudy,
+    },{
+      path: '/main/study/dianWenstudy',
+      name: 'dianWenstudy-page',
+      component: dianWenstudy,
+    },{
+      path: '/main/study/xiangstudy1',
+      name: 'xiangstudy1-page',
+      component: xiangstudy1,
     }
-
-
+    ,{
+      path: '/main/study/xiangstudy2',
+      name: 'xiangstudy2-page',
+      component: xiangstudy2,
+    }
+    ,{
+      path: '/main/study/xiangstudy3',
+      name: 'xiangstudy3-page',
+      component: xiangstudy3,
+    }
+    ,{
+      path: '/main/study/huistudy1',
+      name: 'huistudy1-page',
+      component: huistudy1,
+    }
+    ,{
+      path: '/main/study/huistudy2',
+      name: 'huistudy2-page',
+      component: huistudy2,
+    }
   ]
 })
-
 
 // 导航守卫
 // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆

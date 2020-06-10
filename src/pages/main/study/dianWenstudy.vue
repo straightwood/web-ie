@@ -1,10 +1,8 @@
 <template>
   <div id="main">
-    
     <img src="../../../assets/dianexam/dsWenBg.png">
     <input type="button" id="button1" @click.stop="handleInputOne" ref="inputOne"/>
     <div class="myDiv"  :class="{active1:isActive1}" ref="myDiv"></div>
-    <div id="endtime">{{val1}}</div>
     <div id="bird">
     <img src="../../../assets/dianexam/酒杯A.gif" style="width:125px" id="birdA" @click='aclick'>
     <img src="../../../assets/dianexam/酒杯B.gif" style="width:125px" id="birdB" @click='bclick'>
@@ -29,6 +27,38 @@
     <img src="../../../assets/dianexam/correct.png" id="gou">
     <img src="../../../assets/dianexam/wrong.png" id="cha">
     <Button type="text" id="nextqusBtn" @click="nextqus"></Button>
+    <Button type="text" id="qusjiexiBtn"  @click="qusjiexi"></Button>
+    <Button type="text" id="finishqusbutton"  @click="gotoresult"></Button>
+    <img id="jiexibg" src="../../../assets/dianstudy/jiexiBg.png">
+    <Button type="text" id="jiexiclosebtn" @click="closejiexi"></Button>
+    <p id=q1jiexi class=jiexi>&emsp;&emsp;于嗟女兮！无与士耽。<br>
+                  &emsp;&emsp;士之耽兮，犹可说也。<br>
+                  &emsp;&emsp;女之耽兮，不可说也。<br>  
+                  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;——《诗经·氓》<br>  
+                  &emsp;正确答案为C。<br>
+                  &emsp;这句话的意思是：唉呀年青<br>
+                  姑娘们，见了男人别胡缠。男人<br>
+                  要把女人缠，说甩就甩他不管。<br>
+                  女人若是恋男人，撒手摆脱难上<br>
+                  难。<br>
+                  &emsp;所以，这句话不适合对你暗恋<br>
+                  的女生说。
+    </p>
+    <p id=q2jiexi class=jiexi>《论语》记录的是孔子与他弟子<br>
+                  之间的言行举止<br>
+                  &emsp;正确答案为B。<br>
+                  &emsp;但是这不代表这本书是由孔子<br>
+                  编撰的。<br>
+                  &emsp;实际上，这些都是由孔子的弟<br>
+                  子与再传弟子记录的。<br>
+                  
+    </p>
+    <p id=q3jiexi class=jiexi>
+                  &emsp;《左传》有很多别称，大家容<br>
+                  易搞混<br>
+                  &emsp;正确答案为A。<br>
+                  &emsp;这个名字是我杜撰的。<br>
+    </p>    
     <img id="wskaichang" src="../../../assets/dianexam/wenskaichang.png">
   </div>
 </template>
@@ -39,7 +69,6 @@ export default {
     return{
       pos:[],
       isActive1:false,
-      val1:'倒计时:',
       t:16,
       ans:[],
       ansnum:0,
@@ -51,7 +80,6 @@ export default {
     }
   },
   mounted:function(){
-      this.judge();
       this.timejian();
       this.timer=setInterval(this.timejian, 1000);
       this.handleInputOne(this.$refs.inputOne);
@@ -108,30 +136,26 @@ export default {
       }
     },
      timejian(){
-        this.val1 ="倒计时:"+(this.t).toString();
         if(this.t>0 ){
           this.t=this.t-1;
         }
         if(this.t==14 && this.kcflag==0){
           this.kcflag=1;
-          wskaichang.style.visibility='hidden';
+          wskaichang.style.display='none';
         } 
-        if(this.val1=="倒计时:0" && this.choseflag[this.ansnum]==0){
+        if(this.t==0 && this.choseflag[this.ansnum]==0){
           cha.style.visibility='visible';
-          if(this.ansnum<3){
-          nextqusBtn.style.visibility='visible';
-          }
           bird.style.display='none';
-          endtime.style.display='none';
         }
-        if(this.choseflag[this.ansnum]==1){
-          endtime.style.display='none';
+        if(this.t==0){
+          qusjiexiBtn.style.display='block';
+          if(this.ansnum==2){
+            finishqusbutton.style.display='block';
+          }
+          else{
+            nextqusBtn.style.display='block';
+          }
         }
-        if(this.ansnum==2 && (this.choseflag[2]==1 || this.val1=="倒计时:0") ){
-          this.gotoresult();
-        }
-        console.log("选择标记："+this.choseflag);
-        console.log("题号："+this.ansnum);
     },
     
     aclick(){
@@ -155,44 +179,72 @@ export default {
         this.jiaodui(this.ans);
     },
     jiaodui(ans){
-      if(2>this.ansnum>0){
-        nextqusBtn.style.visibility='visible';
-      }
+      if(this.ansnum==2){
+          finishqusbutton.style.display='block';
+        }else{
+          nextqusBtn.style.display='block';
+        }
+        qusjiexiBtn.style.display='block';
       if(this.correctans[this.ansnum]==ans){
-        this.score +=10;
-        gou.style.visibility='visible';
+        gou.style.display='block';
       }
       else{
-        cha.style.visibility='visible';
+        cha.style.display='block';
       } 
-      console.log("选中："+ans);
-      console.log("正确答案："+this.correctans[this.ansnum]);
-      console.log("成绩："+this.score);
       bird.style.display='none';
     },
     nextqus(){
       this.ansnum++;
-      endtime.style.display='block';
       gou.style.visibility='hidden';
       cha.style.visibility='hidden';
       if(this.ansnum==1 ){
         this.t=15;
-        q1title.style.visibility='hidden';
-        q1content.style.visibility='hidden';
-        q2title.style.visibility='visible';
-        q2content.style.visibility='visible';
-        nextqusBtn.style.visibility='hidden';
+        q1title.style.display='none';
+        q1content.style.display='none';
+        q2title.style.display='block';
+        q2content.style.display='block';
+        nextqusBtn.style.display='none';
+        qusjiexiBtn.style.display='none';
         bird.style.display='block';
       }
         else if(this.ansnum==2 ){
         this.t=15;
-        q2title.style.visibility='hidden';
-        q2content.style.visibility='hidden';
-        q3title.style.visibility='visible';
-        q3content.style.visibility='visible';
-        nextqusBtn.style.visibility='hidden';
+        q2jiexi.style.display='none';
+        this.t=10;
+        q2title.style.display='none';
+        q2content.style.display='none';
+        q3title.style.display='block';
+        q3content.style.display='block';
+        nextqusBtn.style.display='none';
+        qusjiexiBtn.style.display='none';
         bird.style.display='block';
       }
+    },
+    qusjiexi(){
+      jiexibg.style.display='block';
+      jiexiclosebtn.style.display='block';
+      if(this.ansnum==0){
+        q1jiexi.style.display='block';
+      }
+      else if(this.ansnum==1){
+        q2jiexi.style.display='block';
+      }
+      else{
+        q3jiexi.style.display='block';
+      }
+    },
+    closejiexi(){
+       jiexibg.style.display='none';
+       jiexiclosebtn.style.display='none';
+       if(this.ansnum==0){
+        q1jiexi.style.display='none';
+       }
+       else if(this.ansnum==1){
+        q2jiexi.style.display='none';
+       }
+       else{
+        q3jiexi.style.display='none'; 
+       }
     },
     gotoresult(){
     }
@@ -290,7 +342,7 @@ p,input{
   font-family:KaiTi;
 }
 #q2title,#q3title,#q2content,#q3content{
-  visibility: hidden;
+  display:none;
 }
 #gou,#cha{
   position: absolute;
@@ -300,18 +352,59 @@ p,input{
   visibility:hidden;
 }
 #nextqusBtn{
-  background: url("../../../assets/dianexam/nextqusbutton.png")  no-repeat;
+  background: url("../../../assets/dianstudy/nextqusbutton.png")  no-repeat;
   position: absolute;
   right:80px;
-  bottom:20px;
-  width:250px;
+  bottom:50px;
+  width:300px;
   height:100px;
-  visibility:hidden;
+  display:none;
+}
+#finishqusbutton{
+  background: url("../../../assets/dianstudy/finishqusbutton.png")  no-repeat;
+  position: absolute;
+  right:80px;
+  bottom:50px;
+  width:300px;
+  height:100px;
+  display:none;
+}
+#qusjiexiBtn{
+  background: url("../../../assets/dianstudy/qusjiexibtn.png")  no-repeat;
+  position: absolute;
+  right:80px;
+  bottom:150px;
+  width:300px;
+  height:100px;
+  display:none;
 }
 #wskaichang{
   position:absolute;
   left:0px;
   top:0px;
   visibility:visible;
+}
+#jiexibg{
+  width:500px;
+  position: absolute;
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;
+  display:none;
+}
+#jiexiclosebtn{
+  width:30px;
+  position: absolute;
+  margin: auto;
+  top: 0; left:420px; bottom:670px; right: 0;
+  background: url("../../../assets/dianstudy/jiexiclosebtn.png") no-repeat;
+  display:none;
+}
+#q1jiexi,#q2jiexi,#q3jiexi{
+  position: absolute;
+  top:320px; left: 750px;
+  font-size:28px;
+  color:#000000;
+  font-family:SimHei;
+  display:none;
 }
 </style>
