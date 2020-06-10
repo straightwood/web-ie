@@ -18,6 +18,12 @@ import hsTest2 from '../pages/main/exam/hsTest2'
 import hsTest from '../pages/main/exam/hsTest'
 import dsTest from '../pages/main/exam/dsTest'
 
+import DsExam from '../pages/main/exam/dianExam'
+import HsExam from '../pages/main/exam/huiExam'
+import XsExam from '../pages/main/exam//xiangExam'
+import DsWu from '../pages/main/exam//dianExamWu'
+import DsWen from '../pages/main/exam/dianExamWen'
+
 Vue.use(Router)//vue全局使用Router
 
 export default new Router({
@@ -78,9 +84,30 @@ export default new Router({
       path: '/main/exam/hsTest',     //填空2
       name: 'hsTest',
       component: hsTest
-    },
+    },{
+      path: '/main/exam/dsExam', //链接路径######################################
+      name: 'dsexam-page',
+      component: DsExam,
+    },{
+      path: '/main/exam/hsExam',
+      name: 'hsexam-page',
+      component: HsExam,
+    },{
+      path: '/main/exam/xsExam',
+      name: 'xsexam-page',
+      component: XsExam,
+    },{
+      path: '/main/exam/DsExamWu',
+      name: 'dsexamwu-page',
+      component: DsWu,
+    },{
+      path: '/main/exam/DsExamWen',
+      name: 'dsexamwen-page',
+      component: DsWen,
+    }
+
   ]
-});
+})
 
 
 // 导航守卫

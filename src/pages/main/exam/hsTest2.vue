@@ -232,7 +232,7 @@ export default {
             };
         },  
         nextBtn(){
-            this.$router.push({name:'dsTest',params:{correct:this.correct,time:this.current}});
+            this.$router.push('/main/exam/dsExam');
         },
         passFn(){
           let order=0,i,j,k;

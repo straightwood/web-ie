@@ -44,7 +44,7 @@ export default{
             this.$router.push('./main');
         },
         handleBoard(){
-            this.$router.push('./board');
+            this.$router.push('/board');
             
         },
         handleLogout(){
@@ -61,16 +61,17 @@ export default{
             
         },
         handleExam(){
-            this.$router.push('./main/exam/xsTest1');
+            // this.$router.push('./exam/xsTest1');
+            this.$router.push('/main/exam/xsExam');
         },
         handleStudy(){
-            this.$router.push('./main/study');
+            this.$router.push('/main/study');
         },
         handleRead(){
-            this.$router.push('./main/read');
+            this.$router.push('/main/read');
         },
         handleThink(){
-            this.$router.push('./main/think');
+            this.$router.push('/main/think');
         },
     },
 }

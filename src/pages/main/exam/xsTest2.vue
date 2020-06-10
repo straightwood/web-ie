@@ -164,7 +164,7 @@ export default {
       );
     },
     nextBtn(){
-        this.$router.push('/main/exam/hsTest');
+        this.$router.push('/main/exam/hsExam');
     },
     passFn () {
         if(this.list_result.length==9){
