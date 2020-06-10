@@ -14,6 +14,7 @@ import xsTest1 from '../pages/main/exam/xsTest1'
 import xsTest2 from '../pages/main/exam/xsTest2'
 import hsTest1 from '../pages/main/exam/hsTest1'
 import hsTest2 from '../pages/main/exam/hsTest2'
+import xsTest3 from '../pages/main/exam/xsTest3'
 
 import DsExam from '../pages/main/exam/dianExam'
 import HsExam from '../pages/main/exam/huiExam'
@@ -65,6 +66,10 @@ export default new Router({
       path: '/main/exam/xsTest2/:correct',     //拼图2
       name: 'xsTest2',
       component: xsTest2
+    },{
+      path: '/main/exam/xsTest3/:correct',     //拼图3
+      name: 'xsTest3',
+      component: xsTest3
     },{
       path: '/main/exam/hsTest1',     //填空1
       name: 'hsTest1',

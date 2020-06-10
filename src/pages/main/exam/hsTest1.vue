@@ -32,58 +32,58 @@ export default {
       current:20,
       positionX:0,
       positionY:0,
-      title1:"登幽州台歌",
-      text1:"凤凰台上| |凰游 凤去| |空江自流 吴宫花草埋| |径 晋代衣冠成| |丘 三山半落| |天外 二水中分白鹭| | 总为浮| |能蔽日 | |安不见使人愁",
+      title1:"钗头凤·陆游",
+      text1:"红酥手，黄縢| |，满城春色宫墙| |。东风恶，欢情| |。| |怀愁绪，几年离索。错、错、错。| |如旧，人空瘦，泪痕红| |鲛绡透。桃花落，| |池阁。山盟虽在，| |书难托。莫、莫、莫！",
        answer1:[
         {
           order:5,
           id:1,
-          text:"青",
-          positionX:-242,
-          positionY:389,
+          text:"春",
+          positionX:-275,
+          positionY:616,
         },{
           order:1,
           id:2,
-          text:"凤",
-          positionX:-425,
-          positionY:392,
+          text:"酒",
+          positionX:-452,
+          positionY:499,
         },{
           order:8,
           id:3,
-          text:"长",
-          positionX:-152,
-          positionY:658,
+          text:"锦",
+          positionX:-93,
+          positionY:442,
         },{
           order:6,
           id:4,
-          text:"洲",
-          positionX:-242,
-          positionY:1064,
+          text:"浥",
+          positionX:-183,
+          positionY:325,
         },
         {
           order:7,
           id:5,
-          text:"云",
-          positionX:-152,
-          positionY:324,
+          text:"闲",
+          positionX:-183,
+          positionY:867,
         },{
           order:2,
           id:6,
-          text:"台",
-          positionX:-425,
-          positionY:795,
+          text:"柳",
+          positionX:-452,
+          positionY:986,
         },{
           order:4,
           id:7,
-          text:"古",
-          positionX:-333,
-          positionY:997,
+          text:"一",
+          positionX:-363,
+          positionY:634,
         },{
           order:3,
           id:8,
-          text:"幽",
-          positionX:-333,
-          positionY:457,
+          text:"薄",
+          positionX:-363,
+          positionY:500,
         },
       ],
       answer1_position:[
@@ -116,36 +116,36 @@ export default {
       empty_position:[
         {
           order:1,
-          positionX:-425,
-          positionY:392,
+          positionX:-452,
+          positionY:499,
         },{
           order:2,
-          positionX:-425,
-          positionY:795,
+          positionX:-452,
+          positionY:986,
         },{
           order:3,
-          positionX:-333,
-          positionY:457,
+          positionX:-363,
+          positionY:500,
         },{
           order:4,
-          positionX:-333,
-          positionY:997,
+          positionX:-363,
+          positionY:634,
         },{
           order:5,
-          positionX:-242,
-          positionY:389,
+          positionX:-275,
+          positionY:616,
         },{
           order:6,
-          positionX:-242,
-          positionY:1064,
+          positionX:-183,
+          positionY:325,
         },{
           order:7,
-          positionX:-152,
-          positionY:324,
+          positionX:-183,
+          positionY:867,
         },{
           order:8,
-          positionX:-152,
-          positionY:658,
+          positionX:-93,
+          positionY:442,
         },
       ],
       answer1_user:[],
@@ -164,7 +164,7 @@ export default {
         setTime(){
           this.current-=1;
           if(this.current==0){
-            this.correct=0;
+            this.passFn();
             this.$router.push({name:'hsTest2',params:{correct:this.correct}});
           }
         },
@@ -216,6 +216,7 @@ export default {
                   && (this.positionY>=this.empty_position[i].positionY-60&&this.positionY<=this.empty_position[i].positionY+40)){
                     odiv.style.top = this.empty_position[i].positionX+'px';
                     odiv.style.left = this.empty_position[i].positionY+'px';
+                    // console.log( e.target.id,odiv.style.top, odiv.style.left)
                   }
                 }//吸附功能
 
@@ -236,14 +237,14 @@ export default {
         },
         passFn(){
           let order=0,i,j,k;
-          
           if(this.answer1_user.length==8){
-
             for(i in this.empty_position){
               for(j in this.answer1_user){
                 if((this.empty_position[i].positionX+'px')==this.answer1_user[j].positionX
                 &&(this.empty_position[i].positionY+'px')==this.answer1_user[j].positionY){
+                  // console.log(this.answer1_user[j].positionX,this.answer1_user[j].positionY,this.empty_position[i].order);
                     this.answer1_user[j].order=this.empty_position[i].order;
+                    break;
                 }
               }
             }
@@ -251,20 +252,20 @@ export default {
             const newPuzzles = this.answer1_user.slice(0, 8);
             newPuzzles.sort(this.creatCompare('order'));
             this.answer1.sort(this.creatCompare('order'));
-
             for(k=0; k <8 ;k++){
+              // console.log(newPuzzles[k].id,this.answer1[k].id)
                if(newPuzzles[k].id==this.answer1[k].id){
                 order++;
               }
             }
             if(order==8){
-              alert ('恭喜，闯关成功！')
-              this.correct=1;
+              // alert ('恭喜，闯关成功！')
+              this.correct++;
             }else{
-              alert ('答案不正确！')
+              // alert ('答案不正确！')
             }
         }else{
-            alert ('答案不正确！')
+            // alert ('答案不正确！')
         }
         this.nextBtn();        
         }
@@ -295,18 +296,18 @@ export default {
   position: absolute;
   display: flex;
   justify-content: space-between;
-  left:180px;
-  top:350px;
+  left:220px;
+  top:320px;
   width:1100px;
   height: 500px;
   font-size: 45px;
   line-height: 2;
 }
 .content_box{
-  width:1200px;
+  width:1000px;
   height: 460px;
   /* padding-left:20px; */
-  letter-spacing:0.5em;
+  letter-spacing:0.3em;
   color:lightslategray;
 }
 .answer{

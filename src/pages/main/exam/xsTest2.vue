@@ -1,5 +1,6 @@
 <template>
     <div id=main>
+        <div id="title">{{title}}</div>
         <div class="fluid container container2">
             <div class="box b_box">
             <draggable class="b_list-group" tag="ul" v-model="list_left" v-bind="dragOptions" :move="onMove" @start="isDragging=true" @end="isDragging=false">
@@ -80,10 +81,10 @@ export default {
   },
   data() {
     return {
+      title:'的',
       timer:'',
-      correct:0,
+      correct:'',
       current:60,
-      correct_res:0,
         // numList:[1,2,3,4,5,6,7,8,9],
         // numRes:[''],
         
@@ -105,13 +106,13 @@ export default {
         //     }
         // }
         // console.log(num,this.numList);
-        return { name, order: index + 1, image:require('../../../assets/pintu/ex1/'+(index)+'.png'),fixed: false };
+        return { name, order: index + 1, image:require('../../../assets/pintu/ex2/'+(index)+'.png'),fixed: false };
       }),
       list_right: message_right.map((name, index) => {
-        return { name, order: index + 4, image:require('../../../assets/pintu/ex1/'+(index+3)+'.png'),fixed: false };
+        return { name, order: index + 4, image:require('../../../assets/pintu/ex2/'+(index+3)+'.png'),fixed: false };
       }),
       list_bottom: message_bottom.map((name, index) => {
-        return { name, order: index + 7, image:require('../../../assets/pintu/ex1/'+(index+6)+'.png'),fixed: false };
+        return { name, order: index + 7, image:require('../../../assets/pintu/ex2/'+(index+6)+'.png'),fixed: false };
       }),
 
       list_result: [],
@@ -120,14 +121,48 @@ export default {
       delayedDragging: false
     };
   },
-  mounted(res){
+  mounted(){
     this.judge();
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
-    this.correct_res = parseInt(this.$route.params.correct);//处理传参
+    this.correct = parseInt(this.$route.params.correct);//处理传参
   },
   beforeDestroy(){
     clearInterval(this.timer);
+  },
+  methods: {
+    setTime(){
+      this.current-=1;
+      if(this.current==0){
+        this.passFn();
+        this.$router.push({name:'xsTest3',params:{correct:this.correct}});
+      }   
+    },
+    onMove({ relatedContext, draggedContext }) {
+      const relatedElement = relatedContext.element;
+      const draggedElement = draggedContext.element;
+      return (
+        (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
+      );
+    },
+    nextBtn(){
+        this.$router.push({name:'xsTest3',params:{correct:this.correct,time:this.current}});
+    },
+    passFn () {
+        if(this.list_result.length==9){
+            const newPuzzles = this.list_result.slice(0, 9)
+            const isPass = newPuzzles.every((e, i) => e.order === i + 1)
+            if (isPass) {
+                // alert ('恭喜，闯关成功！')
+                this.correct++;
+            }else{
+                // alert ('答案不正确！')
+            }
+        }else{
+            // alert ('答案不正确！')
+        }
+        this.nextBtn();        
+    }
   },
   computed: {
     dragOptions() {
@@ -149,62 +184,7 @@ export default {
         this.delayedDragging = false;
       });
     }
-  },
-  methods: {
-    setTime(){
-      this.current-=1;
-      if(this.current==0){
-        this.correct=0;
-        this.$router.push('/main/exam/hsExam');
-      }    
-    },
-    onMove({ relatedContext, draggedContext }) {
-      const relatedElement = relatedContext.element;
-      const draggedElement = draggedContext.element;
-      return (
-        (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
-      );
-    },
-    nextBtn(){
-        this.$router.push('/main/exam/hsExam');
-    },
-    passFn () {
-        if(this.list_result.length==9){
-            const newPuzzles = this.list_result.slice(0, 9)
-            const isPass = newPuzzles.every((e, i) => e.order === i + 1)
-            if (isPass) {
-                alert ('恭喜，闯关成功！')
-                this.correct=1;
-            }else{
-                alert ('答案不正确！')
-            }
-        }else{
-            alert ('答案不正确！')
-        }
-        this.compute();
-        this.nextBtn();
-    },
-    compute(){
-        this.correct_res+=this.correct;
-        // console.log(111,this.correct_res,this.time_res,)
-        // console.log(JSON.parse(localStorage.getItem("username")))
-        fetch('api/web-ie/server/xsTest.php',{
-            method:"POST",
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify({
-                Authorization:localStorage.getItem('Authorization'),//token
-                username:JSON.parse(localStorage.getItem("username")),
-                correct:this.correct_res,
-            }),
-        }).then((res)=>{
-            return res.json();
-        }).then((res)=>{
-        }); 
-    }
-  },
+  }
 };
 </script>
 
@@ -214,6 +194,13 @@ export default {
     position: relative;
     width: 1920px;
     height: 1080px;
+}
+#title{
+  position: absolute;
+  font: 38px bold;
+  color: white;
+  left: 942px;
+  top:47px;
 }
 .container{
     display: flex;
@@ -238,7 +225,7 @@ export default {
    width: 108px;
     height: 324px;
     padding: 0;
-    background: rgba(204, 204, 204, 0.787);
+    /* background: rgba(204, 204, 204, 0.787); */
     list-style: none;
 }
 .b2_list-group {
@@ -246,7 +233,7 @@ export default {
     height: 108px;
     margin-bottom: 20px;
     padding: 0;
-    background: rgba(204, 204, 204, 0.787);
+    /* background: rgba(204, 204, 204, 0.787); */
     list-style: none;
 }
 .list-group {
@@ -282,7 +269,7 @@ export default {
   position: absolute;
   left:1700px;
   top:70px;
-  background: url('../../../assets/pintu/finish.png') center center no-repeat;
+  background: url('../../../assets/pintu/next.png') center center no-repeat;
   width: 150px;
   height: 164px;
   border: 0px;

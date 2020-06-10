@@ -30,7 +30,6 @@ export default {
       timer:'',
       correct:0,
       current:20,
-      correct_res:0,
 
       positionX:0,
       positionY:0,
@@ -158,7 +157,7 @@ export default {
     this.random();//打乱备选答案顺序
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
-    this.correct_res = parseInt(this.$route.params.correct);//处理传参
+    this.correct = parseInt(this.$route.params.correct);//处理传参
   },
   beforeDestroy(){
     clearInterval(this.timer);
@@ -167,7 +166,7 @@ export default {
         setTime(){
           this.current-=1;
           if(this.current==0){
-            this.correct=0;
+            this.passFn();
             this.$router.push('/main/exam/dsExam');
           }
         },
@@ -261,19 +260,18 @@ export default {
               }
             }
             if(order==8){
-              alert ('恭喜，闯关成功！')
-              this.correct=1;
+              // alert ('恭喜，闯关成功！')
+              this.correct++;
             }else{
-              alert ('答案不正确！')
+              // alert ('答案不正确！')
             }
         }else{
-            alert ('答案不正确！')
+            // alert ('答案不正确！')
         }
         this.compute();
         this.nextBtn();        
       },
       compute(){
-          this.correct_res+=this.correct;
           // console.log(111,this.correct_res,this.time_res,)
           // console.log(JSON.parse(localStorage.getItem("username")))
           fetch('api/web-ie/server/hsTest.php',{
@@ -285,7 +283,7 @@ export default {
               body:JSON.stringify({
                   Authorization:localStorage.getItem('Authorization'),//token
                   username:JSON.parse(localStorage.getItem("username")),
-                  correct:this.correct_res,
+                  correct:this.correct,
               }),
           }).then((res)=>{
               return res.json();
