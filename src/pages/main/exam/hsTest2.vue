@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="timer">计时器：{{current}}</div>
+    <div class="timer">倒计时：{{current}}</div>
     <button class="nextBtn" @click="passFn"></button>
   </div>
 </template>
@@ -249,7 +249,6 @@ export default {
                 }
               }
             }
-            
             const newPuzzles = this.answer1_user.slice(0, 8);
             newPuzzles.sort(this.creatCompare('order'));
             this.answer1.sort(this.creatCompare('order'));
@@ -262,14 +261,14 @@ export default {
             if(order==8){
               // alert ('恭喜，闯关成功！')
               this.correct++;
-            }else{
-              // alert ('答案不正确！')
             }
-        }else{
-            // alert ('答案不正确！')
-        }
-        this.compute();
-        this.nextBtn();        
+          }
+          if(this.correct>=1){
+            this.compute();
+            this.nextBtn();
+          }else{
+            this.$router.push('/main/exam/failed');
+          }      
       },
       compute(){
           // console.log(111,this.correct_res,this.time_res,)
@@ -285,16 +284,6 @@ export default {
                   username:JSON.parse(localStorage.getItem("username")),
                   correct:this.correct,
               }),
-          }).then((res)=>{
-              return res.json();
-          }).then((res)=>{
-              // console.log(res);
-              // if(res[2].code==1){     
-                  
-              // }else{
-              //     this.$Message.error(res[2].message);
-              //     this.$router.push('./index');
-              // }
           }); 
       }
     
@@ -391,7 +380,7 @@ export default {
   position: absolute;
   left:1700px;
   top:70px;
-  background: url('../../../assets/pintu/next.png') center center no-repeat;
+  background: url('../../../assets/pintu/finish.png') center center no-repeat;
   width: 150px;
   height: 164px;
   border: 0px;

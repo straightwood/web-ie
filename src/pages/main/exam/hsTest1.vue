@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="timer">计时器：{{current}}</div>
+    <div class="timer">倒计时：{{current}}</div>
     <button class="nextBtn" @click="passFn"></button>
   </div>
 </template>
@@ -259,15 +259,10 @@ export default {
               }
             }
             if(order==8){
-              // alert ('恭喜，闯关成功！')
               this.correct++;
-            }else{
-              // alert ('答案不正确！')
             }
-        }else{
-            // alert ('答案不正确！')
-        }
-        this.nextBtn();        
+          }
+          this.nextBtn();        
         }
     
     },

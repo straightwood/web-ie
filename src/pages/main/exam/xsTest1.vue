@@ -53,7 +53,7 @@
             </draggable>
         </div>
     </div>
-    <div class="timer">计时器：{{current}}</div>
+    <div class="timer">倒计时：{{current}}</div>
     <button class="nextBtn" @click="passFn"></button>
 </div>
 </template>
@@ -153,12 +153,8 @@ export default {
             const isPass = newPuzzles.every((e, i) => e.order === i + 1)
             if (isPass) {
                 // alert ('恭喜，闯关成功！')
-                this.correct++;
-            }else{
-                // alert ('答案不正确！')
+                this.correct=1;
             }
-        }else{
-            // alert ('答案不正确！')
         }
         this.nextBtn();        
     }

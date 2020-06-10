@@ -5,8 +5,6 @@
     $token = $data['Authorization'];
     require_once('decodeToken.php');
 
-    $username = "admin";
-
     if($tokenNum=='200'){
         $result_array[2] = ['code'=>'1','message'=>'登录成功！'];
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

@@ -74,7 +74,7 @@ export default {
     getScore(){
     //   this.user_nickname=localStorage.getItem("nickname");
     // console.log(localStorage.getItem("nickname"))
-      fetch('api/web-ie/server/getScore.php',{
+      fetch('api/web-ie/server/think.php',{
           method:"POST",
           headers:{
             'Accept': 'application/json',
@@ -82,23 +82,23 @@ export default {
           },
           body:JSON.stringify({
             Authorization:localStorage.getItem('Authorization'),//token
-            username:localStorage.getItem("username"),
+            username:JSON.parse(localStorage.getItem("username")),
           }),
       }).then((res)=>{
           return res.json();
+          
       }).then((res)=>{
+        // console.log(res);
           if(res[2].code==1){     //############################分数计算
               this.user_totalscore=res[1][0].score;//取总成绩
               for(var i in res[0]){
                 this.user_score[i]=res[0][i].score;//取各关成绩
               }
+              this.user_grade=this.grade[res[0].length];//称号判定
+              this.person=this.personImage_id[res[0].length];//目前还是按称号改变的
+              this.house='house_'+this.personImage_id[res[0].length];//目前还是按称号改变的
+
               for(var i in this.user_score){    
-                if(this.user_score[i]==''){           //称号判定
-                  this.user_grade=this.grade[i];
-                  this.person=this.personImage_id[i];//目前还是按称号改变的
-                  this.house='house_'+this.personImage_id[i];//目前还是按称号改变的
-                  console.log(this.house)
-                }
                 if(this.user_score[i]==''){           //评论语句
                   this.user_score[i]=this.round_sentence[0];
                 }else if(this.user_score[i]>=20 && this.user_score[i]<=30){

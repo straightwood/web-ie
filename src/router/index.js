@@ -22,6 +22,9 @@ import XsExam from '../pages/main/exam//xiangExam'
 import DsWu from '../pages/main/exam//dianExamWu'
 import DsWen from '../pages/main/exam/dianExamWen'
 
+import failed from '../pages/main/exam/failed'
+import success from '../pages/main/exam/success'
+
 Vue.use(Router)//vue全局使用Router
 
 export default new Router({
@@ -98,7 +101,16 @@ export default new Router({
       path: '/main/exam/DsExamWen',
       name: 'dsexamwen-page',
       component: DsWen,
+    },{
+      path: '/main/exam/failed',
+      name: 'failed-page',
+      component: failed,
+    },{
+      path: '/main/exam/success',
+      name: 'success-page',
+      component: success,
     }
+
 
   ]
 })

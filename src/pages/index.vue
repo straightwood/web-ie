@@ -29,7 +29,7 @@
                   <Input type="text"
                         size="large" 
                         v-model="formInline1.username" 
-                        placeholder="Username..." 
+                        placeholder="请输入用户名..." 
                   />
               </FormItem>
               <FormItem label="密码" prop="password">
@@ -37,7 +37,7 @@
                         size="large"
                         v-model="formInline1.password"
                         password 
-                        placeholder="Password..."
+                        placeholder="请输入密码..."
                   />
               </FormItem>
               <FormItem>
@@ -54,7 +54,7 @@
                   <Input type="text"
                         size="large" 
                         v-model="formInline2.username"  
-                        placeholder="Username..." 
+                        placeholder="请输入用户名..." 
                   />
               </FormItem>
               <FormItem label="昵称" prop="nickname">
@@ -63,7 +63,7 @@
                         v-model="formInline2.nickname" 
                         maxlength="5" 
                         show-word-limit 
-                        placeholder="Nickname..." 
+                        placeholder="请输入昵称..." 
                   />
               </FormItem>
               <FormItem label="设置密码" prop="password">
@@ -71,7 +71,7 @@
                         size="large"
                         v-model="formInline2.password"
                         password 
-                        placeholder="Password..."
+                        placeholder="请输入密码..."
                   />
               </FormItem>
               <FormItem>

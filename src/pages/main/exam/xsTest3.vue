@@ -53,7 +53,7 @@
             </draggable>
         </div>
     </div>
-    <div class="timer">计时器：{{current}}</div>
+    <div class="timer">倒计时：{{current}}</div>
     <button class="nextBtn" @click="passFn"></button>
 </div>
 </template>
@@ -126,7 +126,6 @@ export default {
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
     this.correct = parseInt(this.$route.params.correct);//处理传参
-    console.log(this.correct)
   },
   beforeDestroy(){
     clearInterval(this.timer);
@@ -171,25 +170,21 @@ export default {
         this.$router.push('/main/exam/hsExam');
     },
     passFn () {
-        if(this.list_result.length==9){
-            const newPuzzles = this.list_result.slice(0, 9)
-            const isPass = newPuzzles.every((e, i) => e.order === i + 1)
-            if (isPass) {
-                // alert ('恭喜，闯关成功！')
-                this.correct++;
-                console.log(this.correct)
-            }else{
-                // alert ('答案不正确！')
-            }
-        }else{
-            // alert ('答案不正确！')
+      if(this.list_result.length==9){
+        const newPuzzles = this.list_result.slice(0, 9)
+        const isPass = newPuzzles.every((e, i) => e.order === i + 1)
+        if (isPass) {
+            this.correct++;
         }
-        this.compute();
-        this.nextBtn();
+        if(this.correct>=2){
+          this.compute();
+          this.nextBtn();
+        }else{
+          this.$router.push('/main/exam/failed');
+        }
+      }
     },
     compute(){
-        // console.log(111,this.correct_res,this.time_res,)
-        // console.log(JSON.parse(localStorage.getItem("username")))
         fetch('api/web-ie/server/xsTest.php',{
             method:"POST",
             headers:{
