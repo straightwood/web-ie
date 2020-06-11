@@ -17,29 +17,29 @@ Vue.config.productionTip = false
 
 
 Vue.prototype.judge = function(){
-//   fetch('api/web-ie/server/judge.php',{
-//       method:"POST",
-//       headers:{
-//           'Accept': 'application/json',
-//           'Content-Type': 'application/json',
-//       },
-//       body:JSON.stringify({
-//           Authorization:localStorage.getItem('Authorization'),//token
-//           username:JSON.parse(localStorage.getItem("username")),
-//       }),
-//   }).then((res)=>{
-//       return res.json();
-//   }).then((res)=>{
-//       if(res[0]==0){
-//           this.$router.push('/main/exam/xsExam');
-//       }else if(res[0]==1){
-//           this.$router.push('/main/exam/hsExam');
-//       }else if(res[0]==2){
-//           this.$router.push('/main/exam/dsExam');
-//       }else{
-//           alert("三关考完 还没完善");
-//       }
-//   });
+  fetch('api/web-ie/server/judge.php',{
+      method:"POST",
+      headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+      },
+      body:JSON.stringify({
+          Authorization:localStorage.getItem('Authorization'),//token
+          username:JSON.parse(localStorage.getItem("username")),
+      }),
+  }).then((res)=>{
+      return res.json();
+  }).then((res)=>{
+      if(res[0]==0){
+          this.$router.push('/main/exam/xsExam');
+      }else if(res[0]==1){
+          this.$router.push('/main/exam/hsExam');
+      }else if(res[0]==2){
+          this.$router.push('/main/exam/dsExam');
+      }else{
+          alert("三关考完 还没完善");
+      }
+  });
 }
 
 /* eslint-disable no-new */

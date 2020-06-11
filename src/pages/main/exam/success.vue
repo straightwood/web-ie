@@ -43,7 +43,7 @@ export default {
                    
                 }else{
                     this.$Message.error(res[2].message);
-                    this.$router.push('./index');
+                    this.$router.push('/index');
                 }
             });
         },
@@ -70,7 +70,7 @@ export default {
 
                 }else{
                     this.$Message.error(res[2].message);
-                    this.$router.push('./index');
+                    this.$router.push('/index');
                 }
             });
         }

@@ -52,7 +52,7 @@ export default{
                 onOk: () => {
                     this.$Message.info('已退出登录！');
                     this.changeLogin({ Authorization: '' });
-                    this.$router.push('./index');
+                    this.$router.push('/index');
                 },
                 onCancel: () => {
                 }
