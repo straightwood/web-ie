@@ -143,7 +143,7 @@ export default {
               }
           }else{
               this.$Message.error(res[2].message);
-              this.$router.push('./index');
+              this.$router.push('/index');
           }
       });  
     },
@@ -162,7 +162,7 @@ export default {
             onOk: () => {
                 this.$Message.info('已退出登录！');
                 this.changeLogin({ Authorization: '' });
-                this.$router.push('./index');
+                this.$router.push('/index');
             },
             onCancel: () => {
             }

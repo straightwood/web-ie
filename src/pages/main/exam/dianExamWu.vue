@@ -188,7 +188,7 @@ export default {
       }
     },
     passFn(){
-      console.log("正确题数："+this.correct);
+      // console.log("正确题数："+this.correct);
       this.$router.push({name:'dsexamwen-page',params:{correct:this.correct}});
     }
   }

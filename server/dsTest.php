@@ -25,5 +25,5 @@
     }else{
         $result_array[2] = ['code'=>'0','message'=>'请进行登录后操作！'];      
     }
-    echo json_encode($time);
+    echo json_encode($result_array);
 ?>
