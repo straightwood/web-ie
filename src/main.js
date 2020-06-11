@@ -15,6 +15,14 @@ Vue.use(VueRouter);//引入router
 Vue.use(ViewUI);//引入view
 Vue.config.productionTip = false
 
+/* eslint-disable no-new */
+new Vue({
+    el: '#app',
+    router,     //属性值和属性名一样时省略 router:router
+    components: { App },
+    template: '<App/>',
+    store
+  })
 
 Vue.prototype.judge = function(){
   fetch('api/web-ie/server/judge.php',{
@@ -42,11 +50,4 @@ Vue.prototype.judge = function(){
   });
 }
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,     //属性值和属性名一样时省略 router:router
-  components: { App },
-  template: '<App/>',
-  store
-})
+
