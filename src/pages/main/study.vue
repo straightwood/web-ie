@@ -2,33 +2,35 @@
   <div id="main">
     <img src="../../assets/study/studybg.png">
     <div id="btnBox">
-      <Button type="text"
+      <button type="text"
               id="xiangshiBtn"
               class="btnClass"
               @click="gotoxsstudy"
               @mouseenter="PlaySound()" 
               @mouseleave="StopSound()"
-      ></Button>
-      <Button type="text"
+      ></button>
+      <button type="text"
               id="huishiBtn" 
               class="btnClass"
               @click="gotohsstudy"
               @mouseenter="PlaySound()" 
               @mouseleave="StopSound()"
-      ></Button>
-      <Button type="text"
+      ></button>
+      <button type="text"
               id="dianshiBtn" 
               class="btnClass"
               @click="gotodsstudy"
               @mouseenter="PlaySound()" 
               @mouseleave="StopSound()"
-      ></Button>
+      ></button>
     </div>
-    <Button type="text"
+    <button type="text"
               id="returnmain" 
               class="btnClass"
               @click="save"
-      ></Button>
+              @mouseenter="PlaySound()" 
+              @mouseleave="StopSound()"
+      ></button>
     <audio ref="audio" :src="audioUrl"></audio>
   </div>
 </template>
