@@ -1,10 +1,11 @@
 <template>
   <div id="main">
-        <button id="backBtn" @click="back();clearInfo()"></button>
+        <button id="backBtn" @click="back();clearInfo()" @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
         <div id="xsScore" class="score">{{xsScore}}</div>
         <div id="hsScore" class="score">{{hsScore}}</div>
         <div id="dsScore" class="score">{{dsScore}}</div>
         <div id="totalScore" class="score">{{totalScore}}</div>
+        <audio ref="audio" :src="audioUrl"></audio>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
             hsScore:'',
             dsScore:'',
             totalScore:'',
+            audioUrl:require('../../../music/悬停按钮音效.wav'),//声音文件
         }
     },
     mounted(){
@@ -73,6 +75,13 @@ export default {
                     this.$router.push('/index');
                 }
             });
+        },
+        PlaySound() {
+            this.$refs.audio.play();
+        },
+         StopSound() {
+             this.$refs.audio.pause();
+         this.$refs.audio.currentTime = 0;
         }
     }
 }

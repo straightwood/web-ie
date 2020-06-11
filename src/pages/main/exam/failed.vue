@@ -1,11 +1,17 @@
 <template>
   <div id="main">
-      <button id="backBtn" @click="back();clearInfo()"></button>
+      <button id="backBtn" @click="back();clearInfo()" @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
+      <audio ref="audio" :src="audioUrl"></audio>
   </div>
 </template>
 
 <script>
 export default {
+    data(){
+        return{
+            audioUrl:require('../../../music/悬停按钮音效.wav'),//声音文件
+        };
+    },
     methods:{
         back(){
             this.$router.push('/main')
@@ -31,6 +37,13 @@ export default {
                     this.$router.push('/index');
                 }
             });
+        },
+        PlaySound() {
+            this.$refs.audio.play();
+        },
+         StopSound() {
+             this.$refs.audio.pause();
+         this.$refs.audio.currentTime = 0;
         }
     }
 }
@@ -51,4 +64,5 @@ export default {
     width: 150px;
     height: 164px;
 }
+
 </style>

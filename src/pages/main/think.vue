@@ -50,7 +50,7 @@ export default {
         'xiucai',
         'jvren',
         'gongshi',
-        'jingshi',
+        'jinshi',
       ],
       round_sentence:[
         "还没有进行考试，不知道水平。",

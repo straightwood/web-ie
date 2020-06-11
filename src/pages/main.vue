@@ -25,7 +25,7 @@
             <button class="select_button" id="thinkBtn" 
             @click="handleThink" @mouseenter="PlaySound()" @mouseleave="StopSound()"></button>
         </div>
-        <!-- 音频控件 -->
+    
         <audio ref="audio" :src="audioUrl"></audio>
 
     </div>
