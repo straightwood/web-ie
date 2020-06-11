@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     
-    <img src="../../../assets/dianexam/dsWenBg.png">
+    <img src="../../../assets/dianexam/dsWenBg.png" @click='PlaySound()'>
     <input type="button" id="button1" @click.stop="handleInputOne" ref="inputOne"/>
     <div class="myDiv"  :class="{active1:isActive1}" ref="myDiv"></div>
     <div id="endtime">{{val1}}</div>
@@ -30,6 +30,8 @@
     <img src="../../../assets/dianexam/wrong.png" id="cha">
     <Button type="text" id="nextqusBtn" @click="nextqus"></Button>
     <img id="wskaichang" src="../../../assets/dianexam/wenskaichang.png">
+    <audio ref="audio" :src="audioUrl"></audio>
+    <p id=playerans>{{val2}}</p>
   </div>
 </template>
 
@@ -48,6 +50,8 @@ export default {
       kcflag:0,
       choseflag:[0,0,0],
       timer:'',
+      audioUrl:require('../../../music/流水潺潺.wav'),//声音文件
+      val2:''
     }
   },
   mounted:function(){
@@ -136,24 +140,29 @@ export default {
        this.ans= 'a' ;
        this.choseflag[this.ansnum]=1;
        this.jiaodui(this.ans);
+       this.val2="A";
     },
     bclick(){
        this.ans= 'b' ;
        this.choseflag[this.ansnum]=1;
        this.jiaodui(this.ans);
+       this.val2="B";
     },
     cclick(){
          this.ans= 'c' ;
          this.choseflag[this.ansnum]=1;
          this.jiaodui(this.ans);
+         this.val2="C";
     },
     dclick(){
         this.ans= 'd' ;
         this.choseflag[this.ansnum]=1;
         this.jiaodui(this.ans);
+        this.val2="D";
     },
     jiaodui(ans){
-      if(2>this.ansnum>0){
+      if(3>this.ansnum>0){
+        playerans.style.display='block';
         nextqusBtn.style.visibility='visible';
       }
       if(this.correctans[this.ansnum]==ans){
@@ -166,6 +175,7 @@ export default {
       bird.style.display='none';
     },
     nextqus(){
+      playerans.style.display='none';
       this.ansnum++;
       endtime.style.display='block';
       gou.style.visibility='hidden';
@@ -225,7 +235,10 @@ export default {
               return res.json();
           }).then((res)=>{
           }); 
-      }
+      },
+      PlaySound() {
+      this.$refs.audio.play();
+    },
   }
 }
 </script>
@@ -324,7 +337,7 @@ p,input{
 }
 #gou,#cha{
   position: absolute;
-  right:550px;
+  right:500px;
   bottom:270px;
   width:70px;
   visibility:hidden;
@@ -343,5 +356,13 @@ p,input{
   left:0px;
   top:0px;
   visibility:visible;
+}
+#playerans{
+  position: absolute;
+  bottom:250px;
+  right:600px;
+  font-size:50px;
+  color:RED;
+  font-family:KaiTi;
 }
 </style>

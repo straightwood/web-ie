@@ -19,7 +19,8 @@
       </div>
     </div>
     <div class="timer">倒计时：{{current}}</div>
-    <button class="nextBtn" @click="passFn"></button>
+    <button class="nextBtn" @click="passFn" @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
+    <audio ref="audio" :src="audioUrl"></audio>
   </div>
 </template>
 
@@ -150,6 +151,7 @@ export default {
         },
       ],
       answer1_user:[],
+      audioUrl:require('../../../music/悬停按钮音效.wav'),//声音文件
     }
   },
   mounted(){
@@ -298,8 +300,14 @@ export default {
               return res.json();
           }).then((res)=>{
           }); 
+      },
+      PlaySound() {
+        this.$refs.audio.play();
+      },
+      StopSound() {
+        this.$refs.audio.pause();
+        this.$refs.audio.currentTime = 0;
       }
-    
     },
 }
 </script>

@@ -4,10 +4,10 @@
     <input type="button" id="button1" @click.stop="handleInputOne" ref="inputOne"/>
     <div class="myDiv"  :class="{active1:isActive1}" ref="myDiv"></div>
     <div id="bird">
-    <img src="../../../assets/dianexam/仙鹤飞翔A.gif" style="width:280px" id="birdA" @click='aclick'>
-    <img src="../../../assets/dianexam/仙鹤飞翔B.gif" style="width:290px" id="birdB" @click='bclick'>
-    <img src="../../../assets/dianexam/仙鹤飞翔C.gif" style="width:300px" id="birdC" @click='cclick'>
-    <img src="../../../assets/dianexam/仙鹤飞翔D.gif" style="width:310px" id="birdD" @click='dclick'>
+    <img src="../../../assets/dianexam/仙鹤飞翔A.gif" style="width:280px" id="birdA" @click="aclick();PlaySound();">
+    <img src="../../../assets/dianexam/仙鹤飞翔B.gif" style="width:290px" id="birdB" @click="bclick();PlaySound();">
+    <img src="../../../assets/dianexam/仙鹤飞翔C.gif" style="width:300px" id="birdC" @click="cclick();PlaySound();">
+    <img src="../../../assets/dianexam/仙鹤飞翔D.gif" style="width:310px" id="birdD" @click="dclick();PlaySound();">
     </div>
     <p id=q1title>问题(1/3)：以下哪个人奉行《公羊传》的思想：</p>
     <p id=q1content>A：人不犯我，我不犯人。<br> 
@@ -29,6 +29,7 @@
     <Button type="text" id="nextqusBtn"  @click="nextqus"></Button>
     <Button type="text" id="qusjiexiBtn"  @click="qusjiexi"></Button>
     <Button type="text" id="finishqusbutton"  @click="gotowens"></Button>
+    <p id=playerans>{{val2}}</p>
     <img id="jiexibg" src="../../../assets/dianstudy/jiexiBg.png">
     <Button type="text" id="jiexiclosebtn" @click="closejiexi"></Button>
     <p id=q1jiexi class=jiexi>九世犹可以复仇乎?虽百世可也。<br>
@@ -63,6 +64,7 @@
                   &emsp;因此，答案是A。<br>
     </p>    
     <img id="wskaichang" src="../../../assets/dianexam/wskaichang.png">
+    <audio ref="audio" :src="audioUrl"></audio>
   </div>
 </template>
 
@@ -80,6 +82,8 @@ export default {
       kcflag:0,
       choseflag:[0,0,0],
       timer:'',
+      audioUrl:require('../../../music/射击声.mp3'),//声音文件
+      val2:''
     }
   },
   mounted:function(){
@@ -165,39 +169,45 @@ export default {
        this.ans= 'a' ;
        this.choseflag[this.ansnum]=1;
        this.jiaodui(this.ans);
+       this.val2="A";
     },
     bclick(){
        this.ans= 'b' ;
        this.choseflag[this.ansnum]=1;
        this.jiaodui(this.ans);
+       this.val2="B";
     },
     cclick(){
          this.ans= 'c' ;
          this.choseflag[this.ansnum]=1;
          this.jiaodui(this.ans);
+         this.val2="C";
     },
     dclick(){
         this.ans= 'd' ;
         this.choseflag[this.ansnum]=1;
         this.jiaodui(this.ans);
+        this.val2="D";
     },
     jiaodui(ans){
         if(this.ansnum==2){
+          playerans.style.display='block';
           finishqusbutton.style.display='block';
         }else{
           nextqusBtn.style.display='block';
         }
         qusjiexiBtn.style.display='block';
       if(this.correctans[this.ansnum]==ans){
-        gou.style.display='block';
+        gou.style.visibility='visible';
       }
       else{
-        cha.style.display='block';
+        cha.style.visibility='visible';
       } 
       bird.style.display='none';
     },
     nextqus(){
       this.ansnum++;
+      playerans.style.display='none';
       gou.style.visibility='hidden';
       cha.style.visibility='hidden';
       jiexibg.style.display='none';
@@ -228,7 +238,6 @@ export default {
     qusjiexi(){
       jiexibg.style.display='block';
       jiexiclosebtn.style.display='block';
-      console.log("题目数："+this.ansnum);
       if(this.ansnum==0){
         q1jiexi.style.display='block';
       }
@@ -240,7 +249,6 @@ export default {
       }
     },
     closejiexi(){
-       console.log("题目数："+this.ansnum);
        jiexibg.style.display='none';
        jiexiclosebtn.style.display='none';
        if(this.ansnum==0){
@@ -255,6 +263,13 @@ export default {
     },
     gotowens(){
        this.$router.push('./dianWenstudy');
+    },
+    PlaySound() {
+      this.$refs.audio.play();
+    },
+    StopSound() {
+      this.$refs.audio.pause();
+      this.$refs.audio.currentTime = 0;
     }
   }
 }
@@ -428,5 +443,13 @@ p,input{
   color:#000000;
   font-family:SimHei;
   display:none;
+}
+#playerans{
+  position: absolute;
+  bottom:250px;
+  right:1000px;
+  font-size:50px;
+  color:RED;
+  font-family:KaiTi;
 }
 </style>

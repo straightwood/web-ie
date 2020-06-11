@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <img src="../../../assets/dianexam/dsWenBg.png">
+    <img src="../../../assets/dianexam/dsWenBg.png" @click='PlaySound()'>
     <input type="button" id="button1" @click.stop="handleInputOne" ref="inputOne"/>
     <div class="myDiv"  :class="{active1:isActive1}" ref="myDiv"></div>
     <div id="bird">
@@ -29,6 +29,7 @@
     <Button type="text" id="nextqusBtn" @click="nextqus"></Button>
     <Button type="text" id="qusjiexiBtn"  @click="qusjiexi"></Button>
     <Button type="text" id="finishqusbutton"  @click="gotoresult"></Button>
+    <p id=playerans>{{val2}}</p>
     <img id="jiexibg" src="../../../assets/dianstudy/jiexiBg.png">
     <Button type="text" id="jiexiclosebtn" @click="closejiexi"></Button>
     <p id=q1jiexi class=jiexi>&emsp;&emsp;于嗟女兮！无与士耽。<br>
@@ -60,6 +61,7 @@
                   &emsp;这个名字是我杜撰的。<br>
     </p>    
     <img id="wskaichang" src="../../../assets/dianexam/wenskaichang.png">
+    <audio ref="audio" :src="audioUrl"></audio>
   </div>
 </template>
 
@@ -77,6 +79,8 @@ export default {
       kcflag:0,
       choseflag:[0,0,0],
       timer:'',
+      audioUrl:require('../../../music/流水潺潺.wav'),//声音文件
+      val2:''
     }
   },
   mounted:function(){
@@ -162,42 +166,51 @@ export default {
        this.ans= 'a' ;
        this.choseflag[this.ansnum]=1;
        this.jiaodui(this.ans);
+       this.val2="A";
     },
     bclick(){
        this.ans= 'b' ;
        this.choseflag[this.ansnum]=1;
        this.jiaodui(this.ans);
+       this.val2="B";
     },
     cclick(){
          this.ans= 'c' ;
          this.choseflag[this.ansnum]=1;
          this.jiaodui(this.ans);
+         this.val2="C";
     },
     dclick(){
         this.ans= 'd' ;
         this.choseflag[this.ansnum]=1;
         this.jiaodui(this.ans);
+        this.val2="D";
     },
     jiaodui(ans){
       if(this.ansnum==2){
+          playerans.style.display='block';
           finishqusbutton.style.display='block';
         }else{
           nextqusBtn.style.display='block';
         }
         qusjiexiBtn.style.display='block';
       if(this.correctans[this.ansnum]==ans){
-        gou.style.display='block';
+        gou.style.visibility='visible';
       }
       else{
-        cha.style.display='block';
+        cha.style.visibility='visible';
       } 
       bird.style.display='none';
     },
     nextqus(){
       this.ansnum++;
+       playerans.style.display='none';
       gou.style.visibility='hidden';
       cha.style.visibility='hidden';
+      jiexibg.style.display='none';
+      jiexiclosebtn.style.display='none';
       if(this.ansnum==1 ){
+        q1jiexi.style.display='none';
         this.t=15;
         q1title.style.display='none';
         q1content.style.display='none';
@@ -208,9 +221,8 @@ export default {
         bird.style.display='block';
       }
         else if(this.ansnum==2 ){
-        this.t=15;
         q2jiexi.style.display='none';
-        this.t=10;
+        this.t=15;
         q2title.style.display='none';
         q2content.style.display='none';
         q3title.style.display='block';
@@ -248,7 +260,10 @@ export default {
     },
     gotoresult(){
       this.$router.push('/main/study');
-    }
+    },
+    PlaySound() {
+      this.$refs.audio.play();
+    },
   }
 }
 </script>
@@ -407,5 +422,13 @@ p,input{
   color:#000000;
   font-family:SimHei;
   display:none;
+}
+#playerans{
+  position: absolute;
+  bottom:250px;
+  right:600px;
+  font-size:50px;
+  color:RED;
+  font-family:KaiTi;
 }
 </style>
