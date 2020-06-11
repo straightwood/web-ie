@@ -31,6 +31,8 @@
     <div id="title">
       <img src="../assets/board/boardtitle.png">
     </div>
+    <audio preload="auto" loop id="audio" :src="require('../music/金榜背景音乐.mp3')"></audio>
+	  <div @click="changeOn" :class="isOff? 'isOff':'isOn' "></div>
   </div>
 </template>
 
@@ -101,14 +103,22 @@ export default {
             {
               achieve:'稀疏平常'
             },
-          ]
+          ],
+          isOff:true,
       };
   },
   mounted(){
     this.getData();
+     // 自动播放音乐效果，解决微信自动播放问题
+       document.addEventListener('touchstart',this.audioAutoPlay,false);
+       document.addEventListener('WeixinJSBridgeReady', this.audioAutoPlay,false);
+       let oAudio = document.querySelector("#audio");
+       oAudio.onended = function () {//播放完毕，重新循环播放
+            oAudio.load();
+            oAudio.play();
+    }
   },
   methods:{
-
     ...mapMutations(['changeLogin']),
     getData(){
       fetch('api/web-ie/server/board.php',{
@@ -158,7 +168,24 @@ export default {
             }
         });
         
+    },changeOn(){
+                let oAudio = document.querySelector("#audio");
+               if(this.isOff){
+                oAudio.play();//让音频文件开始播放     
+               }else{
+                oAudio.pause();//让音频文件暂停播放 
+               }
+               this.isOff = !this.isOff;
+        },
+      audioAutoPlay() {
+                let audio = document.getElementById('audio');
+                    this.isOff = false;
+                    audio.play();
+                document.removeEventListener('touchstart',this.audioAutoPlay);
     },
+    load(){
+      location.reload();
+    }
   }
 }
 </script>
@@ -236,5 +263,36 @@ export default {
   position: absolute;
   left:1600px;
   top:100px;
+}
+
+.isOn{
+    width: 80px;
+    height: 80px;
+    position: fixed;
+    z-index: 2000;
+    top: 950px;
+    left:1800px;
+     -webkit-animation: rotating 1.2s linear infinite;
+    animation: rotating 1.2s linear infinite;
+    background: url("../assets/board/音乐播放.png") 0 0px no-repeat;
+    background-size:100%; 
+}
+@keyframes rotating {
+    from { -webkit-transform: rotate(0) }
+    to { -webkit-transform: rotate(360deg) }
+ }
+@-webkit-keyframes rotating {
+    from { -webkit-transform: rotate(0) }
+    to { -webkit-transform: rotate(360deg) }
+ }
+.isOff{
+    width: 80px;
+    height:80px;
+    position: fixed;
+    z-index: 2000;
+    top: 950px;
+    left:1800px;
+    background: url("../assets/board/音乐播放.png") 0 0px no-repeat;
+    background-size:100%; 
 }
 </style>

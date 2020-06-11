@@ -1,6 +1,7 @@
 <template>
   <div id="main">
     <img src="../assets/index/indexBG.jpg">
+
     <div id="btnBox">
       <Button type="text"
               id="loginButton"
@@ -17,7 +18,6 @@
               class="btnClass"
               @click="userInstruc" 
       ></Button>
-
     </div>
     
     <div id="cardBox">
@@ -85,7 +85,8 @@
       </Card>
     </div>
     
-
+    <audio preload="auto" loop id="audio" :src="require('../music/首页背景音乐.mp3')"></audio>
+	  <div @click="changeOn" :class="isOff?'isOff':'isOn'"></div>
   </div>
 </template>
 
@@ -102,7 +103,7 @@ export default {
             showLoginCard: false,//登录卡片
             showRegisterCard:false,//注册卡片
             showInstrucCard:false,
-
+            
             //表单
             formInline1: {
                 username: '',
@@ -124,7 +125,18 @@ export default {
                 nickname: [
                     { required: true, message: '请输入昵称！', trigger: 'blur' },
                 ]
-            }
+            },
+            isOff:true
+        }
+    },
+    mounted() {
+        // 自动播放音乐效果，解决微信自动播放问题
+       document.addEventListener('touchstart',this.audioAutoPlay,false);
+       document.addEventListener('WeixinJSBridgeReady', this.audioAutoPlay,false);
+       let oAudio = document.querySelector("#audio");
+        oAudio.onended = function () {//播放完毕，重新循环播放
+            oAudio.load();
+            oAudio.play();
         }
     },
     methods:{
@@ -219,9 +231,23 @@ export default {
         userInstruc(){
           this.showInstrucCard = !this.showInstrucCard;
         },
+        changeOn(){
+                let oAudio = document.querySelector("#audio");
+               if(this.isOff){
+                oAudio.play();//让音频文件开始播放     
+               }else{
+                oAudio.pause();//让音频文件暂停播放 
+               }
+               this.isOff = !this.isOff;
+        },
+        audioAutoPlay() {
+                let audio = document.getElementById('audio');
+                    this.isOff = false;
+                    audio.play();
+                document.removeEventListener('touchstart',this.audioAutoPlay);
+        }
+    },
         
-    }
-
 }
 </script>
 
@@ -317,5 +343,28 @@ form{
   margin-left: 90%;
   border: 0px;
   outline: none;
+}
+
+.isOn{
+    width: 28px;
+    height: 28px;
+    position: fixed;
+    z-index: 2000;
+    top: 20px;
+    left: 20px;
+     -webkit-animation: rotating 1.2s linear infinite;
+    animation: rotating 1.2s linear infinite;
+    background: url("../assets/study/jiexiclosebtn.png") 0 0 no-repeat;
+    background-size:100%; 
+}
+.isOff{
+    width: 28px;
+    height: 28px;
+    position: fixed;
+    z-index: 2000;
+    top: 20px;
+    left: 20px;
+    background: url("../assets/index/cancelButton.png") 0 -28px no-repeat;
+    background-size:100%; 
 }
 </style>

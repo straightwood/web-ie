@@ -21,6 +21,7 @@
               id="EntertheroomBtn"
               class="btnClass"
               @click="start"
+              @mouseenter="PlaySound()" @mouseleave="StopSound()"
       ></Button>
       <Button type="text"
               id="ExamRuleBtn" 
@@ -31,6 +32,7 @@
               id="SaveExitBtn" 
               class="btnClass"
               @click="save"
+              @mouseenter="PlaySound()" @mouseleave="StopSound()"
       ></Button>
     </div>
     <div id="btnBox2">
@@ -38,6 +40,7 @@
               id="continueButton" 
               class="btnClass2"
               @click="continueExamRule"
+              @mouseenter="PlaySound()" @mouseleave="StopSound()"
       ></Button>
       <Button type="text"
               id="byeButton"
@@ -45,6 +48,7 @@
               @click="returndsExam"
       ></Button>
     </div>
+    
   </div>
 </template>
 
@@ -98,7 +102,8 @@ export default {
         chatbox3.style.display='block'
         continueButton.style.visibility='hidden'
       }
-   }
+   },
+
   }
 }
 </script>

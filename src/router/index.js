@@ -8,7 +8,6 @@ import Board from '../pages/board'
 
 import Exam from '../pages/main/exam'
 import Study from '../pages/main/study'
-import Read from '../pages/main/read'
 import Think from '../pages/main/think'
 import xsTest1 from '../pages/main/exam/xsTest1'
 import xsTest2 from '../pages/main/exam/xsTest2'
@@ -61,10 +60,6 @@ export default new Router({
       path: '/main/study',     //勤学
       name: 'study',
       component: Study
-    },{
-      path: '/main/read',      //苦读
-      name: 'read',
-      component: Read
     },{
       path: '/main/think',     //自省
       name: 'think',

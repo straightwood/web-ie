@@ -3,25 +3,29 @@
         <!-- <img src="../assets/main/paperBG.png"> -->
         <div class="aside">
             <div :class="{bgColors:1==current}" class="aside_text">
-                <div class="chinese" @click="changeColor(1);handleMain()">学习—</div>
+                <div class="chinese" @click="changeColor(1);handleMain();"> 学习—</div>
                 <div class="english">STUDY</div>
             </div>
             <div :class="{bgColors:2==current}" class="aside_text">
-                <div class="chinese" @click="changeColor(2);handleBoard()">金榜—</div>
+                <div class="chinese" @click="changeColor(2);handleBoard();">金榜—</div>
                 <div class="english">LEADERBOARD</div>
             </div>
             <div :class="{bgColors:3==current}" class="aside_text">
-                <div class="chinese" @click="changeColor(3);handleLogout()">登出—</div>
+                <div class="chinese" @click="changeColor(3);handleLogout();">登出—</div>
                 <div class="english">LOGOUT</div>
             </div>
         </div>
         <div class="title"></div>
         <div class="selection">
-            <button class="select_button" id="examBtn" @click="handleExam"></button>
-            <button class="select_button" id="studyBtn" @click="handleStudy"></button>
-            <!-- <button class="select_button" id="readBtn" @click="handleRead"></button> -->
-            <button class="select_button" id="thinkBtn" @click="handleThink"></button>
+            <button 
+            class="select_button"  id="examBtn" 
+            @click="handleExam" @mouseenter="PlaySound()" @mouseleave="StopSound()"></button>
+            <button class="select_button" id="studyBtn" 
+            @click="handleStudy" @mouseenter="PlaySound()" @mouseleave="StopSound()"></button>
+            <button class="select_button" id="thinkBtn" 
+            @click="handleThink" @mouseenter="PlaySound()" @mouseleave="StopSound()"></button>
         </div>
+        <audio ref="audio" :src="audioUrl"></audio>
     </div>
 </template>
 
@@ -32,6 +36,7 @@ export default{
         return{
             color:false,
             current:1,
+            audioUrl:require('../music/悬停按钮音效.wav'),//声音文件
         };
     },
     methods:{
@@ -66,12 +71,16 @@ export default{
         handleStudy(){
             this.$router.push('/main/study');
         },
-        // handleRead(){
-        //     this.$router.push('/main/read');
-        // },
         handleThink(){
             this.$router.push('/main/think');
         },
+        PlaySound() {
+            this.$refs.audio.play();
+        },
+        StopSound() {
+            this.$refs.audio.pause();
+            this.$refs.audio.currentTime = 0;
+        }
     },
 }
 </script>
@@ -125,7 +134,7 @@ export default{
     /* position: absolute; */
     width:241px;
     height: 360px;
-    margin: 120px;
+    margin: 60px;
 }
 #examBtn{
     background: url('../assets/main/examBtn.png') no-repeat;
