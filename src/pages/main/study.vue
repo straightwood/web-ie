@@ -6,16 +6,22 @@
               id="xiangshiBtn"
               class="btnClass"
               @click="gotoxsstudy"
+              @mouseenter="PlaySound()" 
+              @mouseleave="StopSound()"
       ></Button>
       <Button type="text"
               id="huishiBtn" 
               class="btnClass"
               @click="gotohsstudy"
+              @mouseenter="PlaySound()" 
+              @mouseleave="StopSound()"
       ></Button>
       <Button type="text"
               id="dianshiBtn" 
               class="btnClass"
               @click="gotodsstudy"
+              @mouseenter="PlaySound()" 
+              @mouseleave="StopSound()"
       ></Button>
     </div>
     <Button type="text"
@@ -23,11 +29,19 @@
               class="btnClass"
               @click="save"
       ></Button>
+    <audio ref="audio" :src="audioUrl"></audio>
   </div>
 </template>
 
 <script>
 export default {
+  data(){
+        return{
+            color:false,
+            current:1,
+            audioUrl:require('../../music/悬停按钮音效.wav'),//声音文件
+        };
+  },
   methods:{
     save(){
       this.$router.push('/main');
@@ -40,6 +54,13 @@ export default {
     },
     gotodsstudy(){
       this.$router.push('./study/dianWustudy');
+    },
+    PlaySound() {
+      this.$refs.audio.play();
+    },
+    StopSound() {
+      this.$refs.audio.pause();
+      this.$refs.audio.currentTime = 0;
     }
   }
 }

@@ -25,7 +25,9 @@
             <button class="select_button" id="thinkBtn" 
             @click="handleThink" @mouseenter="PlaySound()" @mouseleave="StopSound()"></button>
         </div>
+        <!-- 音频控件 -->
         <audio ref="audio" :src="audioUrl"></audio>
+
     </div>
 </template>
 
@@ -36,6 +38,7 @@ export default{
         return{
             color:false,
             current:1,
+
             audioUrl:require('../music/悬停按钮音效.wav'),//声音文件
         };
     },
