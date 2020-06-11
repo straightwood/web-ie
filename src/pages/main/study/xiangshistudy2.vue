@@ -53,8 +53,13 @@
             </draggable>
         </div>
     </div>
-    <button class="nextBtn" @click="passFn"></button>
+    <button class="nextBtn" @click="nextBtn"></button>
+    <button class="answerBtn" @click="passFn"></button>
     <button id="returnmain" @click="save"></button>
+    <div id="answerCard"  v-if="showCard">
+      <button id="closeBtn" @click="close"></button>
+      <img id="answerImg" src="../../../assets/pintu/ex2/res.png">
+    </div>
 </div>
 </template>
 
@@ -81,9 +86,8 @@ export default {
   },
   data() {
     return {
+      showCard:false,
       title:'的',
-      timer:'',
-      correct:'',
       current:60,
         // numList:[1,2,3,4,5,6,7,8,9],
         // numRes:[''],
@@ -146,18 +150,15 @@ export default {
       );
     },
     nextBtn(){
-        this.$router.push({name:'xiangstudy3-page',params:{correct:this.correct,time:this.current}});
+        this.$router.push('/main/study/xiangstudy3');
     },
     passFn () {
-        if(this.list_result.length==9){
-            const newPuzzles = this.list_result.slice(0, 9)
-            const isPass = newPuzzles.every((e, i) => e.order === i + 1)
-            if (isPass) {
-                // alert ('恭喜，闯关成功！')
-                this.correct=1;
-            }
-        }
-        this.nextBtn();      
+        this.showCard=!this.showCard;
+        // this.nextBtn();        
+    },
+    close(){
+      this.showCard=!this.showCard;
+      // this.nextBtn(); 
     },
     save(){
       this.$router.push('/main/study');
@@ -200,6 +201,29 @@ export default {
   color: white;
   left: 942px;
   top:47px;
+}
+#answerCard{
+  position: absolute;
+  background: url('../../../assets/study/jiexiBg.png') no-repeat;
+  background-size: contain;
+  width:660px;
+  height: 700px;
+  left:640px;
+  top:50px;
+}
+#closeBtn{
+  position: absolute;
+  background: url('../../../assets/study/jiexiclosebtn.png') no-repeat;
+  /* width:700px; */
+  height: 24px;
+  width: 24px;
+  left:595px;
+  top:30px;
+}
+#answerImg{
+  position: absolute;
+  left:200px;
+  top:200px;
 }
 .container{
     display: flex;
@@ -253,22 +277,23 @@ export default {
 .list-group-item i {
   cursor: pointer;
 }
-.timer{
-  position: absolute;
-  left:1400px;
-  top:550px;
-  width: 200px;
-  height: 60px;
-  color:black;
-  font-size: 30px;
-  border: 0px;
-  outline: none;
-}
+
 .nextBtn{
   position: absolute;
   left:1700px;
   top:70px;
   background: url('../../../assets/pintu/next.png') center center no-repeat;
+  width: 150px;
+  height: 164px;
+  border: 0px;
+  outline: none;
+}
+.answerBtn{
+  position: absolute;
+  left:1700px;
+  top:230px;
+  background: url('../../../assets/study/answer.png') center center no-repeat;
+  background-size: contain;
   width: 150px;
   height: 164px;
   border: 0px;

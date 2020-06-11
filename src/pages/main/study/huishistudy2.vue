@@ -2,12 +2,16 @@
   <div id="main">
     <div class="title">{{title1}}</div>
     <div class="content">
-      <div class="content_box">
+      <div class="content_box" v-if="showCard">
         {{text1}}
+      </div>
+      <div class="content_box" v-if="!showCard">
+        <!-- <button id="closeBtn" @click="close"></button> -->
+        {{answer}}
       </div>
     </div>
     <div class="answer">
-      <div class="answer_box">
+      <div class="answer_box" v-if="showCard">
         <div class="answer_li" 
               @mousedown="move1" 
               v-for="(element,index) in answer1" 
@@ -18,7 +22,8 @@
         </div>
       </div>
     </div>
-    <button class="nextBtn" @click="passFn"></button>
+    <button class="nextBtn" @click="nextBtn"></button>
+    <button class="answerBtn" @click="passFn"></button>
     <button id="returnmain" @click="save"></button>
   </div>
 </template>
@@ -27,9 +32,10 @@
 export default {
   data(){
     return{
+      showCard:true,
       correct:0,
       current:20,
-
+      answer:"凤凰台上凤凰游，凤去台空江自流。吴宫花草埋幽径，晋代衣冠成古丘。三山半落青天外，二水中分白鹭洲。总为浮云能蔽日，长安不见使人愁。",
       positionX:0,
       positionY:0,
       title1:"登幽州台歌",
@@ -223,37 +229,11 @@ export default {
             this.$router.push('/main/study');
         },
         passFn(){
-          let order=0,i,j,k;
-          
-          if(this.answer1_user.length==8){
-
-            for(i in this.empty_position){
-              for(j in this.answer1_user){
-                if((this.empty_position[i].positionX+'px')==this.answer1_user[j].positionX
-                &&(this.empty_position[i].positionY+'px')==this.answer1_user[j].positionY){
-                    this.answer1_user[j].order=this.empty_position[i].order;
-                }
-              }
-            }
-            const newPuzzles = this.answer1_user.slice(0, 8);
-            newPuzzles.sort(this.creatCompare('order'));
-            this.answer1.sort(this.creatCompare('order'));
-
-            for(k=0; k <8 ;k++){
-               if(newPuzzles[k].id==this.answer1[k].id){
-                order++;
-              }
-            }
-            if(order==8){
-              // alert ('恭喜，闯关成功！')
-              this.correct++;
-            }
-          }
-          this.nextBtn();
-      },
-      save(){
+          this.showCard=false;     
+        },
+        save(){
         this.$router.push('/main/study');
-    }
+        }
     },
 }
 </script>
@@ -266,6 +246,14 @@ export default {
     width: 1920px;
     height: 1080px;
     z-index: 0;
+}
+#answerCard{
+  position: absolute;
+  background-size: contain;
+  width:660px;
+  height: 700px;
+  left:640px;
+  top:50px;
 }
 .title{
   position: absolute;
@@ -332,22 +320,23 @@ export default {
   top: -465px;
   /* background-color: white; */
 }
-.timer{
-  position: absolute;
-  left:1000px;
-  top:900px;
-  width: 400px;
-  height: 60px;
-  color:black;
-  font-size: 40px;
-  border: 0px;
-  outline: none;
-}
+
 .nextBtn{
   position: absolute;
   left:1700px;
   top:70px;
-  background: url('../../../assets/pintu/finish.png') center center no-repeat;
+  background: url('../../../assets/pintu/next.png') center center no-repeat;
+  width: 150px;
+  height: 164px;
+  border: 0px;
+  outline: none;
+}
+.answerBtn{
+  position: absolute;
+  left:1700px;
+  top:230px;
+  background: url('../../../assets/study/answer.png') center center no-repeat;
+  background-size: contain;
   width: 150px;
   height: 164px;
   border: 0px;

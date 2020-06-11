@@ -29,7 +29,7 @@ export default {
     return{
       timer:'',
       correct:0,
-      current:20,
+      current:60,
 
       positionX:0,
       positionY:0,

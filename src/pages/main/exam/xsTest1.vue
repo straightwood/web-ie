@@ -134,7 +134,7 @@ export default {
       this.current-=1;
       if(this.current==0){
         this.passFn();
-        this.$router.push({name:'xsTest2',params:{correct:this.correct}});
+        // this.$router.push({name:'xsTest2',params:{correct:this.correct}});
       }   
     },
     onMove({ relatedContext, draggedContext }) {
@@ -145,7 +145,7 @@ export default {
       );
     },
     nextBtn(){
-        this.$router.push({name:'xsTest2',params:{correct:this.correct,time:this.current}});
+        this.$router.push({name:'xsTest2',params:{correct:this.correct}});
     },
     passFn () {
         if(this.list_result.length==9){

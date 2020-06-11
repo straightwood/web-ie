@@ -156,7 +156,7 @@ export default {
       this.current-=1;
       if(this.current==0){
         this.passFn();
-        this.$router.push('/main/exam/hsExam');
+        // this.$router.push('/main/exam/hsExam');
       }    
     },
     onMove({ relatedContext, draggedContext }) {
