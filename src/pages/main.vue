@@ -118,7 +118,7 @@ export default{
 .selection{
     position: absolute;
     width:1500px;
-    left: 200px;
+    left: 400px;
     top:300px;
 }
 .selection .select_button{
@@ -132,9 +132,6 @@ export default{
 }
 #studyBtn{
     background: url('../assets/main/studyBtn.png') no-repeat;
-}
-#readBtn{
-    background: url('../assets/main/readBtn.png') no-repeat;
 }
 #thinkBtn{
     background: url('../assets/main/thinkBtn.png') no-repeat;
