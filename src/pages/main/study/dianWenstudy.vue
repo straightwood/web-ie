@@ -247,6 +247,7 @@ export default {
        }
     },
     gotoresult(){
+      this.$router.push('/main/study');
     }
   }
 }

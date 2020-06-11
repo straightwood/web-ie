@@ -6,9 +6,7 @@ import Index from '../pages/index'
 import Main from '../pages/main'
 import Board from '../pages/board'
 
-import Exam from '../pages/main/exam'
 import Study from '../pages/main/study'
-import Read from '../pages/main/read'
 import Think from '../pages/main/think'
 import xsTest1 from '../pages/main/exam/xsTest1'
 import xsTest2 from '../pages/main/exam/xsTest2'
@@ -53,22 +51,18 @@ export default new Router({
       path: '/board',         //排行榜     
       name: 'board-page',     
       component: Board,       
-    },{                   
-      path: '/main/exam',      //科考
-      name: 'exam',
-      component: Exam
     },{
       path: '/main/study',     //勤学
       name: 'study',
       component: Study
     },{
-      path: '/main/read',      //苦读
-      name: 'read',
-      component: Read
-    },{
       path: '/main/think',     //自省
       name: 'think',
       component: Think
+    },{
+      path: '/main/exam',     //exam
+      name: 'xsTest1',
+      component: xsTest1
     },{
       path: '/main/exam/xsTest1',     //拼图1
       name: 'xsTest1',
