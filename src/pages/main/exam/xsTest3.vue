@@ -176,12 +176,12 @@ export default {
         if (isPass) {
             this.correct++;
         }
-        if(this.correct>=2){
-          this.compute();
-          this.nextBtn();
-        }else{
-          this.$router.push('/main/exam/failed');
-        }
+      }
+      if(this.correct>=2){
+        this.compute();
+        this.nextBtn();
+      }else{
+        this.$router.push('/main/exam/failed');
       }
     },
     compute(){

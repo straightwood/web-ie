@@ -19,7 +19,7 @@
         <div class="selection">
             <button class="select_button" id="examBtn" @click="handleExam"></button>
             <button class="select_button" id="studyBtn" @click="handleStudy"></button>
-            <button class="select_button" id="readBtn" @click="handleRead"></button>
+            <!-- <button class="select_button" id="readBtn" @click="handleRead"></button> -->
             <button class="select_button" id="thinkBtn" @click="handleThink"></button>
         </div>
     </div>
@@ -66,9 +66,9 @@ export default{
         handleStudy(){
             this.$router.push('/main/study');
         },
-        handleRead(){
-            this.$router.push('/main/read');
-        },
+        // handleRead(){
+        //     this.$router.push('/main/read');
+        // },
         handleThink(){
             this.$router.push('/main/think');
         },
@@ -125,7 +125,7 @@ export default{
     /* position: absolute; */
     width:241px;
     height: 360px;
-    margin: 60px;
+    margin: 120px;
 }
 #examBtn{
     background: url('../assets/main/examBtn.png') no-repeat;

@@ -177,8 +177,8 @@ export default {
         if (isPass) {
             this.correct++;
         }
-        this.nextBtn();
       }
+      this.nextBtn();
     },
     // compute(){
     //     fetch('api/web-ie/server/xsTest.php',{
