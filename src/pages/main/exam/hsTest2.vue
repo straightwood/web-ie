@@ -29,7 +29,7 @@ export default {
     return{
       timer:'',
       correct:0,
-      current:20,
+      current:60,
 
       positionX:0,
       positionY:0,
@@ -271,8 +271,6 @@ export default {
           }      
       },
       compute(){
-          // console.log(111,this.correct_res,this.time_res,)
-          // console.log(JSON.parse(localStorage.getItem("username")))
           fetch('api/web-ie/server/hsTest.php',{
               method:"POST",
               headers:{

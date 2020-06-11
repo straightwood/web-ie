@@ -44,7 +44,7 @@ export default {
       ans:[],
       ansnum:0,
       correctans:['c','b','a'],
-      score:0,
+      correct:0,
       kcflag:0,
       choseflag:[0,0,0],
       timer:'',
@@ -55,6 +55,7 @@ export default {
       this.timejian();
       this.timer=setInterval(this.timejian, 1000);
       this.handleInputOne(this.$refs.inputOne);
+      this.correct = parseInt(this.$route.params.correct);//处理传参
   }, 
   beforeDestroy(){
     clearTimeout(this.timer);
@@ -130,10 +131,7 @@ export default {
         if(this.ansnum==2 && (this.choseflag[2]==1 || this.val1=="倒计时:0") ){
           this.gotoresult();
         }
-        console.log("选择标记："+this.choseflag);
-        console.log("题号："+this.ansnum);
     },
-    
     aclick(){
        this.ans= 'a' ;
        this.choseflag[this.ansnum]=1;
@@ -159,15 +157,12 @@ export default {
         nextqusBtn.style.visibility='visible';
       }
       if(this.correctans[this.ansnum]==ans){
-        this.score +=10;
+        this.correct ++;
         gou.style.visibility='visible';
       }
       else{
         cha.style.visibility='visible';
       } 
-      console.log("选中："+ans);
-      console.log("正确答案："+this.correctans[this.ansnum]);
-      console.log("成绩："+this.score);
       bird.style.display='none';
     },
     nextqus(){
@@ -195,7 +190,29 @@ export default {
       }
     },
     gotoresult(){
-    }
+       this.compute();
+      // if(){
+      //     this.$router.push('/main/exam/success');
+      // }else{
+      //     this.$router.push('/main/exam/failed');
+      // }   
+    },
+    compute(){
+          // console.log(111,this.correct_res,this.time_res,)
+          // console.log(JSON.parse(localStorage.getItem("username")))
+          fetch('api/web-ie/server/dsTest.php',{
+              method:"POST",
+              headers:{
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body:JSON.stringify({
+                  Authorization:localStorage.getItem('Authorization'),//token
+                  username:JSON.parse(localStorage.getItem("username")),
+                  correct:this.correct,
+              }),
+          }); 
+      }
   }
 }
 </script>

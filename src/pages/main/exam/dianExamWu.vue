@@ -31,7 +31,7 @@
     <img id="wskaichang" src="../../../assets/dianexam/wskaichang.png">
   </div>
 </template>
-
+s
 <script> 
 export default {
   data(){
@@ -43,7 +43,7 @@ export default {
       ans:[],
       ansnum:0,
       correctans:['c','b','a'],
-      score:0,
+      correct:0,
       kcflag:0,
       choseflag:[0,0,0],
       timer:'',
@@ -127,12 +127,9 @@ export default {
           endtime.style.display='none';
         }
         if(this.ansnum==2 && (this.choseflag[2]==1 || this.val1=="倒计时:0") ){
-          this.gotowens();
+          this.passFn();
         }
-        console.log("选择标记："+this.choseflag);
-        console.log("题号："+this.ansnum);
     },
-    
     aclick(){
        this.ans= 'a' ;
        this.choseflag[this.ansnum]=1;
@@ -158,15 +155,12 @@ export default {
         nextqusBtn.style.visibility='visible';
       }
       if(this.correctans[this.ansnum]==ans){
-        this.score +=10;
+        this.correct++;
         gou.style.visibility='visible';
       }
       else{
         cha.style.visibility='visible';
       } 
-      console.log("选中："+ans);
-      console.log("正确答案："+this.correctans[this.ansnum]);
-      console.log("成绩："+this.score);
       bird.style.display='none';
     },
     nextqus(){
@@ -193,8 +187,9 @@ export default {
         bird.style.display='block';
       }
     },
-    gotowens(){
-       this.$router.push('./DsExamWen');
+    passFn(){
+      console.log("正确题数："+this.correct);
+      this.$router.push({name:'dsexamwen-page',params:{correct:this.correct}});
     }
   }
 }
