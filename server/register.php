@@ -7,10 +7,6 @@
     $username = $data['username'];
     $password = $data["password"];
     $nickname = $data["nickname"];
-
-    // $username = '2';
-    // $password = '123123';
-    // $nickname = '1';
     
     require_once('encodeToken.php');//生成token
 
@@ -21,12 +17,10 @@
             $test = mysqli_query($conn, $sql);
             
             if(mysqli_num_rows($test)==0){
-                $sql_insert = "INSERT INTO user VALUES ('$username', password($password), '$nickname', 0)";
+                $sql_insert = "INSERT INTO user VALUES ('$username', password('$password'), '$nickname', 0)";
                 $result = mysqli_query($conn, $sql_insert);
                 if (mysqli_affected_rows($conn) == 1) {
-                    
                     $result_array[0] = ['token'=>$token,'code'=>'1','message'=>'注册成功!'];
-                     
                 }else{
                     $result_array[0] = ['code'=>'0','message'=>'请再次尝试！'];               
                 }
@@ -37,7 +31,6 @@
         }else{
             $result_array[0] = ['code'=>'0','message'=>'数据库连接失败！'];
         }
-
         echo json_encode($result_array);
     }
 ?>

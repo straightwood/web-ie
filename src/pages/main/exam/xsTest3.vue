@@ -85,27 +85,8 @@ export default {
       timer:'',
       correct:'',
       current:60,
-        // numList:[1,2,3,4,5,6,7,8,9],
-        // numRes:[''],
-        
-    //   list: message.map((name, index) => {
-    //     return { name, order: index + 1, fixed: false };
-    //   }),
+
       list_left: message_left.map((name,index,image) => {
-        // var num=Math.floor(Math.random()*10) % 9;
-        // var numRes=[];
-        // for(i in this.numRes){
-        //     if(i==num){
-        //         console.log(i,num);
-        //         num=Math.floor(Math.random()*10) % 9;
-        //         console.log(i,num);
-        //         continue;
-        //     }else{
-        //         this.numRes.push(num);
-        //         break;
-        //     }
-        // }
-        // console.log(num,this.numList);
         return { name, order: index + 1, image:require('../../../assets/pintu/ex3/'+(index)+'.png'),fixed: false };
       }),
       list_right: message_right.map((name, index) => {
@@ -122,7 +103,7 @@ export default {
     };
   },
   mounted(res){
-    this.judge();
+    // this.judge();
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
     this.correct = parseInt(this.$route.params.correct);//处理传参
@@ -199,8 +180,10 @@ export default {
         }).then((res)=>{
             return res.json();
         }).then((res)=>{
+          this.update();
         }); 
-
+    },
+    update(){
         fetch('api/web-ie/server/compute.php',{
             method:"POST",
             headers:{
@@ -210,7 +193,6 @@ export default {
             body:JSON.stringify({
                 Authorization:localStorage.getItem('Authorization'),//token
                 username:JSON.parse(localStorage.getItem("username")),
-                correct:this.correct,
             }),
         }).then((res)=>{
             return res.json();

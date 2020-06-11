@@ -209,23 +209,29 @@ export default {
                   username:JSON.parse(localStorage.getItem("username")),
                   correct:this.correct,
               }),
-          }); 
-          fetch('api/web-ie/server/compute.php',{
-              method:"POST",
-              headers:{
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-              },
-              body:JSON.stringify({
-                  Authorization:localStorage.getItem('Authorization'),//token
-                  username:JSON.parse(localStorage.getItem("username")),
-                  correct:this.correct,
-              }),
           }).then((res)=>{
-              return res.json();
+                return res.json();
           }).then((res)=>{
-          }); 
-      }
+              this.update();
+          });
+    },
+    update(){
+        fetch('api/web-ie/server/compute.php',{
+            method:"POST",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify({
+                Authorization:localStorage.getItem('Authorization'),//token
+                username:JSON.parse(localStorage.getItem("username")),
+            }),
+        }).then((res)=>{
+            return res.json();
+        }).then((res)=>{
+        }); 
+    }
+        
   }
 }
 </script>

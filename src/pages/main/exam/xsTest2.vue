@@ -85,27 +85,8 @@ export default {
       timer:'',
       correct:'',
       current:60,
-        // numList:[1,2,3,4,5,6,7,8,9],
-        // numRes:[''],
-        
-    //   list: message.map((name, index) => {
-    //     return { name, order: index + 1, fixed: false };
-    //   }),
+
       list_left: message_left.map((name,index,image) => {
-        // var num=Math.floor(Math.random()*10) % 9;
-        // var numRes=[];
-        // for(i in this.numRes){
-        //     if(i==num){
-        //         console.log(i,num);
-        //         num=Math.floor(Math.random()*10) % 9;
-        //         console.log(i,num);
-        //         continue;
-        //     }else{
-        //         this.numRes.push(num);
-        //         break;
-        //     }
-        // }
-        // console.log(num,this.numList);
         return { name, order: index + 1, image:require('../../../assets/pintu/ex2/'+(index)+'.png'),fixed: false };
       }),
       list_right: message_right.map((name, index) => {
@@ -122,7 +103,7 @@ export default {
     };
   },
   mounted(){
-    this.judge();
+    // this.judge();
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
     this.correct = parseInt(this.$route.params.correct);//处理传参
@@ -135,7 +116,6 @@ export default {
       this.current-=1;
       if(this.current==0){
         this.passFn();
-        // this.$router.push({name:'xsTest3',params:{correct:this.correct}});
       }   
     },
     onMove({ relatedContext, draggedContext }) {
@@ -153,7 +133,6 @@ export default {
             const newPuzzles = this.list_result.slice(0, 9)
             const isPass = newPuzzles.every((e, i) => e.order === i + 1)
             if (isPass) {
-                // alert ('恭喜，闯关成功！')
                 this.correct=1;
             }
         }

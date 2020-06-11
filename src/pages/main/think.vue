@@ -16,7 +16,6 @@
           <li>识字:</li>
           <li>记忆:</li>
           <li>熟文:</li>
-          <li>勤奋:</li>
         </ul>
         <div id="comment_content" class="color" v-for="(element,index) in user_score" :key="index">
           {{element}}
@@ -41,6 +40,7 @@ export default {
         '','',''
       ],
       grade:[
+        '平民',
         '秀才',
         '举人',
         '贡士',
@@ -51,6 +51,7 @@ export default {
         'jvren',
         'gongshi',
         'jinshi',
+        'zhuangyuan'
       ],
       round_sentence:[
         "还没有进行考试，不知道水平。",
@@ -58,16 +59,10 @@ export default {
         "一般的意思，一般的意思。",
         "不好的意思不好的意思不好的意思。"
       ],
-      study_sentence:[
-        "勤奋：4很好的意思很好的意思，很好的意思。",
-        "勤奋：4一般的意思，一般的意思。",
-        "勤奋：4不好的意思不好的意思不好的意思。"
-      ]
     }
   },
   mounted(){
     this.getScore();
-    this.getStudy();
     this.user_nickname = localStorage.getItem("nickname");
   },
   methods:{
@@ -91,12 +86,30 @@ export default {
         // console.log(res);
           if(res[2].code==1){     //############################分数计算
               this.user_totalscore=res[1][0].score;//取总成绩
+              // this.person=this.personImage_id[res[0].length];//目前还是按称号改变的
+              // this.house='house_'+this.personImage_id[res[0].length];//目前还是按称号改变的
+              if(this.user_totalscore<=20){
+                this.person=this.personImage_id[0];
+                this.house='house_'+this.personImage_id[0];
+              }else if(this.user_totalscore<=40){
+                this.person=this.personImage_id[1];
+                this.house='house_'+this.personImage_id[1];
+              }else if(this.user_totalscore<=60){
+                this.person=this.personImage_id[2];
+                this.house='house_'+this.personImage_id[2];
+              }else if(this.user_totalscore<=80){
+                this.person=this.personImage_id[3];
+                this.house='house_'+this.personImage_id[3];
+              }else if(this.user_totalscore<=100){
+                this.person=this.personImage_id[4];
+                this.house='house_'+this.personImage_id[4];
+              }
+
               for(var i in res[0]){
                 this.user_score[i]=res[0][i].score;//取各关成绩
               }
               this.user_grade=this.grade[res[0].length];//称号判定
-              this.person=this.personImage_id[res[0].length];//目前还是按称号改变的
-              this.house='house_'+this.personImage_id[res[0].length];//目前还是按称号改变的
+              
 
               for(var i in this.user_score){    
                 if(this.user_score[i]==''){           //评论语句
@@ -221,8 +234,6 @@ export default {
   background: url('../../assets/report/house_jinshi.png') center center no-repeat;
   background-size: contain;
 }
-
-
 #nickname{
   position: absolute;
   left:200px;
@@ -231,7 +242,7 @@ export default {
   text-align: center;
   margin: 0 auto;
   margin-top: 35px;
-  width: 30px;
+  width: 10px;
 }
 #achieve{
   position: absolute;
@@ -254,7 +265,7 @@ export default {
 }
 #comment{
   position: relative;
-  font-size: 25px;
+  font-size: 30px;
   margin: 50px 100px;
 }
 #comment_title{

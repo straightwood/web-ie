@@ -207,6 +207,7 @@ export default {
                     }),
                   }).then(res=> { return res.json()
                     }).then(res=>{
+                      console.log(res);
                       if(res[0].code == 1){
                         this.userToken = res[0].token;
                         this.changeLogin({ Authorization: this.userToken });

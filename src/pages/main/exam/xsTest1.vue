@@ -85,27 +85,9 @@ export default {
       timer:'',
       correct:0,
       current:60,
-        // numList:[1,2,3,4,5,6,7,8,9],
-        // numRes:[''],
-        
-    //   list: message.map((name, index) => {
-    //     return { name, order: index + 1, fixed: false };
-    //   }),
+
       list_left: message_left.map((name,index,image) => {
-        // var num=Math.floor(Math.random()*10) % 9;
-        // var numRes=[];
-        // for(i in this.numRes){
-        //     if(i==num){
-        //         console.log(i,num);
-        //         num=Math.floor(Math.random()*10) % 9;
-        //         console.log(i,num);
-        //         continue;
-        //     }else{
-        //         this.numRes.push(num);
-        //         break;
-        //     }
-        // }
-        // console.log(num,this.numList);
+
         return { name, order: index + 1, image:require('../../../assets/pintu/ex1/'+(index)+'.png'),fixed: false };
       }),
       list_right: message_right.map((name, index) => {
@@ -122,7 +104,7 @@ export default {
     };
   },
   mounted(){
-    this.judge();
+    // this.judge();
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
   },

@@ -152,7 +152,7 @@ export default {
     }
   },
   mounted(){
-    this.judge();
+    // this.judge();
     this.random();
     this.setTime();
     this.timer=setInterval(this.setTime,1000);
