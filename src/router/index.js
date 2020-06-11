@@ -59,12 +59,13 @@ export default new Router({
       path: '/main/think',     //自省
       name: 'think',
       component: Think
-    },{
-      path: '/main/exam',     //exam
-      name: 'xsTest1',
-      component: xsTest1
-    },{
-      path: '/main/exam/xsTest1',     //拼图1
+    },
+    // },{
+    //   path: '/main/exam',     //exam
+    //   name: 'xsTest1',
+    //   component: xsTest1
+    // },{
+     { path: '/main/exam/xsTest1',     //拼图1
       name: 'xsTest1',
       component: xsTest1
     },{
@@ -149,16 +150,16 @@ export default new Router({
 
 // 导航守卫
 // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
-router.beforeEach((to, from, next) => {
-  if (to.path === '/index') {
-    next();
-  } else {
-    let token = localStorage.getItem('Authorization');
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/index') {
+//     next();
+//   } else {
+//     let token = localStorage.getItem('Authorization');
  
-    if (token === null || token === '') {
-      next('/index');
-    } else {
-      next();
-    }
-  }
-});
+//     if (token === null || token === '') {
+//       next('/index');
+//     } else {
+//       next();
+//     }
+//   }
+// });
