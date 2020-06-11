@@ -68,7 +68,7 @@ export default {
                    this.xsScore=res[0][0].score;
                    this.hsScore=res[0][1].score;
                    this.dsScore=res[0][2].score;
-                   console.log(this.totalScore,this.xsScore,this.hsScore,this.dsScore)
+                //    console.log(this.totalScore,this.xsScore,this.hsScore,this.dsScore)
 
                 }else{
                     this.$Message.error(res[2].message);
