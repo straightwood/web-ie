@@ -114,9 +114,9 @@ export default {
               for(var i in this.user_score){    
                 if(this.user_score[i]==''){           //评论语句
                   this.user_score[i]=this.round_sentence[0];
-                }else if(this.user_score[i]>=20 && this.user_score[i]<=30){
+                }else if(this.user_score[i]==100){
                   this.user_score[i]=this.round_sentence[1];
-                }else if(this.user_score[i]>=10 && this.user_score[i]<=20){
+                }else if(this.user_score[i]>=66 && this.user_score[i]<100){
                   this.user_score[i]=this.round_sentence[2];
                 }else{
                   this.user_score[i]=this.round_sentence[3];
