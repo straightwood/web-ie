@@ -64,12 +64,11 @@ export default {
                 return res.json();
             }).then((res)=>{
                 if(res[2].code==1){     
-                   this.totalScore=res[1][0].score;
+                //    this.totalScore=res[1][0].score;
                    this.xsScore=res[0][0].score;
                    this.hsScore=res[0][1].score;
                    this.dsScore=res[0][2].score;
-                //    console.log(this.totalScore,this.xsScore,this.hsScore,this.dsScore)
-
+                   this.totalScore=parseInt(this.xsScore*0.2+this.hsScore*0.3+this.dsScore*0.5);
                 }else{
                     this.$Message.error(res[2].message);
                     this.$router.push('/index');
@@ -105,26 +104,26 @@ export default {
 }
 .score{
     color:red;
-    font-size:100px;
+    font-size:90px;
 }
 #xsScore{
     position: absolute;
-    left:650px;
-    top:515px;
+    left:637px;
+    top:525px;
 }
 #hsScore{
     position: absolute;
-    left:1150px;
-    top:515px;
+    left:1137px;
+    top:525px;
 }
 #dsScore{
     position: absolute;
-    left:1650px;
-    top:515px;
+    left:1637px;
+    top:525px;
 }
 #totalScore{
     position: absolute;
-    left:720px;
-    top:620px;
+    left:707px;
+    top:635px;
 }
 </style>
