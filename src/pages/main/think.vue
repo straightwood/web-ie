@@ -1,12 +1,12 @@
 <template>
   <div id="main">
     <div class="button_box">
-      <div id="button1" @click="report"></div>
-      <div id="button2" @click="back"></div>
+      <button id="button1" @click="report" @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
+      <button id="button2" @click="back" @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
     </div>
     <div :id="house" class="house_position"></div>
     <div id="reportCard" v-if="showCard">
-      <button id="closeBtn" @click="report"></button>
+      <button id="closeBtn" @click="report"  @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
       <div id="nickname" class="color">{{user_nickname}}</div>
       <div id="achieve">{{user_grade}}</div>
       <div :id="person" class="person_position"></div>
@@ -21,7 +21,7 @@
           {{element}}
         </div>
       </div>
-      
+       <audio ref="audio" :src="audioUrl"></audio>
     </div>
   </div>
 </template>
@@ -55,9 +55,9 @@ export default {
       ],
       round_sentence:[
         "还没有进行考试，不知道水平。",
-        "很好的意思很好的意思，很好的意思。",
-        "一般的意思，一般的意思。",
-        "不好的意思不好的意思不好的意思。"
+        "不可思议，你是个天才。",
+        "你在这个领域很有一套。",
+        "菜鸡的存在。"
       ],
     }
   },
@@ -136,6 +136,13 @@ export default {
     },
     report(){
       this.showCard=!this.showCard;
+    },
+    PlaySound() {
+      this.$refs.audio.play();
+    },
+    StopSound() {
+      this.$refs.audio.pause();
+      this.$refs.audio.currentTime = 0;
     }
   },
   

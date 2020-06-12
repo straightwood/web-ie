@@ -5,10 +5,10 @@
     <div class="myDiv"  :class="{active1:isActive1}" ref="myDiv"></div>
     <div id="endtime">{{val1}}</div>
     <div id="bird">
-    <img src="../../../assets/dianexam/仙鹤飞翔A.gif" style="width:280px" id="birdA" @click='aclick'>
-    <img src="../../../assets/dianexam/仙鹤飞翔B.gif" style="width:290px" id="birdB" @click='bclick'>
-    <img src="../../../assets/dianexam/仙鹤飞翔C.gif" style="width:300px" id="birdC" @click='cclick'>
-    <img src="../../../assets/dianexam/仙鹤飞翔D.gif" style="width:310px" id="birdD" @click='dclick'>
+    <img src="../../../assets/dianexam/仙鹤飞翔A.gif" style="width:280px" id="birdA" @click="aclick();PlaySound();">
+    <img src="../../../assets/dianexam/仙鹤飞翔B.gif" style="width:290px" id="birdB" @click="bclick();PlaySound();">
+    <img src="../../../assets/dianexam/仙鹤飞翔C.gif" style="width:300px" id="birdC" @click="cclick();PlaySound();">
+    <img src="../../../assets/dianexam/仙鹤飞翔D.gif" style="width:310px" id="birdD" @click="dclick();PlaySound();">
     </div>
     <p id=q1title>问题(1/3)：以下哪个人奉行《公羊传》的思想：</p>
     <p id=q1content>A：人不犯我，我不犯人。<br> 
@@ -29,9 +29,11 @@
     <img src="../../../assets/dianexam/wrong.png" id="cha">
     <Button type="text" id="nextqusBtn" @click="nextqus"></Button>
     <img id="wskaichang" src="../../../assets/dianexam/wskaichang.png">
+    <audio ref="audio" :src="audioUrl"></audio>
+    <p id=playerans>{{val2}}</p>
   </div>
 </template>
-s
+
 <script> 
 export default {
   data(){
@@ -47,6 +49,8 @@ export default {
       kcflag:0,
       choseflag:[0,0,0],
       timer:'',
+      audioUrl:require('../../../music/射击声.mp3'),//声音文件
+      val2:''
     }
   },
   mounted:function(){
@@ -118,7 +122,7 @@ export default {
         if(this.val1=="倒计时:0" && this.choseflag[this.ansnum]==0){
           cha.style.visibility='visible';
           if(this.ansnum<3){
-          nextqusBtn.style.visibility='visible';
+          nextqusBtn.style.display='block';;
           }
           bird.style.display='none';
           endtime.style.display='none';
@@ -134,25 +138,30 @@ export default {
        this.ans= 'a' ;
        this.choseflag[this.ansnum]=1;
        this.jiaodui(this.ans);
+       this.val2="A";
     },
     bclick(){
        this.ans= 'b' ;
        this.choseflag[this.ansnum]=1;
        this.jiaodui(this.ans);
+       this.val2="B";
     },
     cclick(){
          this.ans= 'c' ;
          this.choseflag[this.ansnum]=1;
          this.jiaodui(this.ans);
+         this.val2="C";
     },
     dclick(){
         this.ans= 'd' ;
         this.choseflag[this.ansnum]=1;
         this.jiaodui(this.ans);
+        this.val2="D";
     },
     jiaodui(ans){
-      if(2>this.ansnum>0){
-        nextqusBtn.style.visibility='visible';
+      if(3>this.ansnum>0){
+        playerans.style.display='block';
+        nextqusBtn.style.display='block';
       }
       if(this.correctans[this.ansnum]==ans){
         this.correct++;
@@ -165,33 +174,42 @@ export default {
     },
     nextqus(){
       this.ansnum++;
+      playerans.style.display='none';
       endtime.style.display='block';
       gou.style.visibility='hidden';
       cha.style.visibility='hidden';
       if(this.ansnum==1 ){
         this.t=10;
-        q1title.style.visibility='hidden';
-        q1content.style.visibility='hidden';
-        q2title.style.visibility='visible';
-        q2content.style.visibility='visible';
-        nextqusBtn.style.visibility='hidden';
+        q1title.style.display='none';
+        q1content.style.display='none';
+        q2title.style.display='block';
+        q2content.style.display='block';
+        nextqusBtn.style.display='none';
         bird.style.display='block';
       }
         else if(this.ansnum==2 ){
         this.t=10;
-        q2title.style.visibility='hidden';
-        q2content.style.visibility='hidden';
-        q3title.style.visibility='visible';
-        q3content.style.visibility='visible';
-        nextqusBtn.style.visibility='hidden';
+        q2title.style.display='none';
+        q2content.style.display='none';
+        q3title.style.display='block';
+        q3content.style.display='block';
+        nextqusBtn.style.display='none';
         bird.style.display='block';
       }
     },
     passFn(){
       // console.log("正确题数："+this.correct);
       this.$router.push({name:'dsexamwen-page',params:{correct:this.correct}});
+    },
+    PlaySound() {
+      this.$refs.audio.play();
+    },
+    StopSound() {
+      this.$refs.audio.pause();
+      this.$refs.audio.currentTime = 0;
     }
-  }
+  },
+
 }
 </script>
 
@@ -306,8 +324,16 @@ p,input{
   color:white;
   font-family:KaiTi;
 }
+#playerans{
+  position: absolute;
+  bottom:250px;
+  right:1000px;
+  font-size:50px;
+  color:RED;
+  font-family:KaiTi;
+}
 #q2title,#q3title,#q2content,#q3content{
-  visibility: hidden;
+  display:none;
 }
 #gou,#cha{
   position: absolute;
@@ -323,7 +349,7 @@ p,input{
   bottom:20px;
   width:250px;
   height:100px;
-  visibility:hidden;
+  display:none;
 }
 #wskaichang{
   position:absolute;

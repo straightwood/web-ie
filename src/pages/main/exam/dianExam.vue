@@ -20,40 +20,58 @@
        <img src="../../../assets/dianexam/dsexam4.png">
     </div>
     <div id="btnBox">
-      <Button type="text"
+      <button type="text"
               id="EntertheroomBtn"
               class="btnClass"
               @click="start"
-      ></Button>
-      <Button type="text"
+              @mouseenter="PlaySound()" 
+              @mouseleave="StopSound()"
+      ></button>
+      <button type="text"
               id="ExamRuleBtn" 
               class="btnClass"
               @click="ExamRule"
-      ></Button>
-      <Button type="text"
+              @mouseenter="PlaySound()" 
+              @mouseleave="StopSound()"
+      ></button>
+      <button type="text"
               id="SaveExitBtn" 
               class="btnClass"
               @click="save"
-      ></Button>
+              @mouseenter="PlaySound()" 
+              @mouseleave="StopSound()"
+      ></button>
     </div>
     <div id="btnBox2">
-     <Button type="text"
+     <button type="text"
               id="continueButton" 
               class="btnClass2"
               @click="continueExamRule"
-      ></Button>
-      <Button type="text"
+              @mouseenter="PlaySound()" 
+              @mouseleave="StopSound()"
+      ></button>
+      <button type="text"
               id="byeButton"
               class="btnClass2"
               @click="returndsExam"
-      ></Button>
+              @mouseenter="PlaySound()" 
+              @mouseleave="StopSound()"
+      ></button>
     </div>
+    <audio ref="audio" :src="audioUrl"></audio>
   </div>
 </template>
 
 <script>
 let count=0;
 export default {
+  data(){
+        return{
+            color:false,
+            current:1,
+            audioUrl:require('../../../music/悬停按钮音效.wav'),//声音文件
+        };
+  },
   mounted(){
     this.judge();
   },
@@ -107,6 +125,13 @@ export default {
    start(){
       this.$router.push('./DsExamWu');
    },
+    PlaySound() {
+      this.$refs.audio.play();
+    },
+    StopSound() {
+      this.$refs.audio.pause();
+      this.$refs.audio.currentTime = 0;
+    }
   }
 }
 </script>

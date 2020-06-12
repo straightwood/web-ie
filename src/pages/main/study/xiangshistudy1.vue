@@ -53,9 +53,10 @@
             </draggable>
         </div>
     </div>
-    <button class="nextBtn" @click="nextBtn"></button>
-    <button class="answerBtn" @click="passFn"></button>
-    <button id="returnmain" @click="save"></button>
+    <audio ref="audio" :src="audioUrl"></audio>
+    <button class="nextBtn" @click="nextBtn" @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
+    <button class="answerBtn" @click="passFn" @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
+    <button id="returnmain" @click="save" @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
     <div id="answerCard"  v-if="showCard">
       <button id="closeBtn" @click="close"></button>
       <img id="answerImg" src="../../../assets/pintu/ex1/res.png">
@@ -124,7 +125,8 @@ export default {
       list_result: [],
       editable: true,
       isDragging: false,
-      delayedDragging: false
+      delayedDragging: false,
+      audioUrl:require('../../../music/悬停按钮音效.wav'),//声音文件
     };
   },
   // mounted(){
@@ -163,7 +165,14 @@ export default {
     },
     save(){
       this.$router.push('/main/study');
-      }
+    },
+    PlaySound() {
+      this.$refs.audio.play();
+    },
+    StopSound() {
+      this.$refs.audio.pause();
+      this.$refs.audio.currentTime = 0;
+    }
   },
   computed: {
     dragOptions() {
