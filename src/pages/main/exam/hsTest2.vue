@@ -269,27 +269,28 @@ export default {
             this.compute();
             this.nextBtn();
           }else{
+            this.compute();
             this.$router.push('/main/exam/failed');
           }      
       },
       compute(){
-          fetch('api/web-ie/server/hsTest.php',{
-              method:"POST",
-              headers:{
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-              },
-              body:JSON.stringify({
-                  Authorization:localStorage.getItem('Authorization'),//token
-                  username:JSON.parse(localStorage.getItem("username")),
-                  correct:this.correct,
-              }),
-          }).then((res)=>{
+        fetch('api/web-ie/server/hsTest.php',{
+            method:"POST",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify({
+                Authorization:localStorage.getItem('Authorization'),//token
+                username:JSON.parse(localStorage.getItem("username")),
+                correct:this.correct,
+            }),
+        }).then((res)=>{
             return res.json();
-          }).then((res)=>{
-            this.update();
-          });
-      },
+        }).then((res)=>{
+          this.update();
+        }); 
+    },
       update(){
         fetch('api/web-ie/server/compute.php',{
             method:"POST",
@@ -304,6 +305,7 @@ export default {
         }).then((res)=>{
             return res.json();
         }).then((res)=>{
+          // console.log(res);
         }); 
     },
      PlaySound() {

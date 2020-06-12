@@ -8,7 +8,7 @@
     $correct = intval($data['correct']);
     require_once('decodeToken.php');
 
-    $score=$correct/3*100;//#################################公式定义
+    $score=$correct/3*100;
 
     if($tokenNum=='200'){
         $result_array[2] = ['code'=>'1','message'=>'登录成功！'];

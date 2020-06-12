@@ -130,7 +130,7 @@ export default {
             console.log(newPuzzles)
             const isPass = newPuzzles.every((e, i) => e.name === i + 1)
             if (isPass) {
-                this.correct=1;
+                this.correct++;
             }
         }
         this.nextBtn();      

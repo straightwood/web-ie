@@ -9,7 +9,7 @@
         $result_array[2] = ['code'=>'1','message'=>'登录成功！'];
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         if($conn != null){
-            $sql = "SELECT * FROM score WHERE account='$username'";
+            $sql = "SELECT * FROM update_score WHERE account='$username'";
             $result = mysqli_query($conn, $sql);
             $resArray0 = mysqli_fetch_all($result,MYSQL_ASSOC);//数组
             
@@ -17,8 +17,13 @@
             $result = mysqli_query($conn, $sql);
             $resArray1 = mysqli_fetch_all($result,MYSQL_ASSOC);//数组
 
+            $sql = "SELECT * FROM score WHERE account='$username'";
+            $result = mysqli_query($conn, $sql);
+            $resArray3 = mysqli_fetch_all($result,MYSQL_ASSOC);//数组
+
             $result_array[0] = $resArray0;
             $result_array[1] = $resArray1;
+            $result_array[3] = $resArray3;
             mysqli_close($conn);
         }
     }else if($tokenNum=='401'){

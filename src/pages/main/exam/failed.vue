@@ -30,12 +30,11 @@ export default {
             }).then((res)=>{
                 return res.json();
             }).then((res)=>{
-                if(res[2].code==1){     
-                   
-                }else{
-                    this.$Message.error(res[2].message);
-                    this.$router.push('/index');
-                }
+                // if(res[2].code==1){     
+                // }else{
+                //     this.$Message.error(res[2].message);
+                //     this.$router.push('/index');
+                // }
             });
         },
         PlaySound() {

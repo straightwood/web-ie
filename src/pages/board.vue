@@ -137,7 +137,7 @@ export default {
               this.dataList = res[0];
               if(res[1]<8){
                 for(var i=res[1];i<8;i++){
-                  console.log(i);
+                  // console.log(i);
                   this.dataList.push({nickname:'待君上榜',score:0});
                 }
               }

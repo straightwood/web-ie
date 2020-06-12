@@ -104,16 +104,15 @@ export default {
                 this.person=this.personImage_id[4];
                 this.house='house_'+this.personImage_id[4];
               }
+              this.user_score[0]=res[0][0].round1;//取各关成绩
+              this.user_score[1]=res[0][0].round2;//取各关成绩
+              this.user_score[2]=res[0][0].round3;//取各关成绩
 
-              for(var i in res[0]){
-                this.user_score[i]=res[0][i].score;//取各关成绩
-              }
-              this.user_grade=this.grade[res[0].length];//称号判定
-              
+              this.user_grade=this.grade[res[3].length+1];//称号判定
 
               for(var i in this.user_score){    
-                if(this.user_score[i]==''){           //评论语句
-                  this.user_score[i]=this.round_sentence[0];
+                if(this.user_score[i]=='0'){           //评论语句
+                  this.user_score[i]=this.round_sentence[3];
                 }else if(this.user_score[i]==100){
                   this.user_score[i]=this.round_sentence[1];
                 }else if(this.user_score[i]>=66 && this.user_score[i]<100){

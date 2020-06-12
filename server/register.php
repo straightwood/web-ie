@@ -17,6 +17,10 @@
             $test = mysqli_query($conn, $sql);
             
             if(mysqli_num_rows($test)==0){
+
+                $sql_insert = "INSERT INTO update_score VALUES ('$username', '0', '0', '0')";
+                $result = mysqli_query($conn, $sql_insert);
+
                 $sql_insert = "INSERT INTO user VALUES ('$username', password('$password'), '$nickname', 0)";
                 $result = mysqli_query($conn, $sql_insert);
                 if (mysqli_affected_rows($conn) == 1) {

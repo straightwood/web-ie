@@ -39,10 +39,13 @@ Vue.prototype.judge = function(){
       return res.json();
   }).then((res)=>{
       if(res[0]==0){
+        if(this.$route.path!='/main/exam/xsExam')
           this.$router.push('/main/exam/xsExam');
       }else if(res[0]==1){
+        if(this.$route.path!='/main/exam/hsExam')
           this.$router.push('/main/exam/hsExam');
       }else if(res[0]==2){
+        if(this.$route.path!='/main/exam/dsExam')
           this.$router.push('/main/exam/dsExam');
       }
   });

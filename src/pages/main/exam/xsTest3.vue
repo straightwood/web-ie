@@ -158,6 +158,7 @@ export default {
         this.compute();
         this.nextBtn();
       }else{
+        this.compute();
         this.$router.push('/main/exam/failed');
       }
     },
