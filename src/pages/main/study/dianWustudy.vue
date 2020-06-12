@@ -63,7 +63,6 @@
                   书。<br>
                   &emsp;因此，答案是A。<br>
     </p>    
-    <img id="wskaichang" src="../../../assets/dianexam/wskaichang.png">
     <audio ref="audio" :src="audioUrl"></audio>
   </div>
 </template>
@@ -74,12 +73,10 @@ export default {
     return{
       pos:[],
       isActive1:false,
-      t:12,
       ans:[],
       ansnum:0,
       correctans:['c','c','a'],
       score:0,
-      kcflag:0,
       choseflag:[0,0,0],
       timer:'',
       audioUrl:require('../../../music/射击声.mp3'),//声音文件
@@ -146,10 +143,6 @@ export default {
         if(this.t>0 ){
           this.t=this.t-1;
         }
-        if(this.t==9 && this.kcflag==0){
-          this.kcflag=1;
-          wskaichang.style.display='none';
-        } 
         if(this.t==0 && this.choseflag[this.ansnum]==0){
           cha.style.visibility='visible';
           bird.style.display='none';
@@ -262,7 +255,7 @@ export default {
        }
     },
     gotowens(){
-       this.$router.push('./dianWenstudy');
+       this.$router.push('./wensgd');
     },
     PlaySound() {
       this.$refs.audio.play();
@@ -414,12 +407,6 @@ p,input{
   width:300px;
   height:100px;
   display:none;
-}
-#wskaichang{
-  position:absolute;
-  left:0px;
-  top:0px;
-  visibility:visible;
 }
 #jiexibg{
   width:500px;

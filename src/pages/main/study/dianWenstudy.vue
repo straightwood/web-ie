@@ -60,7 +60,6 @@
                   &emsp;正确答案为A。<br>
                   &emsp;这个名字是我杜撰的。<br>
     </p>    
-    <img id="wskaichang" src="../../../assets/dianexam/wenskaichang.png">
     <audio ref="audio" :src="audioUrl"></audio>
   </div>
 </template>
@@ -71,7 +70,6 @@ export default {
     return{
       pos:[],
       isActive1:false,
-      t:16,
       ans:[],
       ansnum:0,
       correctans:['c','b','a'],
@@ -143,10 +141,6 @@ export default {
         if(this.t>0 ){
           this.t=this.t-1;
         }
-        if(this.t==14 && this.kcflag==0){
-          this.kcflag=1;
-          wskaichang.style.display='none';
-        } 
         if(this.t==0 && this.choseflag[this.ansnum]==0){
           cha.style.visibility='visible';
           bird.style.display='none';
@@ -187,20 +181,20 @@ export default {
         this.val2="D";
     },
     jiaodui(ans){
+      playerans.style.display='block';
+      qusjiexiBtn.style.display='block';
+      bird.style.display='none';
       if(this.ansnum==2){
-          playerans.style.display='block';
           finishqusbutton.style.display='block';
-        }else{
+      }else{
           nextqusBtn.style.display='block';
-        }
-        qusjiexiBtn.style.display='block';
+      }
       if(this.correctans[this.ansnum]==ans){
         gou.style.visibility='visible';
       }
       else{
         cha.style.visibility='visible';
       } 
-      bird.style.display='none';
     },
     nextqus(){
       this.ansnum++;
@@ -362,7 +356,7 @@ p,input{
 }
 #gou,#cha{
   position: absolute;
-  right:550px;
+  right:500px;
   bottom:270px;
   width:70px;
   visibility:hidden;
@@ -394,12 +388,6 @@ p,input{
   height:100px;
   display:none;
 }
-#wskaichang{
-  position:absolute;
-  left:0px;
-  top:0px;
-  visibility:visible;
-}
 #jiexibg{
   width:500px;
   position: absolute;
@@ -426,7 +414,7 @@ p,input{
 #playerans{
   position: absolute;
   bottom:250px;
-  right:600px;
+  right:580px;
   font-size:50px;
   color:RED;
   font-family:KaiTi;

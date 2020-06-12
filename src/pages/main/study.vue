@@ -55,7 +55,7 @@ export default {
       this.$router.push('./study/huistudy1');
     },
     gotodsstudy(){
-      this.$router.push('./study/dianWustudy');
+      this.$router.push('./study/wusgd');
     },
     PlaySound() {
       this.$refs.audio.play();

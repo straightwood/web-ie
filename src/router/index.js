@@ -16,8 +16,8 @@ import xsTest3 from '../pages/main/exam/xsTest3'
 
 import DsExam from '../pages/main/exam/dianExam'
 import HsExam from '../pages/main/exam/huiExam'
-import XsExam from '../pages/main/exam//xiangExam'
-import DsWu from '../pages/main/exam//dianExamWu'
+import XsExam from '../pages/main/exam/xiangExam'
+import DsWu from '../pages/main/exam/dianExamWu'
 import DsWen from '../pages/main/exam/dianExamWen'
 
 import failed from '../pages/main/exam/failed'
@@ -30,6 +30,9 @@ import xiangstudy2 from  '../pages/main/study/xiangshistudy2'
 import xiangstudy3 from  '../pages/main/study/xiangshistudy3'
 import huistudy1 from  '../pages/main/study/huishistudy1'
 import huistudy2 from  '../pages/main/study/huishistudy2'
+
+import wusstudygd from '../pages/main/study/wusgd'
+import wensstudygd from '../pages/main/study/wensgd'
 
 Vue.use(Router)//vue全局使用Router
 
@@ -142,6 +145,16 @@ const router = new Router({
       path: '/main/study/huistudy2',
       name: 'huistudy2-page',
       component: huistudy2,
+    }
+    ,{
+      path: '/main/study/wusgd',
+      name: 'wsstudygd',
+      component: wusstudygd,
+    }
+    ,{
+      path: '/main/study/wensgd',
+      name: 'wsexamgd',
+      component: wensstudygd,
     },
   ]
 });
