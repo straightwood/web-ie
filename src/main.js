@@ -44,8 +44,6 @@ Vue.prototype.judge = function(){
           this.$router.push('/main/exam/hsExam');
       }else if(res[0]==2){
           this.$router.push('/main/exam/dsExam');
-      }else{
-          alert("三关考完 还没完善");
       }
   });
 }

@@ -61,7 +61,7 @@ const router = new Router({
       component: Think
     },{
       path: '/main/exam',     //exam
-      name: 'xsTest1',
+      name: 'xsTest1-default',
       component: xsTest1
     },{ path: '/main/exam/xsTest1',     //拼图1
       name: 'xsTest1',
@@ -142,7 +142,7 @@ const router = new Router({
       path: '/main/study/huistudy2',
       name: 'huistudy2-page',
       component: huistudy2,
-    }
+    },
   ]
 });
 

@@ -62,19 +62,13 @@
 <script>
 import draggable from "vuedraggable";
 const message_left = [
-  "1",
-  "2",
-  "3",
+  1,5,9
 ];
 const message_right = [
-  "4",
-  "5",
-  "6",
+  3,4,8
 ];
 const message_bottom = [
-  "7",
-  "8",
-  "9",
+  6,2,7
 ];
 export default {
   components: {
@@ -133,7 +127,8 @@ export default {
     passFn () {
         if(this.list_result.length==9){
             const newPuzzles = this.list_result.slice(0, 9)
-            const isPass = newPuzzles.every((e, i) => e.order === i + 1)
+            console.log(newPuzzles)
+            const isPass = newPuzzles.every((e, i) => e.name === i + 1)
             if (isPass) {
                 this.correct=1;
             }
