@@ -44,7 +44,7 @@ export default {
       t:11,
       ans:[],
       ansnum:0,
-      correctans:['c','b','a'],
+      correctans:['c','c','a'],
       correct:0,
       kcflag:0,
       choseflag:[0,0,0],

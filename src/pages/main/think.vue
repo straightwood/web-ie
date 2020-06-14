@@ -1,12 +1,12 @@
 <template>
   <div id="main">
     <div class="button_box">
-      <button id="button1" @click="report" @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
-      <button id="button2" @click="back" @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
+      <button id="button1" @click="report"></button>
+      <button id="button2" @click="back"></button>
     </div>
     <div :id="house" class="house_position"></div>
     <div id="reportCard" v-if="showCard">
-      <button id="closeBtn" @click="report"  @mouseenter="PlaySound()"  @mouseleave="StopSound()"></button>
+      <button id="closeBtn" @click="report"></button>
       <div id="nickname" class="color">{{user_nickname}}</div>
       <div id="achieve">{{user_grade}}</div>
       <div :id="person" class="person_position"></div>
@@ -21,7 +21,6 @@
           {{element}}
         </div>
       </div>
-       <audio ref="audio" :src="audioUrl"></audio>
     </div>
   </div>
 </template>
@@ -43,13 +42,13 @@ export default {
         '平民',
         '秀才',
         '举人',
-        '贡士',
         '进士',
+        '状元',    
       ],
       personImage_id:[
+        'pingmin',
         'xiucai',
         'jvren',
-        'gongshi',
         'jinshi',
         'zhuangyuan'
       ],
@@ -91,24 +90,29 @@ export default {
               if(this.user_totalscore<=20){
                 this.person=this.personImage_id[0];
                 this.house='house_'+this.personImage_id[0];
+                this.user_grade=this.grade[0];
               }else if(this.user_totalscore<=40){
                 this.person=this.personImage_id[1];
                 this.house='house_'+this.personImage_id[1];
+                this.user_grade=this.grade[1];
               }else if(this.user_totalscore<=60){
                 this.person=this.personImage_id[2];
                 this.house='house_'+this.personImage_id[2];
+                this.user_grade=this.grade[2];
               }else if(this.user_totalscore<=80){
                 this.person=this.personImage_id[3];
                 this.house='house_'+this.personImage_id[3];
+                this.user_grade=this.grade[3];
               }else if(this.user_totalscore<=100){
                 this.person=this.personImage_id[4];
                 this.house='house_'+this.personImage_id[4];
+                this.user_grade=this.grade[4];
               }
               this.user_score[0]=res[0][0].round1;//取各关成绩
               this.user_score[1]=res[0][0].round2;//取各关成绩
               this.user_score[2]=res[0][0].round3;//取各关成绩
 
-              this.user_grade=this.grade[res[3].length+1];//称号判定
+              //this.user_grade=this.grade[res[3].length+1];//称号判定
 
               for(var i in this.user_score){    
                 if(this.user_score[i]=='0'){           //评论语句
@@ -136,13 +140,6 @@ export default {
     report(){
       this.showCard=!this.showCard;
     },
-    PlaySound() {
-      this.$refs.audio.play();
-    },
-    StopSound() {
-      this.$refs.audio.pause();
-      this.$refs.audio.currentTime = 0;
-    }
   },
   
 }
@@ -197,6 +194,10 @@ export default {
   margin-top: 100px;
   height:350px;
 }
+#pingmin{
+  background: url('../../assets/report/pingmin.png') center center no-repeat;
+  background-size: contain;
+}
 #xiucai{
   background: url('../../assets/report/xiucai.png') center center no-repeat;
   background-size: contain;
@@ -205,12 +206,12 @@ export default {
   background: url('../../assets/report/jvren.png') center center no-repeat;
   background-size: contain;
 }
-#gongshi{
-  background: url('../../assets/report/gongshi.png') center center no-repeat;
-  background-size: contain;
-}
 #jinshi{
   background: url('../../assets/report/jinshi.png') center center no-repeat;
+  background-size: contain;
+}
+#zhuangyuan{
+  background: url('../../assets/report/zhuangyuan.png') center center no-repeat;
   background-size: contain;
 }
 
@@ -224,6 +225,12 @@ export default {
   width:1200px;
   height: 1000px;
 }
+
+
+#house_pingmin{
+  background: url('../../assets/report/house_pingmin.png') center center no-repeat;
+  background-size: contain;
+}
 #house_xiucai{
   background: url('../../assets/report/house_xiucai.png') center center no-repeat;
   background-size: contain;
@@ -232,14 +239,15 @@ export default {
   background: url('../../assets/report/house_jvren.png') center center no-repeat;
   background-size: contain;
 }
-#house_gongshi{
-  background: url('../../assets/report/house_gongshi.png') center center no-repeat;
-  background-size: contain;
-}
 #house_jinshi{
   background: url('../../assets/report/house_jinshi.png') center center no-repeat;
   background-size: contain;
 }
+#house_zhuangyuan{
+  background: url('../../assets/report/house_zhuangyuan.png') center center no-repeat;
+  background-size: contain;
+}
+
 #nickname{
   position: absolute;
   left:200px;
